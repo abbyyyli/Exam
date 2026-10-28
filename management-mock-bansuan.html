@@ -1,0 +1,633 @@
+<!DOCTYPE html>
+
+<html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1, viewport-fit=cover" name="viewport"/><title>Ban Suan Riverside · Management Mock</title>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&amp;family=Noto+Serif+TC:wght@600;700&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet"/>
+<style>
+/* Layout: one reading column with a sticky chapter rail; colors follow system appearance. */
+:root {
+  color-scheme: light;
+  --bg: var(--tone-fdf9f9); --panel: var(--tone-f8eef0); --paper: var(--tone-ffffff); --tint: var(--tone-fae9ed); --line: var(--tone-efdde2);
+  --fg: var(--tone-2f282b); --muted: var(--tone-7e6f74); --accent: var(--tone-c06c84); --accent-ink: var(--tone-9c4862);
+  --demand: var(--tone-3f5675); --supply: var(--tone-c06c84); --ext: var(--tone-6e3f55); --world: var(--tone-8a7a5c); --policy: var(--tone-3f7f7a);
+  --cs: var(--tone-a7cdb6); --ps: var(--tone-b2c4e3); --dwl: var(--tone-d9674f); --rev: var(--tone-e5c171); --rev2: var(--tone-f1dca8); --time: var(--tone-ddb3cb); --ts: var(--tone-bfdcc9);
+  --serif: "Noto Serif TC", "Songti TC", Georgia, serif;
+  --sans: "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", system-ui, sans-serif;
+  --mono: "JetBrains Mono", ui-monospace, Menlo, monospace;
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; scroll-padding-top: 76px; background: var(--bg); }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+body { background: var(--bg); color: var(--fg); font-family: var(--sans); font-size: 16px; line-height: 1.75; }
+a { color: var(--accent-ink); }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+.top { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 20; background: rgba(var(--header-rgb), .94); backdrop-filter: blur(8px); border-bottom: 1px solid var(--line); padding-inline: 16px; }
+.top-in { max-width: 1160px; margin: 0 auto; display: flex; align-items: center; gap: 14px; min-height: 56px; flex-wrap: wrap; padding-block: 8px; }
+.brand { font-family: var(--serif); font-weight: 700; font-size: 1.02rem; white-space: nowrap; }
+.brand small { font-family: var(--sans); font-weight: 500; color: var(--muted); font-size: .76rem; margin-left: 6px; letter-spacing: .06em; }
+.sessions { display: flex; gap: 4px; margin-left: auto; }
+.crumbs { font-size: .86rem; display: flex; gap: 8px; align-items: baseline; flex-wrap: wrap; }
+.crumbs a { color: var(--muted); text-decoration: none; } .crumbs a:hover { color: var(--accent-ink); } .crumbs span { color: var(--line); } .crumbs b { font-family: var(--serif); }
+.sessions a.pill { text-decoration: none; transition: border-color .15s, color .15s; }
+.sessions a.pill:hover, .sessions a.pill:focus-visible { border-color: var(--accent); color: var(--accent-ink); background: var(--tint); }
+.sessions .pill { font: 500 .82rem var(--sans); border: 1px solid var(--line); background: var(--paper); color: var(--muted); padding: 4px 12px; border-radius: 999px; }
+.sessions .pill[aria-current="page"] { background: var(--accent); border-color: var(--accent); color: #FFFFFF; }
+.sessions .pill.off { opacity: .5; cursor: not-allowed; }
+.toc-btn { display: none; font: 500 .85rem var(--sans); border: 1px solid var(--line); background: var(--paper); color: var(--fg); border-radius: 8px; padding: 5px 12px; }
+
+.wrap { max-width: 1160px; margin: 0 auto; padding-inline: 16px; display: grid; grid-template-columns: 220px minmax(0, 1fr); gap: 52px; }
+.rail { position: sticky; top: 76px; align-self: start; max-height: calc(100vh - 92px); overflow: auto; padding-block: 34px 40px; font-size: .86rem; line-height: 1.5; }
+.rail .lbl { font-size: .7rem; letter-spacing: .14em; text-transform: uppercase; color: var(--muted); margin: 0 0 10px; }
+.rail ol { list-style: none; margin: 0; padding: 0; }
+.rail li a { display: block; padding: 4px 10px; color: var(--muted); text-decoration: none; border-radius: 6px; }
+.rail li a:hover { color: var(--fg); background: var(--tint); }
+.rail li.h3 a { padding-left: 22px; font-size: .8rem; }
+.rail li a.on { color: var(--accent-ink); background: var(--tint); font-weight: 500; }
+
+main { min-width: 0; padding-block: 30px 120px; }
+.doc { max-width: 780px; }
+.hero { padding-block: 8px 26px; border-bottom: 1px solid var(--line); }
+.kick { font-size: .74rem; letter-spacing: .16em; text-transform: uppercase; color: var(--accent-ink); margin: 0 0 6px; font-weight: 500; }
+.hero h1 { font-family: var(--serif); font-size: clamp(1.8rem, 4vw, 2.5rem); line-height: 1.25; margin: 0 0 12px; text-wrap: balance; }
+.lead { margin: 0; font-size: 1.04rem; max-width: 62ch; }
+.legend { display: flex; flex-wrap: wrap; gap: 6px 16px; margin-top: 16px; font-size: .78rem; color: var(--muted); }
+.legend span { display: inline-flex; align-items: center; gap: 6px; }
+
+.doc h2 { font-family: var(--serif); font-size: 1.55rem; line-height: 1.35; margin: 3.4rem 0 .3rem; text-wrap: balance; }
+.doc h3 { font-size: 1.1rem; line-height: 1.45; margin: 2.2rem 0 .5rem; color: var(--accent-ink); text-wrap: balance; }
+.sub { margin: 0 0 1.2rem; color: var(--muted); max-width: 66ch; }
+.doc p, .doc li { max-width: none; }
+.doc ul, .doc ol { padding-left: 1.25em; }
+.doc li { margin: .25rem 0; }
+.zh { display: inline-block; font-size: .78em; line-height: 1.3; color: var(--accent-ink); background: var(--tint); padding: 0 6px; border-radius: 4px; margin-left: 2px; vertical-align: 1px; font-weight: 500; }
+.hint { font-size: .9rem; color: var(--muted); display: flex; gap: 10px; align-items: baseline; }
+.hint b { flex: none; font-size: .72rem; color: #FFFFFF; background: var(--accent); padding: 0 7px; border-radius: 4px; font-weight: 500; }
+.key { background: var(--tint); padding: 12px 16px; border-radius: 8px; font-weight: 500; }
+.note-small { font-size: .8rem; color: var(--muted); }
+
+.pair { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; margin: 1rem 0; }
+.pair > div { background: var(--paper); border: 1px solid var(--line); border-radius: 10px; padding: 12px 16px; }
+.pair b { color: var(--accent-ink); }
+.pair p { margin: 4px 0 0; font-size: .92rem; }
+
+.matrix { display: grid; grid-template-columns: minmax(90px, .7fr) repeat(2, minmax(0, 1fr)); gap: 6px; margin: 1rem 0 1.2rem; font-size: .9rem; max-width: 620px; }
+.matrix .mh { font-weight: 700; font-size: .8rem; color: var(--muted); align-self: end; padding: 0 4px 2px; }
+.matrix .mh.side { align-self: center; }
+.matrix .cell { background: var(--paper); border: 1px solid var(--line); border-radius: 8px; padding: 12px; font-weight: 500; }
+.matrix .cell.hi { background: var(--tint); border-color: var(--accent); }
+.matrix small { display: block; font-weight: 400; color: var(--muted); font-size: .8rem; margin-top: 2px; line-height: 1.45; }
+
+.map { display: grid; grid-template-columns: minmax(0, 1fr) auto minmax(0, 1.3fr) auto minmax(0, 1fr); gap: 10px; align-items: center; margin: 1rem 0; }
+.mcol { display: flex; flex-direction: column; gap: 8px; }
+.mbox { background: var(--paper); border: 1px solid var(--line); border-radius: 10px; padding: 10px 12px; font-size: .84rem; line-height: 1.5; display: flex; flex-direction: column; gap: 2px; }
+.mbox b { font-size: .9rem; } .mbox span { color: var(--muted); } .mbox em { font-style: normal; color: var(--accent-ink); font-size: .78rem; font-weight: 500; }
+.mbox.good { border-color: var(--cs); } .mbox.ask { background: var(--tint); border-color: var(--accent); }
+.marrow { color: var(--accent); font-weight: 700; }
+
+.flow { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; margin: 1rem 0; font-size: .86rem; }
+.flow span { background: var(--paper); border: 1px solid var(--line); border-radius: 6px; padding: 4px 10px; line-height: 1.45; }
+.flow i { font-style: normal; color: var(--accent); font-weight: 700; }
+.formula { font-family: var(--mono); font-size: .9rem; background: var(--paper); border: 1px solid var(--line); border-radius: 8px; padding: 12px 16px; line-height: 1.9; overflow-x: auto; }
+.steps { counter-reset: s; list-style: none; padding-left: 0 !important; }
+.steps li { counter-increment: s; display: flex; gap: 10px; }
+.steps li::before { content: counter(s); flex: none; width: 22px; height: 22px; border-radius: 50%; background: var(--tint); color: var(--accent-ink); font: 700 .75rem/22px var(--sans); text-align: center; margin-top: 3px; }
+.assign { margin: 1.6rem 0; border: 1px dashed var(--accent); border-radius: 10px; padding: 14px 16px; background: var(--paper); }
+.assign p { margin: 6px 0 0; font-size: .92rem; }
+
+.tbl { overflow-x: auto; margin: 1rem 0; border: 1px solid var(--line); border-radius: 10px; background: var(--paper); }
+.doc table { border-collapse: collapse; width: 100%; font-size: .88rem; line-height: 1.55; }
+.doc th, .doc td { text-align: left; vertical-align: top; padding: 9px 12px; border-bottom: 1px solid var(--line); }
+.doc th { background: var(--panel); font-weight: 700; }
+.doc tr:last-child td { border-bottom: 0; }
+.drill .ans { filter: blur(5px); cursor: pointer; user-select: none; transition: filter .2s; }
+.drill .ans.shown { filter: none; user-select: auto; }
+
+.traps { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; margin-top: 1rem; }
+.traps > div { background: var(--paper); border: 1px solid var(--line); border-radius: 10px; padding: 12px 14px; font-size: .88rem; line-height: 1.55; }
+.traps s { color: var(--muted); text-decoration-color: var(--dwl); }
+.traps p { margin: 6px 0 0; font-weight: 500; }
+
+.qa-tools { margin: .4rem 0 .8rem; }
+.qa-tools button { font: 500 .82rem var(--sans); border: 1px solid var(--accent); background: var(--paper); color: var(--accent-ink); border-radius: 6px; padding: 5px 12px; cursor: pointer; }
+.qa { display: flex; flex-direction: column; gap: 6px; }
+.qa details { background: var(--paper); border: 1px solid var(--line); border-radius: 8px; }
+.qa summary { cursor: pointer; padding: 10px 14px; font-weight: 500; font-size: .93rem; list-style: none; display: flex; gap: 10px; }
+.qa summary::before { content: "Q"; color: var(--accent); font-weight: 700; }
+.qa details[open] summary { border-bottom: 1px dashed var(--line); }
+.qa details p { margin: 0; padding: 10px 14px 12px 36px; font-size: .9rem; }
+
+/* graphs */
+.graph { max-width: 900px; margin: 1.8rem 0 2.2rem; background: var(--paper); border: 1px solid var(--line); border-radius: 12px; padding: 18px 18px 14px; }
+.g-head h4 { font-family: var(--serif); font-size: 1.12rem; margin: 2px 0 2px; line-height: 1.45; }
+.g-head p { margin: 0 0 10px; color: var(--muted); font-size: .86rem; }
+.g-kicker { font-size: .68rem; letter-spacing: .16em; text-transform: uppercase; color: var(--accent-ink); }
+.g-body { display: grid; grid-template-columns: minmax(0, 1.55fr) minmax(0, 1fr); gap: 18px; align-items: start; }
+.g-plot svg { width: 100%; height: auto; display: block; }
+.g-side { display: flex; flex-direction: column; gap: 14px; min-width: 0; }
+.g-ctrl { display: flex; flex-direction: column; gap: 10px; }
+.sl label { display: flex; justify-content: space-between; font-size: .8rem; color: var(--muted); line-height: 1.3; }
+.sl output { font-family: var(--mono); color: var(--fg); font-size: .8rem; }
+.sl input { width: 100%; accent-color: var(--accent); margin: 4px 0 0; }
+.g-btn { align-self: flex-start; font: 500 .8rem var(--sans); border: 1px solid var(--accent); color: var(--accent-ink); background: transparent; border-radius: 6px; padding: 4px 11px; cursor: pointer; }
+.g-btn:hover { background: var(--tint); }
+.seg { display: inline-flex; border: 1px solid var(--line); border-radius: 7px; overflow: hidden; align-self: flex-start; }
+.seg button { font: 500 .8rem var(--sans); border: 0; background: transparent; color: var(--muted); padding: 5px 12px; cursor: pointer; }
+.seg button[aria-checked="true"] { background: var(--accent); color: var(--paper); }
+.chk { display: flex; gap: 8px; align-items: center; font-size: .8rem; color: var(--muted); }
+.chk input { accent-color: var(--accent); }
+.g-stats { margin: 0; border-top: 1px solid var(--line); padding-top: 10px; display: flex; flex-direction: column; gap: 3px; }
+.st { display: flex; justify-content: space-between; gap: 10px; font-size: .8rem; line-height: 1.45; }
+.st dt { color: var(--muted); display: flex; align-items: center; gap: 7px; }
+.st dd { margin: 0; font-family: var(--mono); font-variant-numeric: tabular-nums; white-space: nowrap; }
+.st.big dd { font-weight: 500; color: var(--accent-ink); font-size: .92rem; }
+.g-note { margin: 12px 0 0; padding: 9px 12px; background: var(--tint); border-radius: 6px; font-size: .85rem; line-height: 1.6; }
+
+.sw { width: 11px; height: 11px; border-radius: 2px; display: inline-block; flex: none; }
+.sw.none { background: transparent; }
+.sw.a-cs { background: var(--cs); } .sw.a-ps { background: var(--ps); } .sw.a-ps2 { background: var(--ps); outline: 1px solid var(--demand); }
+.sw.a-dwl { background: repeating-linear-gradient(45deg, var(--dwl) 0 2px, transparent 2px 4px); outline: 1px solid var(--dwl); }
+.sw.a-rev { background: var(--rev); } .sw.a-rev2 { background: var(--rev2); } .sw.a-time { background: var(--time); } .sw.a-ts { background: var(--ts); }
+.sw.ln { height: 3px; border-radius: 2px; width: 16px; }
+
+svg .ax { stroke: var(--muted); stroke-width: 1.2; }
+svg .axl { fill: var(--muted); font: 500 11px var(--sans); }
+svg .tk { fill: var(--muted); font: 500 10.5px var(--mono); }
+svg .gd { stroke: var(--muted); stroke-width: 1; stroke-dasharray: 3 4; opacity: .7; }
+svg .cv { stroke-width: 2.6; fill: none; stroke-linecap: round; }
+svg .cv.dash { stroke-dasharray: 7 5; stroke-width: 2; }
+svg .cvl { font: 700 11.5px var(--sans); }
+svg .c-d { stroke: var(--demand); fill: var(--demand); } svg .c-s { stroke: var(--supply); fill: var(--supply); }
+svg .c-x { stroke: var(--ext); fill: var(--ext); } svg .c-w { stroke: var(--world); fill: var(--world); } svg .c-t { stroke: var(--policy); fill: var(--policy); }
+svg text.cvl { stroke: none; }
+svg .pt { fill: var(--paper); stroke: var(--fg); stroke-width: 2; }
+svg .ptl { fill: var(--fg); font: 700 11px var(--sans); }
+svg .atag { fill: var(--fg); font: 700 11px var(--sans); opacity: .8; }
+svg .a-cs { fill: var(--cs); fill-opacity: .6; } svg .a-ps { fill: var(--ps); fill-opacity: .6; }
+svg .a-ps2 { fill: var(--ps); fill-opacity: .95; } svg .a-ts { fill: var(--ts); fill-opacity: .6; }
+svg .a-dwl { fill: url(#dwlHatch); stroke: var(--dwl); stroke-width: 1.2; }
+svg .a-rev { fill: var(--rev); fill-opacity: .75; } svg .a-rev2 { fill: var(--rev2); fill-opacity: .8; } svg .a-time { fill: var(--time); fill-opacity: .65; }
+
+svg .grid { stroke: var(--line); stroke-width: 1; }
+svg .a-prof { fill: var(--cs); fill-opacity: .75; } svg .a-loss { fill: var(--dwl); fill-opacity: .35; }
+.sw.a-prof { background: var(--cs); } .sw.a-loss { background: var(--dwl); opacity: .5; }
+.twin { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+.tw-t { margin: 0 0 2px; font-size: .78rem; font-weight: 700; color: var(--muted); }
+.g-ctrl .g-btn + .g-btn { margin-top: -4px; }
+.graph.wide .g-body { grid-template-columns: minmax(0, 1fr); }
+.graph.wide .g-side { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 16px; }
+@media (max-width: 700px) { .twin, .graph.wide .g-side { grid-template-columns: minmax(0, 1fr); } }
+svg polyline.cv { fill: none !important; }
+
+.graph { background: var(--paper); }
+.g-note { background: var(--tint); }
+
+@media (max-width: 900px) {
+  .wrap { grid-template-columns: minmax(0, 1fr); gap: 0; }
+  .rail { display: none; position: fixed; inset: 64px 0 0 0; max-height: none; background: var(--bg); z-index: 15; padding: 20px 16px 60px; }
+  .rail.open { display: block; }
+  .toc-btn { display: inline-block; }
+  .g-body { grid-template-columns: minmax(0, 1fr); }
+  .map { grid-template-columns: minmax(0, 1fr); }
+  .marrow { transform: rotate(90deg); justify-self: center; }
+}
+@media (max-width: 560px) { .pair, .traps { grid-template-columns: minmax(0, 1fr); } }
+/* Management components */
+.three { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; margin: 1rem 0; }
+.tcard { background: var(--paper); border: 1px solid var(--line); border-radius: 12px; padding: 14px 16px; display: flex; flex-direction: column; gap: 4px; }
+.tcard .tnum { width: 24px; height: 24px; border-radius: 50%; background: var(--accent); color: #FFFFFF; font: 700 .78rem/24px var(--sans); text-align: center; }
+.tcard p { margin: 0; color: var(--muted); font-size: .88rem; }
+.tags { display: flex; flex-wrap: wrap; gap: 5px; margin-top: 6px; }
+.tags span { font-size: .74rem; background: var(--tint); color: var(--accent-ink); padding: 1px 8px; border-radius: 999px; font-weight: 500; }
+.method, .loop, .cascade { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; margin: 1rem 0; font-size: .86rem; }
+.method span, .loop span, .cascade span { background: var(--paper); border: 1px solid var(--line); border-radius: 6px; padding: 5px 11px; line-height: 1.4; }
+.method span.hi { background: var(--tint); border-color: var(--accent); color: var(--accent-ink); font-weight: 700; }
+.method i, .loop i, .cascade i { font-style: normal; color: var(--accent); font-weight: 700; }
+.loop i.back { font-size: 1.1rem; }
+.cascade { flex-direction: column; align-items: flex-start; gap: 2px; }
+.cascade span:nth-of-type(2) { margin-left: 18px; } .cascade span:nth-of-type(3) { margin-left: 36px; } .cascade span:nth-of-type(4) { margin-left: 54px; }
+.cascade i:nth-of-type(1) { margin-left: 14px; } .cascade i:nth-of-type(2) { margin-left: 32px; } .cascade i:nth-of-type(3) { margin-left: 50px; }
+.four { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 10px; margin: 1rem 0; }
+.four > div { background: var(--paper); border: 1px solid var(--line); border-radius: 10px; padding: 12px; }
+.four b { font-size: .9rem; color: var(--accent-ink); } .four p { margin: 4px 0 0; font-size: .84rem; color: var(--muted); line-height: 1.5; }
+
+.ladder { display: grid; grid-template-columns: minmax(0, 1fr) 118px 118px; grid-template-rows: repeat(5, auto); gap: 5px 8px; margin: 1rem 0 .3rem; max-width: 640px; }
+.lv { grid-column: 1; background: var(--paper); border: 1px solid var(--line); border-radius: 8px; padding: 7px 12px; font-weight: 700; font-size: .9rem; line-height: 1.35; }
+.lv small { display: block; font-weight: 400; color: var(--muted); font-size: .78rem; }
+.lv.l5 { grid-row: 1; margin-inline: 22%; } .lv.l4 { grid-row: 2; margin-inline: 16%; } .lv.l3 { grid-row: 3; margin-inline: 10%; } .lv.l2 { grid-row: 4; margin-inline: 5%; } .lv.l1 { grid-row: 5; }
+.lv.l5, .lv.l4 { background: var(--tone-f6e9f4); } .lv.l3 { background: var(--tint); } .lv.l2, .lv.l1 { background: var(--tone-eaf2ee); }
+.erg { border-radius: 8px; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: .84rem; text-align: center; padding: 6px; }
+.erg.g { grid-column: 2; grid-row: 1 / span 2; background: var(--tone-ebd7ea); color: var(--tone-6e3f6a); }
+.erg.r { grid-column: 3; grid-row: 2 / span 2; background: var(--tint); color: var(--accent-ink); }
+.erg.e { grid-column: 2; grid-row: 4 / span 2; background: var(--tone-d9ebe1); color: var(--tone-2f6b4f); }
+
+.mw { background: var(--paper); border: 1px solid var(--line); border-radius: 12px; padding: 18px; margin: 1.6rem 0 2rem; }
+.mw-body { margin-top: 10px; }
+.hz-cols { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
+.hz-t { margin: 0 0 6px; font-weight: 700; font-size: .88rem; } .hz-t small { font-weight: 400; color: var(--muted); }
+.chips { display: flex; flex-direction: column; gap: 5px; }
+.chip { display: flex; justify-content: space-between; gap: 10px; font: 500 .84rem var(--sans); text-align: left; background: var(--bg); border: 1px solid var(--line); color: var(--fg); border-radius: 7px; padding: 6px 10px; cursor: pointer; }
+.chip em { font-style: normal; font-size: .74rem; color: var(--muted); }
+.hz-cols > div:first-child .chip[aria-pressed="true"] { border-color: var(--dwl); background: var(--tone-fcedea); }
+.hz-cols > div:first-child .chip[aria-pressed="true"] em { color: var(--tone-a8432f); }
+.hz-cols > div:last-child .chip[aria-pressed="true"] { border-color: var(--tone-6fae8b); background: var(--tone-eaf5ee); }
+.hz-cols > div:last-child .chip[aria-pressed="true"] em { color: var(--tone-2f6b4f); }
+.scale { display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: 6px; margin-top: 18px; }
+.half { height: 14px; background: var(--bg); border: 1px solid var(--line); border-radius: 7px; position: relative; overflow: hidden; }
+.half i { position: absolute; top: 0; bottom: 0; transition: width .25s; }
+.half.left i { right: 0; background: var(--dwl); } .half.right i { left: 0; background: var(--tone-6fae8b); }
+@media (prefers-reduced-motion: reduce) { .half i { transition: none; } }
+.zero { font: 700 .8rem var(--mono); color: var(--muted); }
+.scale-l { display: flex; justify-content: space-between; font-size: .74rem; color: var(--muted); margin-top: 4px; }
+
+.kpi-flow { display: grid; grid-template-columns: minmax(0, 1fr) auto minmax(0, 1.3fr) auto minmax(0, .8fr) auto minmax(0, 1fr); gap: 8px; align-items: stretch; margin-top: 12px; font-size: .84rem; }
+.kpi-flow > div { background: var(--bg); border: 1px solid var(--line); border-radius: 8px; padding: 8px 10px; line-height: 1.45; }
+.kpi-flow > i { font-style: normal; color: var(--accent); font-weight: 700; align-self: center; }
+.kpi-flow b { font-size: .72rem; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
+.kpi-flow p { margin: 3px 0 0; } .kpi-flow ul { margin: 3px 0 0; padding-left: 1.1em; }
+.kpi-flow .bad { border-color: var(--dwl); background: var(--tone-fcedea); } .kpi-flow .good { border-color: var(--tone-6fae8b); background: var(--tone-eaf5ee); }
+
+.cmp-sel { display: flex; flex-wrap: wrap; gap: 8px 12px; align-items: center; font-size: .84rem; color: var(--muted); }
+.cmp-sel select { font: 500 .88rem var(--sans); padding: 5px 8px; border: 1px solid var(--line); border-radius: 7px; background: var(--paper); color: var(--fg); }
+table.cmp td:first-child { font-weight: 700; color: var(--muted); width: 22%; }
+
+.tabs { display: flex; flex-wrap: wrap; gap: 4px; border-bottom: 1px solid var(--line); }
+.tabs button { font: 500 .86rem var(--sans); background: none; border: 0; border-bottom: 2px solid transparent; color: var(--muted); padding: 6px 12px; cursor: pointer; margin-bottom: -1px; }
+.tabs button[aria-selected="true"] { color: var(--accent-ink); border-bottom-color: var(--accent); }
+.ev { display: flex; flex-direction: column; gap: 6px; margin-top: 12px; }
+.ev > div { display: grid; grid-template-columns: 190px auto minmax(0, 1fr); gap: 10px; align-items: baseline; background: var(--bg); border: 1px solid var(--line); border-radius: 8px; padding: 8px 12px; font-size: .86rem; line-height: 1.5; }
+.ev p { margin: 0; }
+.tag { font-size: .72rem; font-weight: 700; padding: 1px 8px; border-radius: 999px; white-space: nowrap; }
+.tag.gap { background: var(--tone-fce3dd); color: var(--tone-a8432f); } .tag.ok { background: var(--tone-e3f2e9); color: var(--tone-2f6b4f); }
+.tag.maybe { background: var(--tone-fbf0d9); color: var(--tone-8a6216); } .tag.na { background: var(--tone-eee9eb); color: var(--muted); }
+.issue { margin-top: 12px; background: var(--tint); border-radius: 8px; padding: 10px 14px; font-size: .9rem; }
+.issue p { margin: 4px 0 0; }
+
+.xgrid { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 8px; margin: 1rem 0; }
+.xgrid > div { background: var(--paper); border: 1px solid var(--line); border-radius: 10px; padding: 10px; display: flex; flex-direction: column; gap: 5px; font-size: .84rem; line-height: 1.4; }
+.xgrid small { color: var(--muted); font-size: .76rem; }
+.xgrid .ok, .xgrid .gap { align-self: flex-start; font-size: .72rem; font-weight: 700; padding: 1px 8px; border-radius: 999px; }
+.xgrid .ok { background: var(--tone-e3f2e9); color: var(--tone-2f6b4f); } .xgrid .gap { background: var(--tone-fce3dd); color: var(--tone-a8432f); }
+
+@media (max-width: 760px) {
+  .three, .four { grid-template-columns: minmax(0, 1fr); }
+  .xgrid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .hz-cols { grid-template-columns: minmax(0, 1fr); }
+  .kpi-flow { grid-template-columns: minmax(0, 1fr); } .kpi-flow > i { transform: rotate(90deg); justify-self: center; }
+  .ev > div { grid-template-columns: minmax(0, 1fr); gap: 3px; } .ev .tag { justify-self: start; }
+  .ladder { grid-template-columns: minmax(0, 1fr) 84px 84px; }
+}
+
+/* Session 4 + case page */
+.tcard small.dont { color: var(--muted); font-size: .78rem; border-top: 1px dashed var(--line); padding-top: 6px; margin-top: 4px; }
+.quotes { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; margin: .6rem 0 1rem; }
+.quotes q { background: var(--paper); border: 1px solid var(--line); border-radius: 10px; padding: 10px 14px; font-style: italic; color: var(--muted); font-size: .9rem; }
+.six { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; margin: 1rem 0; }
+.six > div { display: flex; gap: 10px; align-items: flex-start; background: var(--paper); border: 1px solid var(--line); border-radius: 10px; padding: 10px 12px; font-size: .88rem; line-height: 1.5; }
+.six > div > span { flex: none; width: 24px; height: 24px; border-radius: 50%; background: var(--tint); color: var(--accent-ink); font: 700 .76rem/24px var(--sans); text-align: center; }
+a.cta { display: inline-block; background: var(--accent); color: #FFFFFF; text-decoration: none; font-weight: 500; padding: 8px 16px; border-radius: 8px; }
+a.cta:hover { background: var(--accent-ink); }
+blockquote.say { margin: .6rem 0; padding: 12px 16px; background: var(--paper); border: 1px solid var(--line); border-radius: 10px; font-size: .92rem; line-height: 1.7; }
+.timeline { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; margin: 1rem 0; }
+.timeline > div { background: var(--paper); border: 1px solid var(--line); border-top: 3px solid var(--accent); border-radius: 10px; padding: 10px 14px; font-size: .88rem; line-height: 1.5; }
+.timeline time { font: 500 .76rem var(--mono); color: var(--accent-ink); display: block; }
+.timeline p { margin: 4px 0 0; color: var(--muted); }
+.score { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 8px; margin: 1rem 0; }
+.score > div { border-radius: 10px; padding: 10px 12px; font-size: .84rem; line-height: 1.5; border: 1px solid var(--line); }
+.score .up { background: var(--tone-eaf5ee); border-color: var(--tone-a9d3ba); } .score .down { background: var(--tone-fcedea); border-color: var(--tone-edc2b8); }
+.score b::after { margin-left: 6px; font-size: .78rem; } .score .up b::after { content: "improved"; color: var(--tone-2f6b4f); } .score .down b::after { content: "worse"; color: var(--tone-a8432f); }
+.score ul { margin: 6px 0 0; padding-left: 1.1em; }
+
+.jcm { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr) minmax(0, .9fr); gap: 16px; }
+.jdims { display: flex; flex-direction: column; gap: 8px; }
+.jd.g0 label span { color: var(--tone-6e3f6a); } .jd.g1 label span { color: var(--accent-ink); } .jd.g2 label span { color: var(--tone-2f6b4f); }
+.jstates { display: flex; flex-direction: column; gap: 12px; padding-top: 4px; }
+.jst span { font-size: .8rem; font-weight: 500; }
+.jbar { height: 12px; border-radius: 6px; background: var(--bg); border: 1px solid var(--line); overflow: hidden; margin-top: 3px; }
+.jbar i { display: block; height: 100%; transition: width .25s; }
+.jst.g0 .jbar i { background: var(--tone-b98ab5); } .jst.g1 .jbar i { background: var(--accent); } .jst.g2 .jbar i { background: var(--tone-6fae8b); }
+@media (prefers-reduced-motion: reduce) { .jbar i { transition: none; } }
+.jout ul { margin: 8px 0 0; padding-left: 1.1em; font-size: .82rem; color: var(--muted); }
+.jlvl { display: inline-block; font-weight: 700; padding: 3px 12px; border-radius: 999px; font-size: .86rem; }
+.jlvl.strong { background: var(--tone-e3f2e9); color: var(--tone-2f6b4f); } .jlvl.moderate { background: var(--tone-fbf0d9); color: var(--tone-8a6216); } .jlvl.weak { background: var(--tone-fce3dd); color: var(--tone-a8432f); }
+.jgns { margin-top: 14px; }
+
+.qz-item { font-size: 1rem; font-weight: 500; margin: 4px 0 12px; }
+.qz-opts { display: grid; gap: 8px; }
+.qz-opts.grid2 { grid-template-columns: repeat(2, minmax(0, 1fr)); max-width: 520px; }
+.qz-opts.row5 { grid-template-columns: repeat(5, minmax(0, 1fr)); }
+.qz-o { font: 500 .88rem var(--sans); background: var(--bg); border: 1px solid var(--line); color: var(--fg); border-radius: 8px; padding: 10px; cursor: pointer; display: flex; flex-direction: column; gap: 2px; text-align: center; }
+.qz-o small { color: var(--muted); font-size: .74rem; font-weight: 400; }
+.qz-o:hover { border-color: var(--accent); }
+.qz-o.right { background: var(--tone-e3f2e9); border-color: var(--tone-6fae8b); } .qz-o.wrong { background: var(--tone-fce3dd); border-color: var(--dwl); }
+.qz-nav { display: flex; justify-content: space-between; align-items: center; margin-top: 10px; font-size: .8rem; color: var(--muted); }
+
+.rsteps { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; margin-top: 12px; }
+.rsteps > div { background: var(--bg); border: 1px solid var(--line); border-radius: 8px; padding: 10px 12px; font-size: .85rem; line-height: 1.5; }
+.rsteps > div.g { background: var(--tint); border-color: var(--accent); }
+.rsteps b { font-size: .72rem; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
+.rsteps p { margin: 4px 0 0; }
+.risk { font-size: .88rem; } .risk b { font-size: .72rem; color: #FFFFFF; background: var(--tone-b98a2e); padding: 1px 7px; border-radius: 4px; margin-right: 6px; }
+.sayd summary { cursor: pointer; font-weight: 500; color: var(--accent-ink); font-size: .9rem; }
+
+@media (max-width: 760px) {
+  .quotes, .six, .timeline, .rsteps { grid-template-columns: minmax(0, 1fr); }
+  .score { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .jcm { grid-template-columns: minmax(0, 1fr); }
+  .qz-opts.row5 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+
+
+.eq-controls{display:flex;flex-wrap:wrap;gap:7px;margin:12px 0}.eq-controls button,.eq-controls select{font:500 .86rem var(--sans);color:var(--accent-ink);background:var(--paper);border:1px solid var(--line);border-radius:8px;padding:8px 12px;max-width:100%;cursor:pointer}.eq-controls button[aria-pressed="true"]{background:var(--tint);border-color:var(--accent)}.eq-result{background:var(--tint);border-radius:8px;padding:14px;min-height:100px}.eq-result p{margin:5px 0}.eq-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}.eq-grid>div{border:1px solid var(--line);border-radius:10px;padding:14px;background:var(--paper)}.eq-grid b{color:var(--accent-ink)}.eq-num{font:500 1.8rem var(--mono);display:block;color:var(--accent-ink)}.eq-map{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}.eq-map>div{padding:16px;background:var(--paper);border:1px solid var(--line);border-radius:10px}.eq-map p{margin:6px 0}body{margin:0}.hint span{min-width:0} @media(max-width:600px){.eq-grid,.eq-map{grid-template-columns:minmax(0,1fr)}.hint{flex-wrap:wrap}.mw{padding:14px}.doc{overflow-wrap:break-word}}
+
+#map + .sub + .three > .tcard > .zh, .three > .tcard > .zh { align-self: flex-start; }
+
+.qz-o:focus-visible,.qz-nav .g-btn:focus-visible{outline:2px solid var(--accent-ink);outline-offset:3px}
+.qz-o[aria-disabled="true"]{cursor:default}
+
+.eq-route{margin:18px 0;padding:18px;border:1px solid var(--line);border-radius:12px;background:var(--paper)}
+.eq-route figcaption{font-weight:600;color:var(--accent-ink);margin-bottom:14px}
+.eq-route-steps{display:grid;grid-template-columns:minmax(0,1fr) 16px minmax(0,1fr) 16px minmax(0,1fr) 16px minmax(0,1fr);align-items:stretch;gap:6px}
+.eq-route-steps>div{min-width:0;border-top:3px solid var(--accent);background:var(--bg);padding:12px 10px}
+.eq-step{display:block;font:500 .8rem var(--mono);color:var(--muted);margin-bottom:5px}
+.eq-route-steps b{display:block;font-size:.9rem}.eq-route-steps p{font-size:.86rem;line-height:1.65;margin:8px 0;color:var(--muted)}
+.eq-route-steps a{display:block;font-size:.75rem;line-height:1.6}.eq-route-steps>i{align-self:center;font-style:normal;color:var(--accent)}
+.eq-route-result{display:flex;justify-content:center;align-items:center;flex-wrap:wrap;gap:10px;margin-top:14px;padding:10px;background:var(--tint);border-radius:7px;font-size:.86rem}
+@media(max-width:720px){.eq-route-steps{grid-template-columns:minmax(0,1fr);gap:5px}.eq-route-steps>i{text-align:center;transform:rotate(90deg)}.eq-route-steps>div{padding:10px 12px}}
+
+</style><style>.doc a.case-text-link{color:var(--accent-ink);text-decoration:underline;text-decoration-color:var(--accent);text-decoration-thickness:1px;text-underline-offset:3px;background:transparent;border:0;border-radius:0;padding:0;box-shadow:none;font-weight:500}.doc a.case-text-link:hover{text-decoration-color:var(--accent-ink)}.doc a.case-text-link:focus-visible{outline:2px solid var(--accent);outline-offset:4px}</style><style id="system-appearance">
+/* System appearance only changes colors. Print retains the light palette. */
+:root {
+  --header-rgb: 253, 249, 249;
+  --tone-2f282b: #2f282b;
+  --tone-2f6b4f: #2f6b4f;
+  --tone-3f5675: #3f5675;
+  --tone-3f7f7a: #3f7f7a;
+  --tone-6e3f55: #6e3f55;
+  --tone-6e3f6a: #6e3f6a;
+  --tone-6fae8b: #6fae8b;
+  --tone-7e6f74: #7e6f74;
+  --tone-8a6216: #8a6216;
+  --tone-8a7a5c: #8a7a5c;
+  --tone-9c4862: #9c4862;
+  --tone-a7cdb6: #a7cdb6;
+  --tone-a8432f: #a8432f;
+  --tone-a9d3ba: #a9d3ba;
+  --tone-b2c4e3: #b2c4e3;
+  --tone-b98a2e: #b98a2e;
+  --tone-b98ab5: #b98ab5;
+  --tone-bfdcc9: #bfdcc9;
+  --tone-c06c84: #c06c84;
+  --tone-d9674f: #d9674f;
+  --tone-d9ebe1: #d9ebe1;
+  --tone-ddb3cb: #ddb3cb;
+  --tone-e3f2e9: #e3f2e9;
+  --tone-e5c171: #e5c171;
+  --tone-eaf2ee: #eaf2ee;
+  --tone-eaf5ee: #eaf5ee;
+  --tone-ebd7ea: #ebd7ea;
+  --tone-edc2b8: #edc2b8;
+  --tone-eee9eb: #eee9eb;
+  --tone-efdde2: #efdde2;
+  --tone-f1dca8: #f1dca8;
+  --tone-f6e9f4: #f6e9f4;
+  --tone-f8eef0: #f8eef0;
+  --tone-fae9ed: #fae9ed;
+  --tone-fbf0d9: #fbf0d9;
+  --tone-fce3dd: #fce3dd;
+  --tone-fcedea: #fcedea;
+  --tone-fdf9f9: #fdf9f9;
+  --tone-ffffff: #ffffff;
+}
+@media screen and (prefers-color-scheme: dark) {
+  :root {
+    color-scheme: dark;
+    --header-rgb: 29, 24, 26;
+    --tone-2f282b: #EEE4E6;
+    --tone-2f6b4f: #A0D2B2;
+    --tone-3f5675: #93AECB;
+    --tone-3f7f7a: #8CC4BE;
+    --tone-6e3f55: #C9A3D6;
+    --tone-6e3f6a: #DAB3D6;
+    --tone-6fae8b: #8CC3A0;
+    --tone-7e6f74: #BEACB2;
+    --tone-8a6216: #E3C480;
+    --tone-8a7a5c: #C9B68C;
+    --tone-9c4862: #E6B3BE;
+    --tone-a7cdb6: #6E8C6B;
+    --tone-a8432f: #F0A48D;
+    --tone-a9d3ba: #669C7D;
+    --tone-b2c4e3: #667C96;
+    --tone-b98a2e: #D8B66B;
+    --tone-b98ab5: #BD99C1;
+    --tone-bfdcc9: #5F7A5C;
+    --tone-c06c84: #D79AA7;
+    --tone-d9674f: #E08A6F;
+    --tone-d9ebe1: #2C4135;
+    --tone-ddb3cb: #8C6680;
+    --tone-e3f2e9: #23372D;
+    --tone-e5c171: #C9A250;
+    --tone-eaf2ee: #29362F;
+    --tone-eaf5ee: #25372D;
+    --tone-ebd7ea: #413047;
+    --tone-edc2b8: #B77F70;
+    --tone-eee9eb: #30282D;
+    --tone-efdde2: #55424A;
+    --tone-f1dca8: #8F7A4A;
+    --tone-f6e9f4: #342938;
+    --tone-f8eef0: #2B2226;
+    --tone-fae9ed: #35272D;
+    --tone-fbf0d9: #3C3223;
+    --tone-fce3dd: #412B28;
+    --tone-fcedea: #382724;
+    --tone-fdf9f9: #1D181A;
+    --tone-ffffff: #241E21;
+  }
+}
+</style><style id="reading-layout-fix">.six > div > p{flex:1;min-width:0;margin:0}.steps > li{align-items:flex-start}.steps > li > .step-copy{flex:1;min-width:0;margin:0}</style>
+<style>
+.zhp { color: var(--accent-ink); background: var(--tint); border-radius: 8px; padding: 10px 14px; font-size: .93rem; margin: .5rem 0 1rem; }
+body.nozh .zhp, body.nozh .zh { display: none !important; }
+.zbtn { font: 500 .82rem var(--sans); border: 1px solid var(--line); background: var(--paper); color: var(--fg); padding: 4px 12px; border-radius: 999px; cursor: pointer; }
+.examinfo { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; margin: 1.2rem 0; }
+.examinfo div { background: var(--paper); border: 1px solid var(--line); border-radius: 10px; padding: 10px 14px; font-size: .88rem; }
+.examinfo b { display: block; font-size: .72rem; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); font-weight: 500; }
+.casebox { background: var(--paper); border: 1px solid var(--line); border-radius: 12px; padding: 6px 20px 14px; margin: 1rem 0; }
+.casebox h4 { font-family: var(--serif); font-size: 1.05rem; margin: 1.1rem 0 .3rem; color: var(--accent-ink); }
+.casebox p { margin: .4rem 0; }
+.quote { border-left: 3px solid var(--accent); padding: 2px 12px; margin: .6rem 0; font-style: italic; }
+.qcard { border: 1px solid var(--line); border-radius: 12px; background: var(--paper); padding: 16px 20px; margin: 1rem 0 1.2rem; }
+.qcard .pts { float: right; font: 700 .78rem var(--sans); color: #fff; background: var(--accent); border-radius: 999px; padding: 2px 10px; margin-left: 10px; }
+.qcard p { margin: .3rem 0; }
+.blk { margin: .6rem 0; border: 1px solid var(--line); border-radius: 10px; background: var(--paper); }
+.blk > summary { cursor: pointer; padding: 10px 14px; font-weight: 700; font-size: .95rem; list-style: none; display: flex; gap: 10px; align-items: baseline; }
+.blk > summary::-webkit-details-marker { display: none; }
+.blk > summary::before { content: "+"; color: var(--accent); font-weight: 700; width: 12px; }
+.blk[open] > summary::before { content: "–"; }
+.blk[open] > summary { border-bottom: 1px dashed var(--line); }
+.blk > summary small { font-weight: 500; color: var(--muted); font-size: .8rem; }
+.blk .in { padding: 6px 16px 12px; }
+.blk.model { border-color: var(--accent); }
+.blk.model > summary { color: var(--accent-ink); }
+.essay p { margin: .55rem 0; }
+.oops li { margin: .3rem 0; }
+.pick { display: flex; flex-wrap: wrap; gap: 6px; margin: .4rem 0 .8rem; }
+.pick span { font-size: .8rem; border: 1px solid var(--line); border-radius: 999px; padding: 2px 10px; background: var(--panel); }
+.pick span.main { background: var(--accent); color: #fff; border-color: var(--accent); }
+.tools { display: flex; gap: 8px; flex-wrap: wrap; margin: 1rem 0; }
+.doc td b { color: var(--accent-ink); }
+@media (max-width: 640px) { .examinfo { grid-template-columns: minmax(0, 1fr); } .casebox, .qcard { padding-inline: 14px; } }
+</style>
+</head><body><header class="top"><div class="top-in"><nav aria-label="Breadcrumb" class="crumbs"><a href="index.html">Mock exams</a><span>/</span><a href="index.html#management">Management</a><span>/</span><b>Ban Suan Riverside</b></nav><button aria-expanded="false" class="toc-btn" id="tocBtn" type="button">Contents</button></div></header><div class="wrap"><aside class="rail" id="rail"><p class="lbl">Contents</p><ol id="toc"></ol></aside><main><article class="doc">
+<div class="hero"><p class="kick">Managing People in Organizations · Mock midterm</p>
+<h1>Ban Suan Riverside Hotel</h1>
+<p class="lead">A new case written for practice. Read it once all the way through, then try each question before you open the answer.</p>
+<div class="tools"><button class="zbtn" id="zBtn" type="button">中文 ON</button><button class="zbtn" id="openAll" type="button">Open all answers</button></div>
+</div>
+<h2 id="format">Exam format</h2>
+<p>This copies the format on the S6 slide (p.27), so you can time yourself the same way.</p>
+<div class="examinfo"><div><b>Type</b>Individual case, essay answers</div><div><b>Time</b>3 hours, closed book</div><div><b>Weight</b>25% of the course grade</div>
+<div><b>Questions</b>7, answer all (100 marks)</div><div><b>Topics</b>Personality, values, attitudes, motivation, job satisfaction, EQ, cross-cultural</div><div><b>Rule</b>Every answer links a theory to facts from the case</div></div>
+<p class="zhp" lang="zh-Hant">時間抓法：先花 20 分鐘讀個案、在題目旁邊標出事實；每 1 分大約 1.5 分鐘。18 分那題給它 25 分鐘左右。</p>
+<h2 id="picker">How to pick a framework</h2>
+<p>Most of the marks come from choosing a framework that fits what the question is really asking, and then using its parts on the facts. Look at the words in the question first. They usually tell you which session it comes from.</p>
+<div style="overflow-x:auto"><table><thead><tr><th>If the question asks about…</th><th>Start with</th><th>Why this one</th></tr></thead><tbody><tr><td>how someone prefers to work, think or decide; how to talk to them</td><td><b>MBTI preferences</b> (S1)</td><td>It describes preferences, so it tells you how a person likes to receive information.</td></tr><tr><td>what someone cares about; fit with the company; "the company says X but…"</td><td><b>Values</b>: person–organization fit, stated vs practiced values (S2)</td><td>It separates "this person wants different things" from "the company is not doing what it says".</td></tr><tr><td>how someone feels and what they still do or stopped doing</td><td><b>Attitudes ABC</b>, job satisfaction, commitment, OCB (S2/S4)</td><td>It lets you say what changed and what didn’t, piece by piece.</td></tr><tr><td>why pay or a bonus is not working</td><td><b>Herzberg</b> (S3), with Maslow/ERG for the needs</td><td>Herzberg is the theory built around "money stops complaints but does not make people want to do more".</td></tr><tr><td>which needs are unmet; different groups needing different things</td><td><b>Maslow</b> or <b>ERG</b> (S3)</td><td>You go level by level and show which ones are covered and which are not.</td></tr><tr><td>targets, KPIs, who set them, feedback</td><td><b>Goal setting / MBO</b> (S3)</td><td>Its four elements (specific, time, participation, feedback) give you a checklist.</td></tr><tr><td>how much control the manager uses, trust in staff</td><td><b>Theory X / Y</b> (S3)</td><td>It is about the manager’s assumptions about people, and how those turn into style.</td></tr><tr><td>how the job itself is set up</td><td><b>Job Characteristics Model</b> (S4)</td><td>Five dimensions show exactly what makes a job feel meaningful or empty.</td></tr><tr><td>rewards, penalties, "what behavior does this rule encourage"</td><td><b>Reinforcement</b> + schedules (S4)</td><td>You classify each rule, then say which behavior it actually strengthens.</td></tr><tr><td>how different employees react to dissatisfaction</td><td><b>EVLN</b> (S4)</td><td>Four boxes: active/passive × constructive/destructive.</td></tr><tr><td>how a leader handles emotions, people, conflict; coaching</td><td><b>EQ five factors</b> (S5)</td><td>Each factor gets its own event, gap and coaching task.</td></tr><tr><td>people from different countries misreading each other</td><td><b>Hofstede</b> + high/low context (S6)</td><td>Compare the scores, then use only the dimensions that match the facts.</td></tr></tbody></table></div>
+<p class="zhp" lang="zh-Hant">一句話：題目在問「什麼」，就用專門處理那件事的框架。問「錢為什麼沒用」就是 Herzberg；問「怎麼跟他溝通」就是 MBTI；問「工作本身怎麼設計」就是 JCM。每題主框架一個就夠，最多再補一個來解釋主框架講不到的地方。</p>
+<p>A simple way to write each answer, in the order the lecturer uses:</p>
+<div class="method"><span>Pick the framework and say why</span><i>→</i><span>Name its parts</span><i>→</i><span>Match case facts</span><i>→</i><span>Say what the gap is</span><i>→</i><span class="hi">What to do, and how you would check</span></div>
+<p class="zhp" lang="zh-Hant">寫的時候把三種東西分開：個案寫了什麼（fact）、你怎麼解讀（inference）、你自己補的前提（assumption，要說出來，例如 “Assuming this is his usual habit…”）。</p>
+<h2 id="case">The case</h2>
+<p>Fictional case. People, numbers and companies are made up for this exercise.</p>
+<div class="casebox">
+<h4>1. A family hotel changes hands</h4>
+<p>Ban Suan Riverside is a 64-room hotel in Chiang Mai with about 85 staff. Khun Wanna’s family opened it in 1998. It was known for warm service. Regular guests often asked for staff by name, and many housekeepers had worked there for more than ten years. A sign in the staff room says: <i>“Look after each other, and the guests will feel it.”</i> Every year Khun Wanna paid for a two-day staff trip to Rayong.</p>
+<p>After two years of losses, the family sold 70% of the hotel to Alder &amp; Stein, a Swiss group that runs 14 hotels. The group’s website lists three values: <b>Precision, Ownership, Guest First.</b> Head office gave the hotel two targets for the next 12 months: raise the online review score from 8.1 to 8.8, and cut operating cost per occupied room by 10%. Khun Wanna kept 30% and still comes in twice a week.</p>
+
+<h4>2. The new general manager</h4>
+<p>Lukas Brunner, 41, came from Lucerne in March. Most mornings he walks around the lobby chatting with guests. When he has a new idea he likes to talk it through with whoever is nearby. “I think better when I talk,” he says. In the evenings he usually closes his office door, and he has not gone to any of the staff birthday parties.</p>
+<p>In his first month he wrote a 40-page operations manual. Cleaning a room now has 32 steps, each with a target time. When someone tells him “we get many complaints”, he asks: “How many? Which rooms? Since when?” He publishes the duty roster four weeks ahead and gets irritated by last-minute changes.</p>
+<p>When he decided to cut the staff meal break from 60 to 45 minutes, he compared kitchen cost per head with occupancy figures. He did not ask the staff. About himself he says: “I am direct. In Lucerne, being direct is how you show respect. I don’t play games.”</p>
+
+<h4>3. What changed</h4>
+<p><b>Housekeeping (22 staff).</b> The quota went from 12 to 16 rooms per shift. A tablet app now times every room and assigns rooms at random each morning “to keep standards the same everywhere”, so housekeepers no longer have their own floor. Before, regular guests often left thank-you notes for the housekeeper of their floor by name. Housekeepers also used to call the maintenance team themselves when they found a broken tap or lamp. Now they must log it in the app and wait for a supervisor to approve the request.</p>
+<p>Housekeepers earn THB 40 for every 4 rooms cleaned above the quota of 16, paid with the monthly salary. A “Late Rooms” board on the canteen wall lists, every afternoon, the names of housekeepers whose rooms were not ready by 2 pm. Anyone who finishes the quota by 3 pm is excused from the 4 pm re-inspection walk, which staff dislike. Base pay for housekeepers is close to the legal minimum, and many of them send money home to their families. Lukas’s view: <i>“Money talks everywhere. The bonus will fix the speed.”</i></p>
+<p><b>Front desk (10 staff).</b> Lukas gave front-desk staff the right to offer a guest up to THB 2,000 in compensation, such as an upgrade or a free dinner, without asking a manager. He and Kan, the front-office supervisor, sat down together and agreed a target: 90% of guest complaints solved at the desk within 15 minutes, reviewed every Friday. Kan went on a three-day training course at the group’s Bangkok hotel. Head office also sends “mystery guests” a few times a month at times nobody knows in advance. A front-desk staff member who gets full marks from a mystery guest receives a THB 500 voucher.</p>
+<p><b>Everyone.</b> The meal break was cut to 45 minutes and the canteen moved to a cheaper food supplier. New staff are hired on one-year contracts instead of permanent ones. The staff trip has been “postponed until results improve.” Head office is also planning to hire an Executive Housekeeper from Bangkok, who would be P’Noi’s new boss.</p>
+
+<h4>4. The Monday meetings</h4>
+<p>Lukas holds a meeting every Monday for about 25 staff. He asks everyone to call him Lukas, not Khun Lukas. In his first meeting he said: “Please challenge me. If my plan is wrong, tell me here.” Nobody spoke. People smiled and nodded. P’Noi, the head housekeeper (19 years at the hotel), said, “Ka, we will try.” Lukas wrote in his notes: <i>“Team agrees with 16-room plan.”</i></p>
+<p>Two weeks later, over lunch, P’Noi told Khun Wanna that 16 rooms was too many for the older housekeepers and that walking between random floors wasted a lot of time. Khun Wanna passed this on. Lukas was annoyed: “Why does she go around me? I asked everybody.”</p>
+<p>At the next Monday meeting he put the Late Rooms numbers on the screen and said: <i>“Housekeeping is our weakest department. P’Noi, your team has the most late rooms. Is the problem the plan, or the people?”</i> P’Noi smiled and said nothing. After the meeting she apologized to her team for making them lose face.</p>
+<p>The next day Lukas felt he had gone too far. He went to the linen room and told P’Noi, in English, that he respected her experience. She answered, “No problem, Khun Lukas.” He considered the matter closed.</p>
+<p>For years P’Noi had written small improvement ideas in a notebook. Khun Wanna read it every week and thanked her for the good ideas in front of the staff. Since March, P’Noi has put five ideas into the app’s suggestion box. None got a reply, and she has stopped sending them. She also used to train new housekeepers on Sunday mornings without pay. She has stopped that too. She still arrives on time and her own rooms pass inspection. She told Kan: <i>“I am still here for Khun Wanna. But this is not our house anymore.”</i></p>
+<p>Lukas summed up the hotel’s promise in three words, <b>“Calm. Clean. Personal.”</b>, and emailed it in English to all staff. Most housekeepers do not use work email. When asked what the new goal is, most of them answer: “Be faster.”</p>
+
+<h4>5. How people are reacting</h4>
+<p>Four experienced housekeepers have resigned since March. One of them said, “I am not a machine.”</p>
+<p>Fon, a 23-year-old housekeeper, asked Kan if she could move to the front desk. She practices English from YouTube videos at night.</p>
+<p>Lung Chai, the chef (22 years at the hotel), tells new staff: “Owners come and go. We keep cooking. It will settle down.” He keeps doing good work and speaks well of the hotel.</p>
+<p>Some housekeepers now tick checklist steps they did not do, such as vacuuming under the bed, when they think nobody will check. Mistakes in minibar counts have gone up.</p>
+<p>Kan wrote Lukas a one-page memo suggesting that housekeepers should again be allowed to call maintenance directly. Lukas read it and said he would think about it.</p>
+
+<h4>Exhibit A · Results, January vs September 2026</h4>
+<div style="overflow-x:auto"><table><thead><tr><th>Measure</th><th>Jan</th><th>Sep</th><th>Target</th></tr></thead><tbody><tr><td>Rooms cleaned per housekeeper per shift</td><td>12.1</td><td>15.2</td><td>16</td></tr><tr><td>Online review score</td><td>8.1</td><td>8.4</td><td>8.8</td></tr><tr><td>Reviews mentioning “friendly staff”</td><td>61%</td><td>52%</td><td></td></tr><tr><td>Complaints about room cleanliness (per month)</td><td>4</td><td>11</td><td></td></tr><tr><td>Front-desk complaints solved within 15 min</td><td>55%</td><td>88%</td><td>90%</td></tr><tr><td>Housekeeping turnover (annualized)</td><td>6%</td><td>36%</td><td></td></tr><tr><td>Cost per occupied room vs last year</td><td></td><td>−7%</td><td>−10%</td></tr></tbody></table></div>
+<h4>Exhibit B · Lecturer’s country scores (S6 slide p.25)</h4>
+<div style="overflow-x:auto"><table><thead><tr><th></th><th>Power Distance</th><th>Individualism</th><th>Masculinity</th><th>Uncertainty Avoidance</th><th>Long-Term Orientation</th></tr></thead><tbody><tr><td>Switzerland</td><td>34</td><td>79</td><td>70</td><td>58</td><td>42</td></tr><tr><td>Thailand</td><td>64</td><td>19</td><td>34</td><td>64</td><td>67</td></tr><tr><td>Gap</td><td>30</td><td>60</td><td>36</td><td>6</td><td>25</td></tr></tbody></table></div></div>
+<p class="zhp" lang="zh-Hant">個案重點速記：同一個 GM，管兩個部門的方式完全不同。前台被授權、被訓練、目標一起訂，結果變好；房務被計時、被排名、目標被丟下來，速度上去但品質、離職率變差。再加上一個瑞士主管 vs 泰國員工的溝通誤會（會議沉默、P’Noi 被當眾點名）。七題就是從不同框架去看這同一堆事實。</p>
+<h2 id="questions">Questions</h2>
+<p>Write your own answer first. Each question has three folds: <b>which framework and why</b>, <b>how to work it out</b>, and a <b>model answer</b> written the way you could write it in the exam.</p>
+<h3 id="q1">Q1 · Reading Lukas</h3>
+<div class="qcard"><span class="pts">12 marks</span><p>Based on how Lukas works, what are his likely personality preferences? Support each preference with evidence from the case, and say if any of them is unclear. Then explain how P’Noi or Kan should present the housekeeping problem to him so that he is more likely to listen.</p></div>
+<p class="zhp" lang="zh-Hant">依 Lukas 的工作方式，推測他的人格偏好，每個字母都要有證據，有不確定的要說。再說明 P’Noi 或 Kan 要怎麼跟他提房務的問題，他比較聽得進去。</p>
+<details class="blk "><summary>Which framework, and why <small>選哪個框架、為什麼</small></summary><div class="in"><div class="pick"><span class="main">MBTI preferences (S1)</span><span>strengths used too much (S1)</span></div><p>The question uses the words “how he works” and “how to present to him”. Both point to S1. MBTI describes how a person prefers to take in information and make decisions, which is exactly what you need to know before you pitch an idea to him.</p><p>You do not need EQ here. His public comment in the meeting is a behavior problem, and that belongs to Q7. Keep this answer about preferences.</p><p class="zhp" lang="zh-Hant">題目問「他怎麼工作」跟「怎麼跟他講」，這兩個都是 S1 的東西。MBTI 講的是一個人習慣怎麼吸收資訊、怎麼做決定，知道這個你才知道要用什麼方式說服他。他在會議上當眾點名 P’Noi 那件事是 EQ 的問題，留到 Q7，這題不要混進來。</p></div></details>
+<details class="blk "><summary>How to work it out <small>一步一步套</small></summary><div class="in"><div style="overflow-x:auto"><table><thead><tr><th>Pair</th><th>What to look for</th><th>Case clue</th><th>Read</th></tr></thead><tbody><tr><td>E / I</td><td>Does he work ideas out by talking, or think first alone?</td><td>“I think better when I talk”; talks ideas through with whoever is nearby. Skips birthday parties and closes his door.</td><td><b>E</b>, with a note. Skipping parties is weak evidence; it could be his role, tiredness or culture.</td></tr><tr><td>S / N</td><td>Facts and details, or big picture and possibilities?</td><td>40-page manual, 32 timed steps, “How many? Which rooms?”</td><td><b>S</b></td></tr><tr><td>T / F</td><td>Decides by logic and numbers, or by impact on people?</td><td>Meal break cut using cost per head and occupancy; staff not asked.</td><td><b>T</b></td></tr><tr><td>J / P</td><td>Likes things settled and planned, or open?</td><td>Roster four weeks ahead; irritated by last-minute changes.</td><td><b>J</b></td></tr></tbody></table></div><p>Then turn each letter into advice. E: talk to him in person, not only in writing. S: bring numbers and room-level detail. T: give the cost and the logic. J: bring a concrete plan with dates, so he has something to decide on.</p><p class="zhp" lang="zh-Hant">每個字母配一個證據就好，然後把字母翻成「溝通建議」：E 就當面講；S 就帶數字、具體房號；T 就講成本跟邏輯；J 就帶一個有日期的試行方案，讓他可以拍板。E/I 那邊故意放了一個混淆的線索（不參加生日派對），要你說出「這不足以判斷 I」，這是加分點。</p></div></details>
+<details class="blk model"><summary>Model answer <small>可以這樣寫</small></summary><div class="in"><div class="essay"><p>Assuming his behavior at work reflects his usual habits, I would read Lukas as <b>ESTJ</b>.</p><p><b>E:</b> He says he thinks better when he talks, and he works through new ideas by talking with whoever is around. That is how extraverts usually process ideas. He skips staff birthday parties and closes his door in the evening, but I would not read that as introversion. It could simply be his position as GM or tiredness after a long day, so it does not change my reading.</p><p><b>S:</b> He wrote a 40-page manual with 32 timed steps for one room, and when he hears “many complaints” he asks how many and which rooms. He trusts concrete facts.</p><p><b>T:</b> He cut the meal break after comparing cost per head and occupancy, without asking staff. He decides by logic and numbers.</p><p><b>J:</b> He fixes the roster four weeks ahead and dislikes late changes. He wants things planned and settled.</p><p>These preferences are useful. The manual and the numbers helped raise rooms per shift from 12.1 to 15.2. The problem is that he is using them too much. Thirty-two timed steps leave no room for a housekeeper’s own judgment, and a decision based only on cost per head missed how the staff would feel about a shorter meal. His wish for closure also showed when he wrote “team agrees” after a silent meeting.</p><p>To get him to listen, P’Noi and Kan should meet him in person, since he likes to talk things through. They should come with numbers: for example, minutes lost walking between floors each shift, late rooms by floor, and the cleanliness complaints (up from 4 to 11). They should explain the cost of the problem in his terms, then offer a specific trial, such as two weeks of fixed floors on two floors with a review date. This gives him facts, logic and a plan he can say yes or no to, which matches how an ESTJ likes to decide.</p></div></div></details>
+<details class="blk "><summary>Easy mistakes <small>容易錯的地方</small></summary><div class="in"><ul class="oops"><li>Using “he skips parties” as proof of I. Preference is about where energy comes from and how you process ideas, so one social habit is not enough.</li><li>Saying T explains his public comment to P’Noi. T is about how he makes decisions. Embarrassing someone in public is an EQ issue.</li><li>Listing four letters with no evidence, or using one fact for two letters.</li><li>Forgetting the second half of the question (how to present to him). That part carries marks too.</li></ul></div></details>
+<h3 id="q2">Q2 · P’Noi</h3>
+<div class="qcard"><span class="pts">14 marks</span><p>Analyze P’Noi’s situation. Is her problem mainly a clash between her values and the new owner’s values, or a gap between what the hotel says and what it does? Then separate her attitude into its components and explain what has changed, and what has not, in her job attitudes and behavior.</p></div>
+<p class="zhp" lang="zh-Hant">分析 P’Noi：她的問題主要是「她的價值觀跟新公司不合」，還是「公司說一套做一套」？再拆解她的態度，說明她在工作態度和行為上，哪些變了、哪些沒變。</p>
+<details class="blk "><summary>Which framework, and why <small>選哪個框架、為什麼</small></summary><div class="in"><div class="pick"><span class="main">Values: fit and stated vs practiced (S2)</span><span>Attitude ABC (S2)</span><span>satisfaction / commitment / OCB (S2, S4)</span></div><p>The question itself names values and attitudes, so this is S2. The key is that S2 gives you two different ways a values problem can happen. One is a real mismatch: the person wants something different from what the company wants. The other is when the company says one thing and does another. You have to decide which one fits better and give a reason.</p><p>For the second half, use the ABC model to split her attitude, then use the job-attitude terms (satisfaction, commitment, OCB) to say exactly which ones moved.</p><p class="zhp" lang="zh-Hant">題目直接寫 values 跟 attitude，所以就是 S2。重點在 S2 有兩種「價值觀出問題」：一種是人跟公司想要的東西真的不一樣（mismatch）；另一種是公司嘴巴上說的，跟實際做的對不起來（stated vs practiced）。你要選一個比較貼的，並說理由。後半段用 ABC 拆態度，再用 satisfaction / commitment / OCB 說清楚到底是哪一項掉了。</p></div></details>
+<details class="blk "><summary>How to work it out <small>一步一步套</small></summary><div class="in"><div style="overflow-x:auto"><table><thead><tr><th>Step</th><th>Case facts</th><th>What it means</th></tr></thead><tbody><tr><td>Her values</td><td>Trains juniors for free, writes improvement ideas, apologizes to her team for their lost face, loyal to Khun Wanna.</td><td>She cares about her team, harmony and being trusted to improve things.</td></tr><tr><td>New group’s stated values</td><td>Precision, <b>Ownership</b>, Guest First.</td><td>On paper, “Ownership” fits her well.</td></tr><tr><td>What happens in practice</td><td>Random floors, app approval for maintenance, five ideas ignored.</td><td>Housekeepers have less ownership than before. The group is not doing what it says.</td></tr><tr><td>Where a real clash exists</td><td>Public naming on the Late Rooms board and in the meeting.</td><td>This clashes with her value of harmony and face.</td></tr><tr><td>Cognitive (A)</td><td>“16 rooms is too many”; “this is not our house anymore”.</td><td>What she believes about the job and the hotel.</td></tr><tr><td>Affective (B)</td><td>Smiles but says nothing; apologizes to her team.</td><td>Hurt and embarrassment (inferred).</td></tr><tr><td>Behavioral (C)</td><td>Stopped Sunday training, stopped sending ideas; still on time, rooms pass.</td><td>Extra effort stopped; core job still done.</td></tr></tbody></table></div><p class="zhp" lang="zh-Hant">判斷方法：先看新公司「說」的價值觀（Ownership）跟她合不合 → 合；再看實際做法 → 房間隨機分、報修要批准、建議沒人回，等於把 ownership 拿走。所以主要是「說一套做一套」。不過當眾點名這件事真的跟她重視和諧、面子的價值觀衝突，可以補一句說也有部分 mismatch。</p></div></details>
+<details class="blk model"><summary>Model answer <small>可以這樣寫</small></summary><div class="in"><div class="essay"><p>I think the main problem is a gap between stated and practiced values, with a smaller real clash on top.</p><p>P’Noi’s values show in what she does without being asked. She trained new housekeepers on Sundays without pay, wrote improvement ideas for years, and apologized to her team when they lost face. She cares about her team, harmony and being trusted to improve the work. The old hotel’s value, “Look after each other”, fitted her very well.</p><p>The new group’s values are Precision, Ownership and Guest First. On paper, Ownership suits her. She used to own a floor and kept suggesting improvements. But in practice the group has taken ownership away from housekeeping. Rooms are now assigned at random, she cannot call maintenance without approval, and her five suggestions got no reply. The problem is less that she disagrees with the new values and more that the hotel is not living them for her department. Khun Wanna’s old value, “Look after each other”, has also faded with the shorter meal break, the postponed trip and the Late Rooms board.</p><p>There is also a real clash. Naming people on a board and asking in a meeting whether “the people” are the problem goes against her value of harmony and saving face. So part of the problem is a true mismatch too.</p><p>Her attitude can be split into three parts. <b>Cognitive:</b> she believes 16 rooms is unrealistic and that “this is not our house anymore.” <b>Affective:</b> she seems hurt and embarrassed. She stayed silent in the meeting and later apologized to her team. <b>Behavioral:</b> she stopped training new staff on Sundays and stopped sending ideas, but she still comes on time and her rooms pass inspection.</p><p>So her task performance has not changed. What has dropped is her organizational citizenship behavior, the extra things nobody pays her for. Her job satisfaction is probably lower, based on what she says. Her commitment has changed in an interesting way. Her emotional attachment to the hotel as an organization is weaker (“not our house”), but she stays out of loyalty to Khun Wanna as a person. That loyalty may not pass to Lukas or the new owners. If the Executive Housekeeper is hired above her, she could lose that last reason to stay.</p><p>The fix is to make “Ownership” real for housekeeping: give floors back, reply to every suggestion within a week, and involve P’Noi in setting the new standard. Then check whether she starts sending ideas and training juniors again.</p></div></div></details>
+<details class="blk "><summary>Easy mistakes <small>容易錯的地方</small></summary><div class="in"><ul class="oops"><li>Saying “her values do not fit the new company” without checking what the new values actually say. Ownership fits her.</li><li>Saying her performance dropped. The case says her rooms still pass inspection. Her extra-role behavior (OCB) is what dropped.</li><li>Treating “I am still here for Khun Wanna” as commitment to the hotel. It is loyalty to a person.</li><li>Only describing the ABC parts without saying what they mean for satisfaction, commitment and OCB.</li></ul></div></details>
+<h3 id="q3">Q3 · Will money fix it?</h3>
+<div class="qcard"><span class="pts">16 marks</span><p>Lukas says: “Money talks everywhere. The bonus will fix the speed.” Choose one motivation theory as your main framework and use it to judge whether he is right. Compare housekeeping with the front desk in your answer.</p></div>
+<p class="zhp" lang="zh-Hant">Lukas 說「錢走到哪都有用，獎金會解決速度問題」。選一個動機理論當主框架，判斷他對不對，並比較房務和前台。</p>
+<details class="blk "><summary>Which framework, and why <small>選哪個框架、為什麼</small></summary><div class="in"><div class="pick"><span class="main">Herzberg two-factor theory (S3)</span><span>Maslow, for the pay part (S3)</span></div><p>The question is about whether money motivates. Herzberg is the theory built for that question. It splits work factors into two groups. <b>Hygiene factors</b> (pay, policy, supervision, working conditions, job security) cause unhappiness when they are bad, but fixing them only brings people back to neutral. <b>Motivators</b> (achievement, recognition, responsibility, growth, the work itself) are what make people want to do more.</p><p>Maslow is a good partner for one point. The housekeepers earn close to minimum wage and send money home, so money does matter to them at the lower levels. That is why the bonus raised speed a bit. Use Maslow for that one point and keep Herzberg as the main argument.</p><p>Why not Maslow as the main one? You could, and it would still score. But Maslow explains which needs are missing. Herzberg explains directly why the bonus raised speed but not care or retention, which is the claim you are asked to judge.</p><p class="zhp" lang="zh-Hant">這題就是在問「錢有沒有用」，Herzberg 就是專門回答這個的：hygiene（薪水、政策、主管對待、工作條件、工作保障）做不好會不爽，但做好只是不扣分；motivator（成就、被肯定、責任、成長、工作本身）才會讓人想多做。Maslow 用來補一點：房務薪水接近最低工資，錢對他們真的重要，所以獎金讓速度有上去一點。主框架用 Herzberg，因為它可以直接解釋「速度上去了，但品質跟留任沒上去」。</p></div></details>
+<details class="blk "><summary>How to work it out <small>一步一步套</small></summary><div class="in"><div style="overflow-x:auto"><table><thead><tr><th>Herzberg group</th><th>Housekeeping</th><th>Front desk</th></tr></thead><tbody><tr><td>Hygiene: pay</td><td>Near minimum wage; small bonus (THB 40 per 4 extra rooms)</td><td>Not described</td></tr><tr><td>Hygiene: conditions & policy</td><td>Shorter meal break, cheaper food, approval needed for repairs, one-year contracts for new hires</td><td>Same meal and food changes</td></tr><tr><td>Hygiene: supervision</td><td>Public Late Rooms board, named in meeting</td><td>Weekly review with Lukas and Kan</td></tr><tr><td>Motivator: responsibility</td><td>Lost own floor; 32 timed steps</td><td><b>Gained</b> THB 2,000 authority</td></tr><tr><td>Motivator: recognition</td><td>Guest notes by name gone; only named for being late</td><td>Mystery guest voucher; Friday review</td></tr><tr><td>Motivator: growth</td><td>No training; Fon teaching herself English at night</td><td>Kan sent to Bangkok training</td></tr><tr><td>Motivator: achievement</td><td>Only speed is visible</td><td>88% of complaints solved, close to the 90% target</td></tr><tr><td>Outcome</td><td>Speed up, quality and retention down</td><td>Results up</td></tr></tbody></table></div><p class="zhp" lang="zh-Hant">寫法：先講 Lukas 對在哪（Maslow：低薪的人錢有用 → 速度從 12.1 到 15.2）；再用 Herzberg 說他錯在哪（hygiene 變差 → 不滿、離職；motivator 被拿走 → 沒動力、亂勾 checklist）；最後拿前台當對照組：同一個 GM，前台拿到責任、訓練、成就感，所以表現好。這個對照是這題最有說服力的證據。</p></div></details>
+<details class="blk model"><summary>Model answer <small>可以這樣寫</small></summary><div class="in"><div class="essay"><p>I would use Herzberg’s two-factor theory, because Lukas’s claim is really about whether pay motivates people, and Herzberg separates the things that stop dissatisfaction from the things that create motivation.</p><p>Lukas is partly right. Housekeepers earn close to the minimum wage and many send money home, so in Maslow’s terms their basic needs are not fully secure and extra money matters to them. This helps explain why rooms per shift rose from 12.1 to 15.2.</p><p>But in Herzberg’s model, pay is a hygiene factor. It can reduce dissatisfaction, but it does not create real motivation. And at the same time as the bonus came in, other hygiene factors got worse. The meal break was cut, the canteen food got cheaper, new hires get one-year contracts and the Late Rooms board publicly names people. These are worse working conditions, policy and supervision, so dissatisfaction went up. Four experienced housekeepers left, and turnover rose from 6% to 36%.</p><p>The motivators were also taken away. Housekeepers lost their own floor, which removed responsibility. The thank-you notes from regular guests stopped, which removed recognition. There is no training, so growth is blocked. Fon is teaching herself English at night so she can leave the department. The only achievement anyone sees is speed. So people do the minimum to reach the number, which fits the falsely ticked checklists and the rise in cleanliness complaints from 4 to 11.</p><p>The front desk shows the other side. Under the same GM, with the same meal and food changes, front-desk staff got responsibility (THB 2,000 to solve problems), growth (Kan’s training), recognition (the mystery-guest voucher and the Friday review) and a clear sense of achievement. Their result went from 55% to 88%. The difference between the two departments is not pay. It is the motivators.</p><p>So Lukas is right that money can push speed up, but wrong that it will fix motivation. For housekeeping he should fix the worst hygiene problems first, especially public naming and the meal break, and then put motivators back: ownership of a floor, guest feedback by name and a training path. He can check this through turnover, cleanliness complaints and whether rooms per shift stays above 15.</p></div></div></details>
+<details class="blk "><summary>Easy mistakes <small>容易錯的地方</small></summary><div class="in"><ul class="oops"><li>Calling pay a motivator. In Herzberg, pay is hygiene.</li><li>Saying “the bonus failed”. Speed did go up. The point is what it did not fix.</li><li>Using Maslow and Herzberg and ERG and X/Y all at once. Pick one main theory and use one other only where it adds something.</li><li>Forgetting the front desk. The question asks for a comparison, and it is your strongest evidence.</li></ul></div></details>
+<h3 id="q4">Q4 · Two jobs, two designs</h3>
+<div class="qcard"><span class="pts">14 marks</span><p>Compare how the housekeeping job and the front-desk job have been redesigned. Use a job-design framework and a goal-setting framework. Then suggest two changes for housekeeping that keep the speed gains.</p></div>
+<p class="zhp" lang="zh-Hant">比較房務和前台的工作被重新設計成什麼樣子。用一個工作設計框架加一個目標設定框架。最後提兩個房務的改善，而且不能把速度的進步弄丟。</p>
+<details class="blk "><summary>Which framework, and why <small>選哪個框架、為什麼</small></summary><div class="in"><div class="pick"><span class="main">Job Characteristics Model (S4)</span><span>Goal setting / MBO (S3)</span><span>Theory X/Y, one line (S3)</span></div><p>The question tells you to use a job-design framework and a goal-setting framework. In this course that means the JCM and MBO. The JCM looks at the job itself through five dimensions. MBO looks at the target through four elements. Together they explain why the front desk improved while housekeeping got faster but worse.</p><p>One extra line on Theory X/Y is worth adding at the end. Lukas trusts the front desk and controls housekeeping, and X/Y explains where that difference comes from: his assumptions about each group.</p><p class="zhp" lang="zh-Hant">題目已經指定兩個框架：工作設計 = JCM（五個構面），目標設定 = MBO（四個要素）。JCM 看「工作本身」，MBO 看「目標怎麼訂」。最後補一句 X/Y：他對前台是 Y（信任、授權），對房務是 X（計時、要批准），這就是兩邊設計差這麼多的原因。</p></div></details>
+<details class="blk "><summary>How to work it out <small>一步一步套</small></summary><div class="in"><div style="overflow-x:auto"><table><thead><tr><th>JCM dimension</th><th>Housekeeping now</th><th>Front desk now</th></tr></thead><tbody><tr><td>Skill variety</td><td>Same cleaning steps; no longer deals with maintenance or regular guests</td><td>Problem solving, guest recovery, new training</td></tr><tr><td>Task identity</td><td>Random rooms; no “my floor” from start to finish</td><td>Handles a guest’s complaint from start to finish</td></tr><tr><td>Task significance</td><td>Guest notes gone, so they rarely see their effect on guests</td><td>Sees the guest’s reaction directly</td></tr><tr><td>Autonomy</td><td>32 timed steps; repairs need approval</td><td>Up to THB 2,000 without asking</td></tr><tr><td>Feedback</td><td>Speed (app) and blame (board) only</td><td>Weekly Friday review on a clear target</td></tr></tbody></table></div><div style="overflow-x:auto"><table><thead><tr><th>MBO element</th><th>Housekeeping: 16 rooms</th><th>Front desk: 90% in 15 min</th></tr></thead><tbody><tr><td>Specific</td><td>Yes, but speed only</td><td>Yes, and tied to guest outcome</td></tr><tr><td>Time period</td><td>Per shift</td><td>Reviewed weekly</td></tr><tr><td>Participation</td><td>None; set by Lukas</td><td>Agreed with Kan</td></tr><tr><td>Feedback</td><td>Public naming when late</td><td>Friday review</td></tr><tr><td>Link to the top goal</td><td>Weak: head office wants review score 8.8, but cleanliness complaints rose</td><td>Strong: solving complaints helps the review score</td></tr></tbody></table></div><p class="zhp" lang="zh-Hant">MBO 最容易被忽略的一點：cascading（目標往下拆）。總部的目標是評分 8.8 + 成本降 10%，Lukas 拆到房務只剩「快」，品質那一半沒拆下去，結果清潔投訴從 4 變 11，反而拖累評分。</p></div></details>
+<details class="blk model"><summary>Model answer <small>可以這樣寫</small></summary><div class="in"><div class="essay"><p>I would use the Job Characteristics Model for the design of the work and MBO for the targets.</p><p>In JCM terms the two jobs moved in opposite directions. At the front desk, autonomy went up (staff can give up to THB 2,000 without asking), task identity is high (one person solves the guest’s problem from start to finish), staff see the result on the guest directly and they get weekly feedback. Skill variety also grew with training. This gives the three psychological states the model talks about: the work feels meaningful, staff feel responsible for the result and they know how they are doing.</p><p>Housekeeping went the other way. Random room assignment removed task identity, because nobody has a floor of their own any more. Without the guest notes, housekeepers rarely see how their work affects guests, so task significance feels lower. Autonomy is very low: 32 timed steps and approval needed even for a broken lamp. Feedback is only about speed, and mostly negative through the Late Rooms board. The job now feels less meaningful, staff feel less responsible for the result, and some tick steps they did not do.</p><p>The goals show the same pattern. The front-desk target is specific, reviewed weekly, agreed with Kan and tied to guest satisfaction, and it reached 88%. The housekeeping target of 16 rooms is specific and has a time period, but staff were not involved and the only feedback is public blame. It also does not cascade well from head office. Head office wants a higher review score, but the room target only measures speed, and cleanliness complaints rose from 4 to 11. A target that pushes against the top goal is a real gap.</p><p>Behind both differences is Lukas’s style. He treats the front desk in a Theory Y way, trusting them with money and decisions, and treats housekeeping in a Theory X way, with timing and approvals. If he assumes housekeepers need control, the job gives them no chance to show initiative, and the false ticking then seems to “prove” him right.</p><p>Two changes for housekeeping:</p><p><b>1. Give floors back and let housekeepers report repairs directly.</b> Each housekeeper or pair keeps a home floor, and guest comments for that floor are shared at the weekly briefing. Keep the app timing as data. This brings back task identity, significance, autonomy and feedback. Fixed floors also cut walking time, which protects speed.</p><p><b>2. Reset the target with P’Noi.</b> Agree on a number per room type (suites take longer) plus a quality measure from spot inspections and guest cleanliness comments, reviewed weekly in Thai. This adds participation and better feedback, and it links the target to the review score. I would check that rooms per shift stay at 15 or above, cleanliness complaints fall back under 5 a month and turnover drops.</p></div></div></details>
+<details class="blk "><summary>Easy mistakes <small>容易錯的地方</small></summary><div class="in"><ul class="oops"><li>Saying the housekeeping job is “not significant”. Clean rooms matter a lot. The point is that staff can no longer <i>see</i> their effect on guests.</li><li>Calling the 16-room target “bad MBO” in general. It is specific and time-bound. The missing parts are participation, useful feedback and the link to the top goal.</li><li>Suggesting changes that would throw away the speed gains, such as “remove the app”. The question asks you to keep them.</li><li>Forgetting growth-need strength: Fon clearly wants growth, while some older staff may prefer stable routines.</li></ul></div></details>
+<h3 id="q5">Q5 · Rules and reactions</h3>
+<div class="qcard"><span class="pts">12 marks</span><p>(a) Classify each reward or consequence at Ban Suan using reinforcement theory, including the schedule where it applies, and say which behavior each one actually strengthens. (b) Classify the responses of the employees in section 5 and explain your choices.</p></div>
+<p class="zhp" lang="zh-Hant">(a) 用強化理論把個案裡每一個獎懲分類，有排程的要寫出排程，並說它實際上強化了哪個行為。(b) 把第 5 段員工的反應分類並說明。</p>
+<details class="blk "><summary>Which framework, and why <small>選哪個框架、為什麼</small></summary><div class="in"><div class="pick"><span class="main">Reinforcement + schedules (S4)</span><span>EVLN (S4)</span></div><p>Part (a) asks you to classify rules and say what behavior they encourage. That is reinforcement theory: positive reinforcement, negative reinforcement, punishment and extinction, plus the five schedules. Part (b) is about how unhappy employees respond, which is EVLN. The question almost names both, so the work here is getting each classification right.</p><p>A quick way to classify: ask two things. Is something <b>added</b> or <b>taken away</b>? Is the goal to make the behavior <b>happen more</b> or <b>happen less</b>? If a behavior used to be rewarded and the reward simply stops, that is extinction.</p><p class="zhp" lang="zh-Hant">判斷兩個問題就好：是「給」還是「拿走」東西？目的是讓行為「變多」還是「變少」？給好東西→正增強；拿走討厭的東西→負增強（行為變多！不是懲罰）；給討厭的東西→懲罰；以前有獎勵、現在沒了→消弱。排程看「拿到獎勵的條件」：看件數就是 ratio，看時間就是 interval；固定就是 fixed，不能預測就是 variable。月底才發錢不會讓它變成 interval。</p></div></details>
+<details class="blk "><summary>How to work it out <small>一步一步套</small></summary><div class="in"><div style="overflow-x:auto"><table><thead><tr><th>Rule</th><th>Type</th><th>Schedule</th><th>What it really strengthens</th></tr></thead><tbody><tr><td>THB 40 per 4 rooms above 16</td><td>Positive reinforcement</td><td><b>Fixed ratio (FR4)</b>. Paid monthly, but earned by count.</td><td>Speed and room count, not quality. Fits the false ticking.</td></tr><tr><td>Names on the Late Rooms board</td><td>Punishment (something unpleasant added)</td><td></td><td>Meant to reduce lateness. Also teaches people to hide problems; loss of face.</td></tr><tr><td>Done by 3 pm → skip 4 pm re-inspection</td><td>Negative reinforcement (unpleasant task removed)</td><td></td><td>Finishing early, which may mean rushing.</td></tr><tr><td>Mystery guest → THB 500 voucher</td><td>Positive reinforcement</td><td><b>Variable interval</b>: checks come at unknown times</td><td>Good service all the time, because any moment could be checked.</td></tr><tr><td>P’Noi’s ideas: once praised, now ignored</td><td>Extinction</td><td></td><td>Nothing. The behavior dies out, and she stopped.</td></tr></tbody></table></div><div style="overflow-x:auto"><table><thead><tr><th>Person</th><th>EVLN</th><th>Why</th></tr></thead><tbody><tr><td>Four housekeepers who resigned</td><td>Exit (active, destructive)</td><td>Left the organization.</td></tr><tr><td>Kan’s memo</td><td>Voice (active, constructive)</td><td>Suggests a fix directly to the GM.</td></tr><tr><td>P’Noi telling Khun Wanna</td><td>Voice, through an indirect channel</td><td>She raised the problem through a trusted senior person. Lukas saw it as going around him (link to Q6).</td></tr><tr><td>Lung Chai</td><td>Loyalty (passive, constructive)</td><td>Waits for things to improve and defends the hotel.</td></tr><tr><td>Box-ticking, minibar errors</td><td>Neglect (passive, destructive)</td><td>Less effort, more errors.</td></tr><tr><td>Fon asking to move</td><td>Arguable: Exit from housekeeping</td><td>She wants to leave the job but not the hotel. You could also read it as growth-seeking. Say which you assume.</td></tr></tbody></table></div><p class="zhp" lang="zh-Hant">最容易錯的兩個：(1) 「3 點前做完就不用 4 點複查」是負增強，不是懲罰，因為它是「拿走討厭的事」來讓「提早完成」變多。(2) 獎金每月發，但它是「每 4 間」才賺到，所以是 FR4，不是 fixed interval。</p></div></details>
+<details class="blk model"><summary>Model answer <small>可以這樣寫</small></summary><div class="in"><div class="essay"><p><b>(a)</b> The overtime bonus of THB 40 for every 4 rooms above 16 is positive reinforcement on a fixed-ratio schedule (FR4). It is paid monthly, but the reward is earned by the number of rooms, so it is a ratio schedule. Fixed ratio produces a fast rate of work, and that is what happened. The problem is that it rewards count only, so it also strengthens rushing and ticking steps that were not done.</p><p>The Late Rooms board is punishment, because something unpleasant (public naming) is added to reduce late rooms. It may reduce lateness, but it also makes people hide problems, and in this team it causes loss of face.</p><p>Being excused from the 4 pm re-inspection if you finish by 3 pm is negative reinforcement. Something unpleasant is removed to make finishing early happen more often. Again, it rewards speed, not care.</p><p>The mystery-guest voucher is positive reinforcement on a variable-interval schedule. Checks come at times nobody can predict, so staff have a reason to give good service all the time. This is the best-designed rule in the hotel, and it is only used at the front desk.</p><p>P’Noi’s improvement notes show extinction. Khun Wanna used to thank her in front of the staff, which reinforced the behavior. Since March nobody has replied, and the behavior has stopped.</p><p>Overall, housekeeping rules reward speed in three different ways and nothing rewards quality. Lukas could use the variable-interval idea there too: random room inspections with a small reward for a perfect room.</p><p><b>(b)</b> The four housekeepers who resigned show Exit. Kan’s memo is Voice, a direct and constructive suggestion. P’Noi telling Khun Wanna is also Voice, but through an indirect channel that is more comfortable for her. Lukas saw it as going around him. Lung Chai shows Loyalty: he waits for things to settle and speaks well of the hotel. The housekeepers who tick steps they did not do, and the rise in minibar errors, show Neglect. Fon is harder to place. Asking to move to the front desk is a way of leaving the housekeeping job while staying in the hotel, so I would call it an Exit-type move, assuming dissatisfaction is the reason. It could also simply be ambition.</p></div></div></details>
+<details class="blk "><summary>Easy mistakes <small>容易錯的地方</small></summary><div class="in"><ul class="oops"><li>Calling the 3 pm rule punishment. Removing something unpleasant to increase a behavior is negative reinforcement.</li><li>Calling the bonus “fixed interval” because it is paid monthly. Look at what earns it: rooms.</li><li>Calling P’Noi’s silence “loyalty”. Her private talk with Khun Wanna was Voice, and her stopped ideas are extinction.</li><li>Classifying without saying what behavior the rule really encourages. Part (a) asks for that.</li></ul></div></details>
+<h3 id="q6">Q6 · Lost in the Monday meeting</h3>
+<div class="qcard"><span class="pts">18 marks</span><p>Using Hofstede’s dimensions and any other cross-cultural concept from the course, explain what went wrong in the Monday meetings and in the P’Noi incident. What should Lukas change, and what could the Thai staff do to work better with him? Avoid stereotyping.</p></div>
+<p class="zhp" lang="zh-Hant">用 Hofstede 的構面（以及課堂上其他跨文化概念）解釋週一會議和 P’Noi 事件哪裡出了問題。Lukas 該改什麼？泰國員工可以怎麼配合他？不要刻板印象。</p>
+<details class="blk "><summary>Which framework, and why <small>選哪個框架、為什麼</small></summary><div class="in"><div class="pick"><span class="main">Hofstede dimensions (S6)</span><span>High/low context (S6)</span><span>Jai Yen / Jai Ron, face (S6)</span></div><p>The question names Hofstede. The skill is choosing <b>which</b> dimensions to use. Look at Exhibit B and pick the gaps that are both large and visible in the facts. Power Distance (gap 30), Individualism (gap 60) and Masculinity (gap 36) all show up clearly in the meeting. Uncertainty Avoidance differs by only 6 points, so it does not explain much here. Saying that briefly shows you chose on purpose.</p><p>Add high/low context communication for the smile and “Ka, we will try”, because Hofstede’s numbers alone do not explain why Lukas misread them.</p><p>“Avoid stereotyping” is asking you to say that country scores are averages. Use them as a reason to check, and base your conclusions on what Lukas and P’Noi actually did.</p><p class="zhp" lang="zh-Hant">Hofstede 五個構面不用全部寫。看 Exhibit B，挑「差距大」而且「個案裡看得到」的：PD（30）、IDV（60）、MAS（36）。UA 只差 6，說一句「這個不是主因」就好，這樣老師知道你是有意識地挑。再加 high/low context 解釋那個微笑跟「Ka」。最後一定要寫：國家分數是平均值，不能直接套在某個人身上，要看他實際的行為。</p></div></details>
+<details class="blk "><summary>How to work it out <small>一步一步套</small></summary><div class="in"><div style="overflow-x:auto"><table><thead><tr><th>Concept</th><th>Scores</th><th>What happened</th><th>Meaning</th></tr></thead><tbody><tr><td>Power Distance</td><td>CH 34 / TH 64</td><td>Lukas asks for first names and open challenge to the GM in a big meeting. Staff stay silent; P’Noi speaks through Khun Wanna.</td><td>Challenging a boss in public may feel wrong to staff. Going through a respected senior is a normal channel for them, not disloyalty.</td></tr><tr><td>High / low context</td><td></td><td>Smiles, nods, “Ka, we will try” → “team agrees”. “No problem, Khun Lukas” → “closed”.</td><td>He took polite words as the full message. The real meaning was in the context.</td></tr><tr><td>Individualism</td><td>CH 79 / TH 19</td><td>Individual names on the board; individual bonus; P’Noi apologizes to her <i>team</i>.</td><td>He works with individual accountability; the team feels shame as a group.</td></tr><tr><td>Masculinity, Jai Ron vs Jai Yen</td><td>CH 70 / TH 34</td><td>“Weakest department… the plan or the people?” in front of everyone.</td><td>Direct, results-first criticism in public. For staff who value harmony and face, this is confrontation.</td></tr><tr><td>Uncertainty Avoidance</td><td>CH 58 / TH 64</td><td>SOPs and rosters</td><td>Small gap. Not the main cause; some staff may even like clear SOPs.</td></tr></tbody></table></div><p class="zhp" lang="zh-Hant">對照 S1 的概念：老師 p.24 說個人性格可能讓文化傾向更強或更弱。Lukas 的 E 和 T 可能讓他更直接，但 E 不等於 individualism，T 不等於 masculinity，可以提一句兩者不同。</p></div></details>
+<details class="blk model"><summary>Model answer <small>可以這樣寫</small></summary><div class="in"><div class="essay"><p>Hofstede’s dimensions are useful here because the trouble started between a Swiss manager and a Thai team. In the lecturer’s chart, the largest gaps are in Individualism (79 vs 19), Masculinity (70 vs 34) and Power Distance (34 vs 64). These scores are national averages, so they cannot tell us what Lukas or P’Noi are like as people. I use them only to explain behavior the case actually describes. Uncertainty Avoidance is close (58 vs 64), so I do not think it is part of the problem.</p><p><b>Power distance.</b> Lukas asks to be called by his first name and invites people to challenge him in a meeting of 25. That fits a low power-distance habit. For staff who are used to more distance from the boss, openly challenging the GM in front of everyone may feel disrespectful or risky, so they stay quiet. P’Noi then raised the problem through Khun Wanna, the person with status and a long relationship with her. In a higher power-distance setting that is a normal and polite route. Lukas read it as going around him.</p><p><b>High and low context.</b> Lukas takes words at face value. When people smiled and P’Noi said “Ka, we will try”, he wrote “team agrees.” In a more high-context setting, that answer can mean “I heard you” or “I do not want to argue here.” The same thing happened after his apology. “No problem, Khun Lukas” was polite, and he took it as the end of the matter. The conflict was still there. It just was not spoken.</p><p><b>Individualism.</b> His tools are individual: names on the board and a bonus per person. The team thinks as a group. P’Noi apologized to her team because the shame fell on all of them. Naming one person in public hurts the whole group.</p><p><b>Masculinity, Jai Ron and Jai Yen.</b> Asking “Is the problem the plan, or the people?” in front of everyone is direct, results-first criticism, which fits a higher-masculinity, Jai Ron style. Many Thai staff expect a Jai Yen approach that protects face and harmony, so they experienced it as confrontation and humiliation. His directness may also come partly from his own preferences (E and T in Q1), but personality and culture are separate things and I would not assume one from the other.</p><p><b>What Lukas should change.</b> Ask for disagreement through channels people will use: small-group talks with P’Noi before the meeting, an anonymous suggestion box in Thai, and specific questions like “What would make 16 rooms hard on your floor?” instead of “Do you disagree?” Correct people privately and praise teams publicly. Remove names from the board and show team-level results. Treat P’Noi as a bridge to her team. After a decision, ask people to explain the plan back to check real understanding.</p><p><b>What staff can do.</b> Lukas has said he respects directness, so P’Noi and Kan can bring concerns to him with numbers, in writing or in a small meeting with Kan helping with English. They can tell him plainly that “Ka” means “I heard you”, not “I agree.”</p><p>To check whether this works, I would look at how many concerns are raised before a plan goes live, how many suggestions get answered, the “friendly staff” share in reviews (now 52%) and housekeeping turnover.</p></div></div></details>
+<details class="blk "><summary>Easy mistakes <small>容易錯的地方</small></summary><div class="in"><ul class="oops"><li>Writing about all five dimensions equally. Choose the ones the facts support and say why you skip the rest.</li><li>Saying “Swiss people are direct and Thai people are passive.” Use the scores as averages and base the analysis on what these people did.</li><li>Treating Lukas’s private apology as fixing the problem. The case shows the conflict was still there.</li><li>Only blaming Lukas. The question also asks what the Thai staff could do.</li></ul></div></details>
+<h3 id="q7">Q7 · Coaching Lukas</h3>
+<div class="qcard"><span class="pts">14 marks</span><p>Khun Wanna asks you to coach Lukas. Assess him on the five EQ factors, give one coaching task for each gap, and explain how you would check progress. Include what he already does well.</p></div>
+<p class="zhp" lang="zh-Hant">Khun Wanna 請你當 Lukas 的教練。用 EQ 五個因素評估他，每個缺口給一個教練任務，並說要怎麼檢查有沒有進步。也要寫出他已經做得好的地方。</p>
+<details class="blk "><summary>Which framework, and why <small>選哪個框架、為什麼</small></summary><div class="in"><div class="pick"><span class="main">EQ five factors (S5)</span><span>coaching plan (S5)</span></div><p>“Coach” and “five EQ factors” point straight at S5. The marks come from going through all five factors, linking each one to its own event, and giving a task with someone responsible, a frequency and a way to check.</p><p>This case is not all bad, so be fair. He apologized the next day, he trusts the front desk and he has a clear three-word promise. Including his strengths shows you read the case carefully, and the question asks for them.</p><p class="zhp" lang="zh-Hant">看到 coach 跟 EQ 就是 S5。五個因素要一個一個來：事件 → 缺口 → 任務（誰做、多久一次）→ 怎麼檢查。不要五個都寫成「他要更有同理心」這種空話。他也有做得好的地方（隔天去道歉、信任前台、有清楚的三字承諾），題目有要求要寫。</p></div></details>
+<details class="blk "><summary>How to work it out <small>一步一步套</small></summary><div class="in"><div style="overflow-x:auto"><table><thead><tr><th>Factor</th><th>Event</th><th>Gap</th><th>Already good</th></tr></thead><tbody><tr><td>Self-awareness & self-control</td><td>“I am direct… that is how you show respect”; public question to P’Noi when annoyed</td><td>Knows his style, not its effect here; annoyance drove a public comment</td><td>Felt he went too far and went to her the next day</td></tr><tr><td>Empathy</td><td>“Why does she go around me?”; never asked why 16 rooms is hard</td><td>Did not see the situation from P’Noi’s side</td><td></td></tr><tr><td>Social expertise</td><td>Apology in English; took “No problem” as closed; suggestions unanswered</td><td>Repair was too quick; conflict still there</td><td>Good working relationship with Kan</td></tr><tr><td>Personal influence</td><td>Front desk follows willingly; housekeeping complies</td><td>Influence stops at one department</td><td>Front desk results</td></tr><tr><td>Mastery of vision</td><td>“Calm. Clean. Personal.” emailed in English; housekeepers think the goal is “be faster”</td><td>The vision did not reach housekeeping, and the speed-only target sends a different message</td><td>He has a clear promise</td></tr></tbody></table></div><p class="zhp" lang="zh-Hant">最後一欄「怎麼檢查」要分層：只看「有沒有去上教練課」是 activity，不算數；要看行為（有沒有再當眾點名）、員工感受（有沒有人敢提問題）、業務結果（離職率、投訴）。</p></div></details>
+<details class="blk model"><summary>Model answer <small>可以這樣寫</small></summary><div class="in"><div class="essay"><p>I would use the five EQ factors from S5 because the problems in this case show up in how Lukas handles his own emotions and other people, while his planning and data skills are strong. The coaching should keep those strengths and change specific behaviors.</p><p><b>1. Self-awareness and self-control.</b> Lukas knows he is direct and believes directness shows respect, so he has some self-awareness. He does not see what that directness does to people here. When he was annoyed that P’Noi went to Khun Wanna, the annoyance came out as a public question about whether “the people” were the problem. To his credit, he felt he had gone too far the next day. <i>Task:</i> before each Monday meeting, he writes down any criticism he plans to give, what he intends and how it might land, and gives corrections only in private. He reviews one real incident a week with the coach for six weeks. <i>Check:</i> no more public naming, and a short anonymous staff survey every month.</p><p><b>2. Empathy.</b> He asked “Why does she go around me?” but never asked why she found 16 rooms unrealistic, or why she might not speak up in a big meeting. <i>Task:</i> work one housekeeping shift a month, and before changing any housekeeping target, talk to three housekeepers and repeat their concern back to them in his own words. <i>Check:</i> housekeepers say they were heard, and their points show up in the next plan.</p><p><b>3. Social expertise.</b> His apology was a good start, but he gave it in English, briefly, and treated “No problem” as the end. Five suggestions went unanswered. <i>Task:</i> hold a proper repair meeting with P’Noi, with Kan helping with language, and agree what support her team needs. Answer every suggestion within seven days with yes, no or not yet, and a reason. <i>Check:</i> response time, and whether the number of suggestions goes up again.</p><p><b>4. Personal influence.</b> He has real influence at the front desk, where staff follow him willingly and results improved. In housekeeping, people follow orders but nobody is on board. <i>Task:</i> design the housekeeping trial together with P’Noi and let her present it to her team. <i>Check:</i> voluntary participation in the trial and its results.</p><p><b>5. Mastery of vision.</b> “Calm. Clean. Personal.” is a clear promise, but it reached housekeeping only as an English email, and the only target they see is speed. So they think the goal is “be faster”. <i>Task:</i> explain the promise in Thai at shift briefings, show what “clean” and “personal” mean for a housekeeper, and add a cleanliness measure to the room target. <i>Check:</i> ask ten random staff what the promise means, and track cleanliness complaints.</p><p>Khun Wanna should review this with him once a month for three months, looking at three things together: his behavior, how staff feel and the hotel’s results (turnover, complaints, review score). Attending coaching sessions on its own does not count as progress.</p></div></div></details>
+<details class="blk "><summary>Easy mistakes <small>容易錯的地方</small></summary><div class="in"><ul class="oops"><li>Writing “he needs more empathy” with no task, owner or check.</li><li>Merging empathy and social expertise. Empathy is understanding her view; social expertise is handling the conversation and the repair.</li><li>Saying he has no vision. He has one; it was not communicated to housekeeping.</li><li>Measuring success by “completed the coaching course”. That is activity, not behavior change.</li></ul></div></details>
+<h2 id="links">How the seven answers connect</h2>
+<p>If the exam ends with a “three priority actions” question, these three come out of the answers above. Fixing the target and rewards (Q3, Q4, Q5) tells housekeepers what “good” means. Giving floors and repair calls back (Q2, Q4) lets them own the result again. Changing how Lukas asks for and handles disagreement (Q6, Q7) lets problems surface before they turn into resignations. Keep what works: his data discipline, the front-desk model and the speed gains.</p>
+<p class="zhp" lang="zh-Hant">如果最後有一題要你「只能給三個建議」：1) 把房務目標和獎勵改成「速度＋品質」；2) 把樓層和報修權還給房務；3) 改 Lukas 收意見和處理衝突的方式。同時保留他做得好的：數據管理、前台授權模式、已經上來的速度。</p>
+<p class="note-small">Fictional practice case. Frameworks follow the S1–S6 lecture slides; model answers are one reasonable way to answer, not the lecturer’s key.</p>
+</article></main></div>
+<script>
+(function(){
+  const b=document.getElementById('zBtn');
+  b.addEventListener('click',()=>{const off=document.body.classList.toggle('nozh');b.textContent=off?'中文 OFF':'中文 ON';});
+  const o=document.getElementById('openAll');
+  o.addEventListener('click',()=>{const ds=[...document.querySelectorAll('details.blk')];const open=!ds.every(d=>d.open);ds.forEach(d=>d.open=open);o.textContent=open?'Close all answers':'Open all answers';});
+})();
+</script>
+<script>
+(function () {
+  const toc = document.getElementById('toc'), rail = document.getElementById('rail');
+  const hs = [...document.querySelectorAll('.doc > h2, .doc > h3')];
+  hs.forEach(h => {
+    const li = document.createElement('li'); li.className = h.tagName.toLowerCase(); li.dataset.id = h.id;
+    const a = document.createElement('a'); a.href = '#' + h.id; a.textContent = h.childNodes[0].textContent.trim();
+    li.appendChild(a); toc.appendChild(li);
+  });
+  const spy = new IntersectionObserver(es => es.forEach(e => {
+    if (!e.isIntersecting) return;
+    toc.querySelectorAll('a.on').forEach(a => a.classList.remove('on'));
+    const a = toc.querySelector('li[data-id="' + e.target.id + '"] a'); if (a) a.classList.add('on');
+  }), { rootMargin: '-80px 0px -70% 0px' });
+  hs.forEach(h => spy.observe(h));
+
+  const tb = document.getElementById('tocBtn');
+  tb.addEventListener('click', () => { const o = rail.classList.toggle('open'); tb.setAttribute('aria-expanded', o); });
+  toc.addEventListener('click', e => { if (e.target.closest('a')) { rail.classList.remove('open'); tb.setAttribute('aria-expanded', false); } });
+
+  const all = document.getElementById('qaAll');
+  if (all) all.addEventListener('click', () => {
+    const ds = document.querySelectorAll('.qa details'), open = ![...ds].every(d => d.open);
+    ds.forEach(d => d.open = open); all.textContent = open ? 'Hide all answers' : 'Show all answers';
+  });
+  document.querySelectorAll('.drill .ans').forEach(s => s.addEventListener('click', () => s.classList.toggle('shown')));
+
+  if (window.EconWidgets) window.EconWidgets.mount(document);
+  if (window.MgmtWidgets) window.MgmtWidgets.mount(document);
+})();
+</script>
+</body></html>

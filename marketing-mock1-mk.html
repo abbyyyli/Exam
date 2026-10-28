@@ -1,0 +1,978 @@
+<!DOCTYPE html>
+<html lang="en" data-bilingual="true"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"><meta name="color-scheme" content="light"><title>MK Restaurants: Mock Paper | CMMU Study Notes</title><style>
+/* Layout: one reading column with a sticky chapter rail; colors follow system appearance. */
+:root {
+  color-scheme: light;
+  --bg: var(--tone-fdf9f9); --panel: var(--tone-f8eef0); --paper: var(--tone-ffffff); --tint: var(--tone-fae9ed); --line: var(--tone-efdde2);
+  --fg: var(--tone-2f282b); --muted: var(--tone-7e6f74); --accent: var(--tone-c06c84); --accent-ink: var(--tone-9c4862);
+  --demand: var(--tone-3f5675); --supply: var(--tone-c06c84); --ext: var(--tone-6e3f55); --world: var(--tone-8a7a5c); --policy: var(--tone-3f7f7a);
+  --cs: var(--tone-a7cdb6); --ps: var(--tone-b2c4e3); --dwl: var(--tone-d9674f); --rev: var(--tone-e5c171); --rev2: var(--tone-f1dca8); --time: var(--tone-ddb3cb); --ts: var(--tone-bfdcc9);
+  --serif: "Noto Serif TC", "Songti TC", Georgia, serif;
+  --sans: "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", system-ui, sans-serif;
+  --mono: "JetBrains Mono", ui-monospace, Menlo, monospace;
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; scroll-padding-top: 76px; background: var(--bg); }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+body { background: var(--bg); color: var(--fg); font-family: var(--sans); font-size: 16px; line-height: 1.75; }
+a { color: var(--accent-ink); }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+.top { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 20; background: rgba(var(--header-rgb), .94); backdrop-filter: blur(8px); border-bottom: 1px solid var(--line); padding-inline: 16px; }
+.top-in { max-width: 1160px; margin: 0 auto; display: flex; align-items: center; gap: 14px; min-height: 56px; flex-wrap: wrap; padding-block: 8px; }
+.brand { font-family: var(--serif); font-weight: 700; font-size: 1.02rem; white-space: nowrap; }
+.brand small { font-family: var(--sans); font-weight: 500; color: var(--muted); font-size: .76rem; margin-left: 6px; letter-spacing: .06em; }
+.sessions { display: flex; gap: 4px; margin-left: auto; }
+.crumbs { font-size: .86rem; display: flex; gap: 8px; align-items: baseline; flex-wrap: wrap; }
+.crumbs a { color: var(--muted); text-decoration: none; } .crumbs a:hover { color: var(--accent-ink); } .crumbs span { color: var(--line); } .crumbs b { font-family: var(--serif); }
+.sessions a.pill { text-decoration: none; }
+.sessions .pill { font: 500 .82rem var(--sans); border: 1px solid var(--line); background: var(--paper); color: var(--muted); padding: 4px 12px; border-radius: 999px; }
+.sessions .pill[aria-current="page"] { background: var(--accent); border-color: var(--accent); color: var(--tone-ffffff); }
+.sessions .pill.off { opacity: .5; cursor: not-allowed; }
+.toc-btn { display: none; font: 500 .85rem var(--sans); border: 1px solid var(--line); background: var(--paper); color: var(--fg); border-radius: 8px; padding: 5px 12px; }
+
+.wrap { max-width: 1160px; margin: 0 auto; padding-inline: 16px; display: grid; grid-template-columns: 220px minmax(0, 1fr); gap: 52px; }
+.rail { position: sticky; top: 76px; align-self: start; max-height: calc(100vh - 92px); overflow: auto; padding-block: 34px 40px; font-size: .86rem; line-height: 1.5; }
+.rail .lbl { font-size: .7rem; letter-spacing: .14em; text-transform: uppercase; color: var(--muted); margin: 0 0 10px; }
+.rail ol { list-style: none; margin: 0; padding: 0; }
+.rail li a { display: block; padding: 4px 10px; color: var(--muted); text-decoration: none; border-radius: 6px; }
+.rail li a:hover { color: var(--fg); background: var(--tint); }
+.rail li.h3 a { padding-left: 22px; font-size: .8rem; }
+.rail li a.on { color: var(--accent-ink); background: var(--tint); font-weight: 500; }
+
+main { min-width: 0; padding-block: 30px 120px; }
+.doc { max-width: 780px; }
+.hero { padding-block: 8px 26px; border-bottom: 1px solid var(--line); }
+.kick { font-size: .74rem; letter-spacing: .16em; text-transform: uppercase; color: var(--accent-ink); margin: 0 0 6px; font-weight: 500; }
+.hero h1 { font-family: var(--serif); font-size: clamp(1.8rem, 4vw, 2.5rem); line-height: 1.25; margin: 0 0 12px; text-wrap: balance; }
+.lead { margin: 0; font-size: 1.04rem; max-width: 62ch; }
+.legend { display: flex; flex-wrap: wrap; gap: 6px 16px; margin-top: 16px; font-size: .78rem; color: var(--muted); }
+.legend span { display: inline-flex; align-items: center; gap: 6px; }
+
+.doc h2 { font-family: var(--serif); font-size: 1.55rem; line-height: 1.35; margin: 3.4rem 0 .3rem; text-wrap: balance; }
+.doc h3 { font-size: 1.1rem; line-height: 1.45; margin: 2.2rem 0 .5rem; color: var(--accent-ink); text-wrap: balance; }
+.sub { margin: 0 0 1.2rem; color: var(--muted); max-width: 66ch; }
+.doc p, .doc li { max-width: none; }
+.doc ul, .doc ol { padding-left: 1.25em; }
+.doc li { margin: .25rem 0; }
+.zh { display: inline-block; font-size: .78em; line-height: 1.3; color: var(--accent-ink); background: var(--tint); padding: 0 6px; border-radius: 4px; margin-left: 2px; vertical-align: 1px; font-weight: 500; }
+.hint { font-size: .9rem; color: var(--muted); display: flex; gap: 10px; align-items: baseline; }
+.hint b { flex: none; font-size: .72rem; color: var(--tone-ffffff); background: var(--accent); padding: 0 7px; border-radius: 4px; font-weight: 500; }
+.key { background: var(--tint); padding: 12px 16px; border-radius: 8px; font-weight: 500; }
+.note-small { font-size: .8rem; color: var(--muted); }
+
+.pair { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; margin: 1rem 0; }
+.pair > div { background: var(--paper); border: 1px solid var(--line); border-radius: 10px; padding: 12px 16px; }
+.pair b { color: var(--accent-ink); }
+.pair p { margin: 4px 0 0; font-size: .92rem; }
+
+.matrix { display: grid; grid-template-columns: minmax(90px, .7fr) repeat(2, minmax(0, 1fr)); gap: 6px; margin: 1rem 0 1.2rem; font-size: .9rem; max-width: 620px; }
+.matrix .mh { font-weight: 700; font-size: .8rem; color: var(--muted); align-self: end; padding: 0 4px 2px; }
+.matrix .mh.side { align-self: center; }
+.matrix .cell { background: var(--paper); border: 1px solid var(--line); border-radius: 8px; padding: 12px; font-weight: 500; }
+.matrix .cell.hi { background: var(--tint); border-color: var(--accent); }
+.matrix small { display: block; font-weight: 400; color: var(--muted); font-size: .8rem; margin-top: 2px; line-height: 1.45; }
+
+.map { display: grid; grid-template-columns: minmax(0, 1fr) auto minmax(0, 1.3fr) auto minmax(0, 1fr); gap: 10px; align-items: center; margin: 1rem 0; }
+.mcol { display: flex; flex-direction: column; gap: 8px; }
+.mbox { background: var(--paper); border: 1px solid var(--line); border-radius: 10px; padding: 10px 12px; font-size: .84rem; line-height: 1.5; display: flex; flex-direction: column; gap: 2px; }
+.mbox b { font-size: .9rem; } .mbox span { color: var(--muted); } .mbox em { font-style: normal; color: var(--accent-ink); font-size: .78rem; font-weight: 500; }
+.mbox.good { border-color: var(--cs); } .mbox.ask { background: var(--tint); border-color: var(--accent); }
+.marrow { color: var(--accent); font-weight: 700; }
+
+.flow { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; margin: 1rem 0; font-size: .86rem; }
+.flow span { background: var(--paper); border: 1px solid var(--line); border-radius: 6px; padding: 4px 10px; line-height: 1.45; }
+.flow i { font-style: normal; color: var(--accent); font-weight: 700; }
+.formula { font-family: var(--mono); font-size: .9rem; background: var(--paper); border: 1px solid var(--line); border-radius: 8px; padding: 12px 16px; line-height: 1.9; overflow-x: auto; }
+.steps { counter-reset: s; list-style: none; padding-left: 0 !important; }
+.steps li { counter-increment: s; display: flex; gap: 10px; }
+.steps li::before { content: counter(s); flex: none; width: 22px; height: 22px; border-radius: 50%; background: var(--tint); color: var(--accent-ink); font: 700 .75rem/22px var(--sans); text-align: center; margin-top: 3px; }
+.assign { margin: 1.6rem 0; border: 1px dashed var(--accent); border-radius: 10px; padding: 14px 16px; background: var(--paper); }
+.assign p { margin: 6px 0 0; font-size: .92rem; }
+
+.tbl { overflow-x: auto; margin: 1rem 0; border: 1px solid var(--line); border-radius: 10px; background: var(--paper); }
+.doc table { border-collapse: collapse; width: 100%; font-size: .88rem; line-height: 1.55; }
+.doc th, .doc td { text-align: left; vertical-align: top; padding: 9px 12px; border-bottom: 1px solid var(--line); }
+.doc th { background: var(--panel); font-weight: 700; }
+.doc tr:last-child td { border-bottom: 0; }
+.drill .ans { filter: blur(5px); cursor: pointer; user-select: none; transition: filter .2s; }
+.drill .ans.shown { filter: none; user-select: auto; }
+
+.traps { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; margin-top: 1rem; }
+.traps > div { background: var(--paper); border: 1px solid var(--line); border-radius: 10px; padding: 12px 14px; font-size: .88rem; line-height: 1.55; }
+.traps s { color: var(--muted); text-decoration-color: var(--dwl); }
+.traps p { margin: 6px 0 0; font-weight: 500; }
+
+.qa-tools { margin: .4rem 0 .8rem; }
+.qa-tools button { font: 500 .82rem var(--sans); border: 1px solid var(--accent); background: var(--paper); color: var(--accent-ink); border-radius: 6px; padding: 5px 12px; cursor: pointer; }
+.qa { display: flex; flex-direction: column; gap: 6px; }
+.qa details { background: var(--paper); border: 1px solid var(--line); border-radius: 8px; }
+.qa summary { cursor: pointer; padding: 10px 14px; font-weight: 500; font-size: .93rem; list-style: none; display: flex; gap: 10px; }
+.qa summary::before { content: "Q"; color: var(--accent); font-weight: 700; }
+.qa details[open] summary { border-bottom: 1px dashed var(--line); }
+.qa details p { margin: 0; padding: 10px 14px 12px 36px; font-size: .9rem; }
+
+/* graphs */
+.graph { max-width: 900px; margin: 1.8rem 0 2.2rem; background: var(--paper); border: 1px solid var(--line); border-radius: 12px; padding: 18px 18px 14px; }
+.g-head h4 { font-family: var(--serif); font-size: 1.12rem; margin: 2px 0 2px; line-height: 1.45; }
+.g-head p { margin: 0 0 10px; color: var(--muted); font-size: .86rem; }
+.g-kicker { font-size: .68rem; letter-spacing: .16em; text-transform: uppercase; color: var(--accent-ink); }
+.g-body { display: grid; grid-template-columns: minmax(0, 1.55fr) minmax(0, 1fr); gap: 18px; align-items: start; }
+.g-plot svg { width: 100%; height: auto; display: block; }
+.g-side { display: flex; flex-direction: column; gap: 14px; min-width: 0; }
+.g-ctrl { display: flex; flex-direction: column; gap: 10px; }
+.sl label { display: flex; justify-content: space-between; font-size: .8rem; color: var(--muted); line-height: 1.3; }
+.sl output { font-family: var(--mono); color: var(--fg); font-size: .8rem; }
+.sl input { width: 100%; accent-color: var(--accent); margin: 4px 0 0; }
+.g-btn { align-self: flex-start; font: 500 .8rem var(--sans); border: 1px solid var(--accent); color: var(--accent-ink); background: transparent; border-radius: 6px; padding: 4px 11px; cursor: pointer; }
+.g-btn:hover { background: var(--tint); }
+.seg { display: inline-flex; border: 1px solid var(--line); border-radius: 7px; overflow: hidden; align-self: flex-start; }
+.seg button { font: 500 .8rem var(--sans); border: 0; background: transparent; color: var(--muted); padding: 5px 12px; cursor: pointer; }
+.seg button[aria-checked="true"] { background: var(--accent); color: var(--paper); }
+.chk { display: flex; gap: 8px; align-items: center; font-size: .8rem; color: var(--muted); }
+.chk input { accent-color: var(--accent); }
+.g-stats { margin: 0; border-top: 1px solid var(--line); padding-top: 10px; display: flex; flex-direction: column; gap: 3px; }
+.st { display: flex; justify-content: space-between; gap: 10px; font-size: .8rem; line-height: 1.45; }
+.st dt { color: var(--muted); display: flex; align-items: center; gap: 7px; }
+.st dd { margin: 0; font-family: var(--mono); font-variant-numeric: tabular-nums; white-space: nowrap; }
+.st.big dd { font-weight: 500; color: var(--accent-ink); font-size: .92rem; }
+.g-note { margin: 12px 0 0; padding: 9px 12px; background: var(--tint); border-radius: 6px; font-size: .85rem; line-height: 1.6; }
+
+.sw { width: 11px; height: 11px; border-radius: 2px; display: inline-block; flex: none; }
+.sw.none { background: transparent; }
+.sw.a-cs { background: var(--cs); } .sw.a-ps { background: var(--ps); } .sw.a-ps2 { background: var(--ps); outline: 1px solid var(--demand); }
+.sw.a-dwl { background: repeating-linear-gradient(45deg, var(--dwl) 0 2px, transparent 2px 4px); outline: 1px solid var(--dwl); }
+.sw.a-rev { background: var(--rev); } .sw.a-rev2 { background: var(--rev2); } .sw.a-time { background: var(--time); } .sw.a-ts { background: var(--ts); }
+.sw.ln { height: 3px; border-radius: 2px; width: 16px; }
+
+svg .ax { stroke: var(--muted); stroke-width: 1.2; }
+svg .axl { fill: var(--muted); font: 500 11px var(--sans); }
+svg .tk { fill: var(--muted); font: 500 10.5px var(--mono); }
+svg .gd { stroke: var(--muted); stroke-width: 1; stroke-dasharray: 3 4; opacity: .7; }
+svg .cv { stroke-width: 2.6; fill: none; stroke-linecap: round; }
+svg .cv.dash { stroke-dasharray: 7 5; stroke-width: 2; }
+svg .cvl { font: 700 11.5px var(--sans); }
+svg .c-d { stroke: var(--demand); fill: var(--demand); } svg .c-s { stroke: var(--supply); fill: var(--supply); }
+svg .c-x { stroke: var(--ext); fill: var(--ext); } svg .c-w { stroke: var(--world); fill: var(--world); } svg .c-t { stroke: var(--policy); fill: var(--policy); }
+svg text.cvl { stroke: none; }
+svg .pt { fill: var(--paper); stroke: var(--fg); stroke-width: 2; }
+svg .ptl { fill: var(--fg); font: 700 11px var(--sans); }
+svg .atag { fill: var(--fg); font: 700 11px var(--sans); opacity: .8; }
+svg .a-cs { fill: var(--cs); fill-opacity: .6; } svg .a-ps { fill: var(--ps); fill-opacity: .6; }
+svg .a-ps2 { fill: var(--ps); fill-opacity: .95; } svg .a-ts { fill: var(--ts); fill-opacity: .6; }
+svg .a-dwl { fill: url(#dwlHatch); stroke: var(--dwl); stroke-width: 1.2; }
+svg .a-rev { fill: var(--rev); fill-opacity: .75; } svg .a-rev2 { fill: var(--rev2); fill-opacity: .8; } svg .a-time { fill: var(--time); fill-opacity: .65; }
+
+svg .grid { stroke: var(--line); stroke-width: 1; }
+svg .a-prof { fill: var(--cs); fill-opacity: .75; } svg .a-loss { fill: var(--dwl); fill-opacity: .35; }
+.sw.a-prof { background: var(--cs); } .sw.a-loss { background: var(--dwl); opacity: .5; }
+.twin { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+.tw-t { margin: 0 0 2px; font-size: .78rem; font-weight: 700; color: var(--muted); }
+.g-ctrl .g-btn + .g-btn { margin-top: -4px; }
+.graph.wide .g-body { grid-template-columns: minmax(0, 1fr); }
+.graph.wide .g-side { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 16px; }
+@media (max-width: 700px) { .twin, .graph.wide .g-side { grid-template-columns: minmax(0, 1fr); } }
+svg polyline.cv { fill: none !important; }
+
+.graph { background: var(--paper); }
+.g-note { background: var(--tint); }
+
+@media (max-width: 900px) {
+  .wrap { grid-template-columns: minmax(0, 1fr); gap: 0; }
+  .rail { display: none; position: fixed; inset: 64px 0 0 0; max-height: none; background: var(--bg); z-index: 15; padding: 20px 16px 60px; }
+  .rail.open { display: block; }
+  .toc-btn { display: inline-block; }
+  .g-body { grid-template-columns: minmax(0, 1fr); }
+  .map { grid-template-columns: minmax(0, 1fr); }
+  .marrow { transform: rotate(90deg); justify-self: center; }
+}
+@media (max-width: 560px) { .pair, .traps { grid-template-columns: minmax(0, 1fr); } }
+/* Management components */
+.three { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; margin: 1rem 0; }
+.tcard { background: var(--paper); border: 1px solid var(--line); border-radius: 12px; padding: 14px 16px; display: flex; flex-direction: column; gap: 4px; }
+.tcard .tnum { width: 24px; height: 24px; border-radius: 50%; background: var(--accent); color: var(--tone-ffffff); font: 700 .78rem/24px var(--sans); text-align: center; }
+.tcard p { margin: 0; color: var(--muted); font-size: .88rem; }
+.tags { display: flex; flex-wrap: wrap; gap: 5px; margin-top: 6px; }
+.tags span { font-size: .74rem; background: var(--tint); color: var(--accent-ink); padding: 1px 8px; border-radius: 999px; font-weight: 500; }
+.method, .loop, .cascade { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; margin: 1rem 0; font-size: .86rem; }
+.method span, .loop span, .cascade span { background: var(--paper); border: 1px solid var(--line); border-radius: 6px; padding: 5px 11px; line-height: 1.4; }
+.method span.hi { background: var(--tint); border-color: var(--accent); color: var(--accent-ink); font-weight: 700; }
+.method i, .loop i, .cascade i { font-style: normal; color: var(--accent); font-weight: 700; }
+.loop i.back { font-size: 1.1rem; }
+.cascade { flex-direction: column; align-items: flex-start; gap: 2px; }
+.cascade span:nth-of-type(2) { margin-left: 18px; } .cascade span:nth-of-type(3) { margin-left: 36px; } .cascade span:nth-of-type(4) { margin-left: 54px; }
+.cascade i:nth-of-type(1) { margin-left: 14px; } .cascade i:nth-of-type(2) { margin-left: 32px; } .cascade i:nth-of-type(3) { margin-left: 50px; }
+.four { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 10px; margin: 1rem 0; }
+.four > div { background: var(--paper); border: 1px solid var(--line); border-radius: 10px; padding: 12px; }
+.four b { font-size: .9rem; color: var(--accent-ink); } .four p { margin: 4px 0 0; font-size: .84rem; color: var(--muted); line-height: 1.5; }
+
+.ladder { display: grid; grid-template-columns: minmax(0, 1fr) 118px 118px; grid-template-rows: repeat(5, auto); gap: 5px 8px; margin: 1rem 0 .3rem; max-width: 640px; }
+.lv { grid-column: 1; background: var(--paper); border: 1px solid var(--line); border-radius: 8px; padding: 7px 12px; font-weight: 700; font-size: .9rem; line-height: 1.35; }
+.lv small { display: block; font-weight: 400; color: var(--muted); font-size: .78rem; }
+.lv.l5 { grid-row: 1; margin-inline: 22%; } .lv.l4 { grid-row: 2; margin-inline: 16%; } .lv.l3 { grid-row: 3; margin-inline: 10%; } .lv.l2 { grid-row: 4; margin-inline: 5%; } .lv.l1 { grid-row: 5; }
+.lv.l5, .lv.l4 { background: var(--tone-f6e9f4); } .lv.l3 { background: var(--tint); } .lv.l2, .lv.l1 { background: var(--tone-eaf2ee); }
+.erg { border-radius: 8px; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: .84rem; text-align: center; padding: 6px; }
+.erg.g { grid-column: 2; grid-row: 1 / span 2; background: var(--tone-ebd7ea); color: var(--tone-6e3f6a); }
+.erg.r { grid-column: 3; grid-row: 2 / span 2; background: var(--tint); color: var(--accent-ink); }
+.erg.e { grid-column: 2; grid-row: 4 / span 2; background: var(--tone-d9ebe1); color: var(--tone-2f6b4f); }
+
+.mw { background: var(--paper); border: 1px solid var(--line); border-radius: 12px; padding: 18px; margin: 1.6rem 0 2rem; }
+.mw-body { margin-top: 10px; }
+.hz-cols { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
+.hz-t { margin: 0 0 6px; font-weight: 700; font-size: .88rem; } .hz-t small { font-weight: 400; color: var(--muted); }
+.chips { display: flex; flex-direction: column; gap: 5px; }
+.chip { display: flex; justify-content: space-between; gap: 10px; font: 500 .84rem var(--sans); text-align: left; background: var(--bg); border: 1px solid var(--line); color: var(--fg); border-radius: 7px; padding: 6px 10px; cursor: pointer; }
+.chip em { font-style: normal; font-size: .74rem; color: var(--muted); }
+.hz-cols > div:first-child .chip[aria-pressed="true"] { border-color: var(--dwl); background: var(--tone-fcedea); }
+.hz-cols > div:first-child .chip[aria-pressed="true"] em { color: var(--tone-a8432f); }
+.hz-cols > div:last-child .chip[aria-pressed="true"] { border-color: var(--tone-6fae8b); background: var(--tone-eaf5ee); }
+.hz-cols > div:last-child .chip[aria-pressed="true"] em { color: var(--tone-2f6b4f); }
+.scale { display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: 6px; margin-top: 18px; }
+.half { height: 14px; background: var(--bg); border: 1px solid var(--line); border-radius: 7px; position: relative; overflow: hidden; }
+.half i { position: absolute; top: 0; bottom: 0; transition: width .25s; }
+.half.left i { right: 0; background: var(--dwl); } .half.right i { left: 0; background: var(--tone-6fae8b); }
+@media (prefers-reduced-motion: reduce) { .half i { transition: none; } }
+.zero { font: 700 .8rem var(--mono); color: var(--muted); }
+.scale-l { display: flex; justify-content: space-between; font-size: .74rem; color: var(--muted); margin-top: 4px; }
+
+.kpi-flow { display: grid; grid-template-columns: minmax(0, 1fr) auto minmax(0, 1.3fr) auto minmax(0, .8fr) auto minmax(0, 1fr); gap: 8px; align-items: stretch; margin-top: 12px; font-size: .84rem; }
+.kpi-flow > div { background: var(--bg); border: 1px solid var(--line); border-radius: 8px; padding: 8px 10px; line-height: 1.45; }
+.kpi-flow > i { font-style: normal; color: var(--accent); font-weight: 700; align-self: center; }
+.kpi-flow b { font-size: .72rem; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
+.kpi-flow p { margin: 3px 0 0; } .kpi-flow ul { margin: 3px 0 0; padding-left: 1.1em; }
+.kpi-flow .bad { border-color: var(--dwl); background: var(--tone-fcedea); } .kpi-flow .good { border-color: var(--tone-6fae8b); background: var(--tone-eaf5ee); }
+
+.cmp-sel { display: flex; flex-wrap: wrap; gap: 8px 12px; align-items: center; font-size: .84rem; color: var(--muted); }
+.cmp-sel select { font: 500 .88rem var(--sans); padding: 5px 8px; border: 1px solid var(--line); border-radius: 7px; background: var(--paper); color: var(--fg); }
+table.cmp td:first-child { font-weight: 700; color: var(--muted); width: 22%; }
+
+.tabs { display: flex; flex-wrap: wrap; gap: 4px; border-bottom: 1px solid var(--line); }
+.tabs button { font: 500 .86rem var(--sans); background: none; border: 0; border-bottom: 2px solid transparent; color: var(--muted); padding: 6px 12px; cursor: pointer; margin-bottom: -1px; }
+.tabs button[aria-selected="true"] { color: var(--accent-ink); border-bottom-color: var(--accent); }
+.ev { display: flex; flex-direction: column; gap: 6px; margin-top: 12px; }
+.ev > div { display: grid; grid-template-columns: 190px auto minmax(0, 1fr); gap: 10px; align-items: baseline; background: var(--bg); border: 1px solid var(--line); border-radius: 8px; padding: 8px 12px; font-size: .86rem; line-height: 1.5; }
+.ev p { margin: 0; }
+.tag { font-size: .72rem; font-weight: 700; padding: 1px 8px; border-radius: 999px; white-space: nowrap; }
+.tag.gap { background: var(--tone-fce3dd); color: var(--tone-a8432f); } .tag.ok { background: var(--tone-e3f2e9); color: var(--tone-2f6b4f); }
+.tag.maybe { background: var(--tone-fbf0d9); color: var(--tone-8a6216); } .tag.na { background: var(--tone-eee9eb); color: var(--muted); }
+.issue { margin-top: 12px; background: var(--tint); border-radius: 8px; padding: 10px 14px; font-size: .9rem; }
+.issue p { margin: 4px 0 0; }
+
+.xgrid { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 8px; margin: 1rem 0; }
+.xgrid > div { background: var(--paper); border: 1px solid var(--line); border-radius: 10px; padding: 10px; display: flex; flex-direction: column; gap: 5px; font-size: .84rem; line-height: 1.4; }
+.xgrid small { color: var(--muted); font-size: .76rem; }
+.xgrid .ok, .xgrid .gap { align-self: flex-start; font-size: .72rem; font-weight: 700; padding: 1px 8px; border-radius: 999px; }
+.xgrid .ok { background: var(--tone-e3f2e9); color: var(--tone-2f6b4f); } .xgrid .gap { background: var(--tone-fce3dd); color: var(--tone-a8432f); }
+
+@media (max-width: 760px) {
+  .three, .four { grid-template-columns: minmax(0, 1fr); }
+  .xgrid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .hz-cols { grid-template-columns: minmax(0, 1fr); }
+  .kpi-flow { grid-template-columns: minmax(0, 1fr); } .kpi-flow > i { transform: rotate(90deg); justify-self: center; }
+  .ev > div { grid-template-columns: minmax(0, 1fr); gap: 3px; } .ev .tag { justify-self: start; }
+  .ladder { grid-template-columns: minmax(0, 1fr) 84px 84px; }
+}
+
+/* Session 4 + case page */
+.tcard small.dont { color: var(--muted); font-size: .78rem; border-top: 1px dashed var(--line); padding-top: 6px; margin-top: 4px; }
+.quotes { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; margin: .6rem 0 1rem; }
+.quotes q { background: var(--paper); border: 1px solid var(--line); border-radius: 10px; padding: 10px 14px; font-style: italic; color: var(--muted); font-size: .9rem; }
+.six { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; margin: 1rem 0; }
+.six > div { display: flex; gap: 10px; align-items: flex-start; background: var(--paper); border: 1px solid var(--line); border-radius: 10px; padding: 10px 12px; font-size: .88rem; line-height: 1.5; }
+.six span { flex: none; width: 24px; height: 24px; border-radius: 50%; background: var(--tint); color: var(--accent-ink); font: 700 .76rem/24px var(--sans); text-align: center; }
+a.cta { display: inline-block; background: var(--accent); color: var(--tone-ffffff); text-decoration: none; font-weight: 500; padding: 8px 16px; border-radius: 8px; }
+a.cta:hover { background: var(--accent-ink); }
+blockquote.say { margin: .6rem 0; padding: 12px 16px; background: var(--paper); border: 1px solid var(--line); border-radius: 10px; font-size: .92rem; line-height: 1.7; }
+.timeline { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; margin: 1rem 0; }
+.timeline > div { background: var(--paper); border: 1px solid var(--line); border-top: 3px solid var(--accent); border-radius: 10px; padding: 10px 14px; font-size: .88rem; line-height: 1.5; }
+.timeline time { font: 500 .76rem var(--mono); color: var(--accent-ink); display: block; }
+.timeline p { margin: 4px 0 0; color: var(--muted); }
+.score { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 8px; margin: 1rem 0; }
+.score > div { border-radius: 10px; padding: 10px 12px; font-size: .84rem; line-height: 1.5; border: 1px solid var(--line); }
+.score .up { background: var(--tone-eaf5ee); border-color: var(--tone-a9d3ba); } .score .down { background: var(--tone-fcedea); border-color: var(--tone-edc2b8); }
+.score b::after { margin-left: 6px; font-size: .78rem; } .score .up b::after { content: "improved"; color: var(--tone-2f6b4f); } .score .down b::after { content: "worse"; color: var(--tone-a8432f); }
+.score ul { margin: 6px 0 0; padding-left: 1.1em; }
+
+.jcm { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr) minmax(0, .9fr); gap: 16px; }
+.jdims { display: flex; flex-direction: column; gap: 8px; }
+.jd.g0 label span { color: var(--tone-6e3f6a); } .jd.g1 label span { color: var(--accent-ink); } .jd.g2 label span { color: var(--tone-2f6b4f); }
+.jstates { display: flex; flex-direction: column; gap: 12px; padding-top: 4px; }
+.jst span { font-size: .8rem; font-weight: 500; }
+.jbar { height: 12px; border-radius: 6px; background: var(--bg); border: 1px solid var(--line); overflow: hidden; margin-top: 3px; }
+.jbar i { display: block; height: 100%; transition: width .25s; }
+.jst.g0 .jbar i { background: var(--tone-b98ab5); } .jst.g1 .jbar i { background: var(--accent); } .jst.g2 .jbar i { background: var(--tone-6fae8b); }
+@media (prefers-reduced-motion: reduce) { .jbar i { transition: none; } }
+.jout ul { margin: 8px 0 0; padding-left: 1.1em; font-size: .82rem; color: var(--muted); }
+.jlvl { display: inline-block; font-weight: 700; padding: 3px 12px; border-radius: 999px; font-size: .86rem; }
+.jlvl.strong { background: var(--tone-e3f2e9); color: var(--tone-2f6b4f); } .jlvl.moderate { background: var(--tone-fbf0d9); color: var(--tone-8a6216); } .jlvl.weak { background: var(--tone-fce3dd); color: var(--tone-a8432f); }
+.jgns { margin-top: 14px; }
+
+.qz-item { font-size: 1rem; font-weight: 500; margin: 4px 0 12px; }
+.qz-opts { display: grid; gap: 8px; }
+.qz-opts.grid2 { grid-template-columns: repeat(2, minmax(0, 1fr)); max-width: 520px; }
+.qz-opts.row5 { grid-template-columns: repeat(5, minmax(0, 1fr)); }
+.qz-o { font: 500 .88rem var(--sans); background: var(--bg); border: 1px solid var(--line); color: var(--fg); border-radius: 8px; padding: 10px; cursor: pointer; display: flex; flex-direction: column; gap: 2px; text-align: center; }
+.qz-o small { color: var(--muted); font-size: .74rem; font-weight: 400; }
+.qz-o:hover { border-color: var(--accent); }
+.qz-o.right { background: var(--tone-e3f2e9); border-color: var(--tone-6fae8b); } .qz-o.wrong { background: var(--tone-fce3dd); border-color: var(--dwl); }
+.qz-nav { display: flex; justify-content: space-between; align-items: center; margin-top: 10px; font-size: .8rem; color: var(--muted); }
+
+.rsteps { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; margin-top: 12px; }
+.rsteps > div { background: var(--bg); border: 1px solid var(--line); border-radius: 8px; padding: 10px 12px; font-size: .85rem; line-height: 1.5; }
+.rsteps > div.g { background: var(--tint); border-color: var(--accent); }
+.rsteps b { font-size: .72rem; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
+.rsteps p { margin: 4px 0 0; }
+.risk { font-size: .88rem; } .risk b { font-size: .72rem; color: var(--tone-ffffff); background: var(--tone-b98a2e); padding: 1px 7px; border-radius: 4px; margin-right: 6px; }
+.sayd summary { cursor: pointer; font-weight: 500; color: var(--accent-ink); font-size: .9rem; }
+
+@media (max-width: 760px) {
+  .quotes, .six, .timeline, .rsteps { grid-template-columns: minmax(0, 1fr); }
+  .score { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .jcm { grid-template-columns: minmax(0, 1fr); }
+  .qz-opts.row5 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+
+/* Marketing interactions: same CMMU palette, different learning mechanics */
+body {margin:0}
+.doc h2 {border-top:1px solid var(--line);padding-top:1.35rem;margin-top:2.5rem}
+.doc h2#map {border-top:0;padding-top:0}
+.doc h3 {margin-top:1.7rem}
+.doc > .hero {border-bottom:1px solid var(--line)}
+.hero .lead {max-width:68ch}
+.m-widget {background:var(--paper);border:1px solid var(--line);border-radius:12px;margin:1.3rem 0 1.6rem;padding:18px}
+.m-widget h4 {font-family:var(--serif);font-size:1.12rem;margin:0 0 3px}
+.m-widget .mw-sub {margin:0 0 14px;color:var(--muted);font-size:.88rem}
+.m-widget .m-grid {display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,1fr);gap:22px;align-items:start}
+.m-control {margin:.6rem 0 1.1rem}
+.m-control label{display:flex;gap:8px;align-items:baseline;justify-content:space-between;font-size:.88rem;font-weight:500}
+.m-control output{font-family:var(--mono);color:var(--accent-ink);font-weight:700}
+.m-control input[type=range]{width:100%;accent-color:var(--accent);cursor:pointer;min-height:23px}
+.m-pillrow{display:flex;flex-wrap:wrap;gap:8px;margin:10px 0}
+.m-pillrow button,.m-action,.flash button {font:500 .85rem var(--sans);padding:9px 12px;border:1px solid var(--line);border-radius:8px;color:var(--fg);background:var(--paper);cursor:pointer}
+.m-pillrow button:hover,.m-action:hover,.flash button:hover{border-color:var(--accent)}
+.m-pillrow button[aria-pressed=true] {background:var(--accent);color:var(--tone-ffffff);border-color:var(--accent)}
+.m-action {border-color:var(--accent);color:var(--accent-ink)}
+.m-action.primary{background:var(--accent);border-color:var(--accent);color:var(--tone-ffffff)}
+.m-answer{background:var(--tint);padding:13px 15px;border-radius:9px;line-height:1.6;font-size:.88rem}
+.m-answer b{color:var(--accent-ink)}
+.m-answer p{margin:5px 0 0}
+.m-two {display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:11px}
+.m-two>div {background:var(--bg);border:1px solid var(--line);border-radius:10px;padding:10px 13px}
+.m-two strong{display:block;color:var(--accent-ink)}
+.m-two small{color:var(--muted)}
+.m-interact-note{font-size:.78rem;color:var(--muted);margin-top:12px;line-height:1.55}
+.bcg-svg {width:100%;height:auto;display:block;touch-action:none;cursor:crosshair;border:1px solid var(--line);border-radius:8px;background:var(--tone-ffffff)}
+.bcg-svg text{font-family:var(--sans)}
+.bcg-svg .bq-label{font-weight:700;font-size:13px;fill:var(--tone-3a2830)}
+.bcg-svg .bq-axis{font-size:10px;fill:var(--tone-77636e)}
+.bcg-point{stroke:var(--tone-ffffff);stroke-width:3;filter:drop-shadow(0 1px 2px var(--tone-887766))}
+.m-feedback{min-height:65px;margin:12px 0;padding:12px 14px;border-radius:8px;border:1px solid var(--line);background:var(--bg);font-size:.9rem}
+.m-feedback.good{border-color:var(--tone-88bb9c);background:var(--tone-eff9f1)}
+.m-feedback.bad{border-color:var(--tone-dfb6ac);background:var(--tone-fff3ee)}
+.m-choices{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px;margin:12px 0}
+.m-choices button{font:500 .89rem var(--sans);border:1px solid var(--line);background:var(--bg);color:var(--fg);border-radius:8px;padding:12px 9px;cursor:pointer;min-height:50px}
+.m-choices button:hover,.m-choices button:focus-visible{border-color:var(--accent)}
+.m-choices button.correct{border-color:var(--tone-70ae85);background:var(--tone-eff9f1)}
+.m-choices button.incorrect{border-color:var(--tone-cf8877);background:var(--tone-fff1ed)}
+.m-choices button:disabled{cursor:default;opacity:.88}
+.m-progress{font-size:.81rem;color:var(--muted)}
+.decision-flow{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:6px;margin:16px 0}
+.decision-step{font:500 .79rem var(--sans);color:var(--fg);border:1px solid var(--line);border-top:4px solid var(--tone-b5a4a9);background:var(--tone-ffffff);border-radius:8px;min-height:95px;padding:10px 7px;cursor:pointer;display:flex;flex-direction:column;align-items:flex-start;gap:4px;text-align:left;line-height:1.4}
+.decision-step b{color:var(--accent-ink);font-size:.75rem}
+.decision-step span{font-size:.74rem;color:var(--muted)}
+.decision-step.active{border-color:var(--accent);background:var(--tint)}
+.decision-step.long{border-top-color:var(--tone-53866c)}
+.decision-step.quick{border-top-color:var(--tone-d6ba68)}
+.decision-step.optional{border-top-color:var(--tone-c7bcc0)}
+.weight-row{display:grid;grid-template-columns:140px minmax(0,1fr) 52px;align-items:center;gap:8px;font-size:.85rem;margin:10px 0}
+.weight-track{height:17px;border-radius:6px;background:var(--panel);overflow:hidden}
+.weight-fill{height:100%;width:0;background:var(--accent);border-radius:6px;transition:width .25s}
+.weight-row:nth-of-type(2) .weight-fill{background:var(--tone-6f99ba)}
+.weight-row:nth-of-type(3) .weight-fill{background:var(--tone-86ad95)}
+.weight-row:nth-of-type(4) .weight-fill{background:var(--tone-ceb17d)}
+.m-funnel{display:flex;flex-direction:column;align-items:center;gap:9px;margin:14px 0}
+.funnel-level{background:var(--accent);min-width:16%;max-width:100%;height:57px;color:var(--tone-ffffff);border-radius:8px;display:flex;align-items:center;justify-content:center;gap:12px;transition:width .25s;white-space:nowrap;padding:0 5px;text-align:center}
+.funnel-level:nth-child(2){background:var(--tone-ba8299)}
+.funnel-level:nth-child(3){background:var(--tone-987a92)}
+.funnel-level strong{font-size:1.06rem}
+.flash-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin:12px 0 18px}
+.flash{min-height:102px;perspective:700px}
+.flash button{height:100%;width:100%;text-align:left;padding:14px 16px;display:block;transition:background .15s}
+.flash button[aria-pressed=true]{background:var(--tint);border-color:var(--accent)}
+.flash .front{display:block;font-weight:700;color:var(--accent-ink);font-size:.94rem}
+.flash .back{display:none;font-weight:400;margin-top:8px;font-size:.83rem;color:var(--fg);line-height:1.5}
+.flash button[aria-pressed=true] .back{display:block}
+.flash button[aria-pressed=true] .front{color:var(--fg)}
+.mnemonic{padding:10px 13px;border-left:3px solid var(--accent);margin:.9rem 0;background:var(--paper)}
+.zhtext{color:var(--accent-ink)}
+.doc .note-small{font-size:.8rem}
+.chapterline{display:flex;flex-wrap:wrap;gap:7px;align-items:center;margin:12px 0}
+.chapterline span{font-size:.81rem;border:1px solid var(--line);border-radius:99px;background:var(--tone-ffffff);padding:5px 9px}
+.chapterline i{font-style:normal;color:var(--accent)}
+@media(max-width:760px){
+ .m-widget{padding:13px}
+ .m-widget .m-grid,.m-two,.flash-grid{grid-template-columns:minmax(0,1fr)}
+ .decision-flow{grid-template-columns:repeat(2,minmax(0,1fr))}
+ .weight-row{grid-template-columns:111px minmax(0,1fr) 36px;font-size:.76rem}
+ .m-choices{grid-template-columns:minmax(0,1fr)}
+ .decision-step{min-height:66px}
+ .funnel-level{font-size:.78rem}
+}
+@media(max-width:460px){.hero h1{font-size:1.7rem}.decision-flow{grid-template-columns:minmax(0,1fr)}}
+@media(prefers-reduced-motion:reduce){.weight-fill,.funnel-level{transition:none}}
+
+/* Small, restrained retrieval disclosures; Chinese glossary remains persistent. */
+.m-reveal{background:var(--paper);border:1px solid var(--line);border-radius:9px;padding:10px 14px;margin:12px 0;font-size:.91rem}
+.m-reveal summary{cursor:pointer;color:var(--accent-ink);font-weight:600;line-height:1.55}
+.m-reveal p{margin:10px 0 2px;font-size:.91rem;line-height:1.7}
+
+.sessions a.pill[href]:not([aria-current=page]):hover,
+.sessions a.pill[href]:not([aria-current=page]):focus-visible{
+ background:var(--tone-fceef2);border-color:var(--tone-b86b7b);color:var(--tone-8e4357);
+}
+.sessions a.pill[href]:not([aria-current=page]):focus-visible{outline:2px solid var(--tone-b86b7b);outline-offset:2px}
+
+/* These elements extend the existing S4 design rather than replacing it. */
+.doc h2{scroll-margin-top:90px}.doc h3{scroll-margin-top:95px}
+.chapterline{display:flex;flex-wrap:wrap;align-items:center;gap:6px;margin:1.1rem 0;font-size:.84rem}
+.chapterline>span{background:var(--paper);border:1px solid var(--line);border-radius:7px;padding:7px 11px;font-weight:500}
+.chapterline>i{font-style:normal;color:var(--accent);font-weight:800}
+.s5-cards{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:11px;margin:1rem 0}
+.s5-cards>div{background:var(--paper);border:1px solid var(--line);padding:13px 15px;border-radius:10px}
+.s5-cards b{display:block;color:var(--accent-ink)}.s5-cards p{font-size:.87rem;line-height:1.55;margin:5px 0 0}
+.mw{background:var(--paper);border:1px solid var(--line);border-radius:12px;padding:17px 18px;margin:1.3rem 0 1.7rem}
+.mw h4{font-family:var(--serif);font-size:1.05rem;margin:0 0 4px}
+.mw>.sub{font-size:.86rem;margin:0 0 12px}
+.mw-label{color:var(--accent-ink);text-transform:uppercase;letter-spacing:.13em;font-size:.68rem;font-weight:700;margin:0 0 4px}
+.s5-muted{font-size:.82rem;color:var(--muted)}
+.s5-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.s5-grid .field{min-width:0}
+.s5-grid label{font-size:.81rem;color:var(--muted);display:block;margin-bottom:5px}
+.s5-grid input[type=number],.s5-grid select{width:100%;min-width:0;border:1px solid var(--line);border-radius:7px;padding:8px 10px;background:var(--bg);font:500 .93rem var(--sans);color:var(--fg)}
+.mw select{font:500 .88rem var(--sans);border:1px solid var(--line);padding:7px 9px;background:var(--paper);border-radius:7px;color:var(--fg)}
+.result{background:var(--tint);border-radius:9px;padding:11px 14px;margin-top:12px}
+.result strong{color:var(--accent-ink);font-variant-numeric:tabular-nums}
+.result p{margin:0;font-size:.86rem;line-height:1.55}
+.result .big{font:700 1.2rem var(--serif);margin-bottom:5px}
+.buttonrow{display:flex;flex-wrap:wrap;gap:7px;margin:9px 0 12px}
+.buttonrow button{font:500 .8rem var(--sans);border:1px solid var(--line);color:var(--muted);padding:7px 10px;border-radius:7px;background:var(--paper);cursor:pointer}
+.buttonrow button:hover,.buttonrow button:focus-visible{background:var(--tint);border-color:var(--accent);color:var(--accent-ink)}
+.buttonrow button[aria-pressed=true]{background:var(--accent);color:var(--tone-ffffff);border-color:var(--accent)}
+.seg-flow{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px;margin:1rem 0}
+.seg-flow>div{background:var(--paper);border:1px solid var(--line);border-radius:8px;padding:12px 9px;text-align:center}
+.seg-flow>b{display:none}
+.seg-flow strong{display:block;color:var(--accent-ink);font-size:.88rem}.seg-flow small{display:block;color:var(--muted);margin-top:4px;font-size:.77rem;line-height:1.45}
+.mapbox{display:grid;grid-template-columns:minmax(0,1.8fr) minmax(170px,1fr);gap:12px;align-items:start;margin-top:10px}
+.mapbox svg{width:100%;height:auto;display:block;background:var(--bg);border:1px solid var(--line);border-radius:10px}
+.mapbox .mapexplainer{font-size:.84rem;line-height:1.55}.mapbox .mapexplainer p{margin:.25rem 0 .8rem}
+.mapbox .mapexplainer b{color:var(--accent-ink)}
+.mapbox text{font-family:var(--sans);fill:var(--fg)}
+.mapbox .axis{stroke:var(--muted);stroke-width:1.5}.mapbox .gridline{stroke:var(--line);stroke-dasharray:4 5}
+.mapbox .axislabel{fill:var(--muted);font-size:11px}.mapbox .brandlabel{font-size:12px;font-weight:600}
+.mapbox circle{stroke:var(--tone-ffffff);stroke-width:2;filter:drop-shadow(0 1px 1px var(--tone-00000033))}
+.value-chain{display:flex;align-items:center;flex-wrap:wrap;gap:7px;margin:8px 0 12px;font-size:.84rem}
+.value-chain span{background:var(--tint);border:1px solid var(--line);border-radius:7px;padding:6px 9px}
+.value-chain i{font-style:normal;color:var(--accent);font-weight:700}
+.kpi{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin:11px 0}
+.kpi div{background:var(--bg);border:1px solid var(--line);padding:10px;border-radius:8px;font-size:.8rem;color:var(--muted)}
+.kpi b{display:block;color:var(--fg);font-size:1.03rem;font-variant-numeric:tabular-nums}
+.flashgrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px;margin-top:12px}
+.flash button{display:block;width:100%;text-align:left;cursor:pointer;min-height:97px;background:var(--paper);border:1px solid var(--line);border-radius:9px;padding:12px;color:var(--fg);font:500 .87rem/1.5 var(--sans)}
+.flash button:hover,.flash button:focus-visible{border-color:var(--accent);background:var(--tint)}
+.flash .front{display:block}.flash .back{display:none;font-weight:400}
+.flash button[aria-pressed=true]{background:var(--tint);border-color:var(--accent)}
+.flash button[aria-pressed=true] .front{display:none}.flash button[aria-pressed=true] .back{display:block}
+.flash .back strong{color:var(--accent-ink)}
+.qa{display:flex;flex-direction:column;gap:6px}
+.qa details{background:var(--paper);border:1px solid var(--line);border-radius:8px}
+.qa summary{cursor:pointer;padding:10px 14px;font-weight:500;font-size:.92rem;list-style:none;display:flex;gap:9px}
+.qa summary::before{content:'Q';color:var(--accent);font-weight:700}
+.qa details[open] summary{border-bottom:1px dashed var(--line)}
+.qa details p{margin:0;padding:10px 16px 12px 36px;font-size:.88rem}
+.qa-tools{margin:.6rem 0}
+.qa-tools button{font:500 .8rem var(--sans);border:1px solid var(--accent);border-radius:7px;background:var(--paper);padding:7px 11px;color:var(--accent-ink);cursor:pointer}
+.practice{border:1px dashed var(--accent);padding:12px 15px;border-radius:10px;background:var(--paper);margin:17px 0}
+.practice b{color:var(--accent-ink)}.practice p{margin:4px 0;font-size:.91rem}
+.note-small{font-size:.8rem;color:var(--muted)}
+@media(max-width:900px){.rail{inset:var(--header-height,64px) 0 0 0!important;max-height:calc(100vh - var(--header-height,64px))!important}}
+@media(max-width:700px){.mapbox{grid-template-columns:1fr}.s5-cards,.kpi{grid-template-columns:1fr 1fr}.seg-flow{grid-template-columns:1fr 1fr}}
+@media(max-width:510px){.s5-cards,.kpi,.s5-grid,.flashgrid{grid-template-columns:1fr}}
+@media print{.rail,.toc-btn,.buttonrow,.qa-tools{display:none!important}.wrap{display:block}.doc{max-width:none}.mw,.mapbox{break-inside:avoid}.flash .back{display:block}.flash .front{display:none}}
+
+/* Optional, distraction-free thinking prompts; hidden unless Practice mode is on. */
+.practice-toolbar{display:flex;justify-content:flex-end;margin-top:11px}
+.practice-toggle{font:500 .78rem var(--sans);padding:5px 11px;border:1px solid var(--line);background:var(--paper);color:var(--muted);border-radius:999px;cursor:pointer;transition:background-color .15s,border-color .15s}
+.practice-toggle:hover,.practice-toggle:focus-visible{border-color:var(--accent);background:var(--tint);color:var(--accent-ink)}
+.practice-toggle[aria-pressed="true"]{border-color:var(--accent);background:var(--tint);color:var(--accent-ink)}
+.practice-toggle .mode-state{font-weight:700}
+.practice-prompt[hidden]{display:none!important}
+.practice-prompt{border-left:3px solid var(--accent);border-radius:0 8px 8px 0;background:var(--paper);padding:11px 15px;margin:1rem 0 1.7rem;font-size:.91rem;line-height:1.65}
+.practice-prompt strong{display:block;color:var(--accent-ink);font-size:.81rem;margin-bottom:2px}
+.practice-prompt p{margin:0}
+@media(prefers-reduced-motion:reduce){.practice-toggle{transition:none}}
+
+.page-tools{display:flex;align-items:center;gap:14px;margin-left:8px;flex-shrink:0}
+.page-tools .topswitch{margin-left:0}
+.page-tools .practice-toggle{font-size:.72rem;padding:5px 10px}
+.page-tools .practice-toggle>.zh-full{display:none!important}
+body.show-zh .page-tools .practice-toggle{white-space:normal}
+@media(max-width:560px){.top-in .sessions{order:2}.top-in .page-tools{order:3;flex-basis:100%;margin-left:0;justify-content:flex-end;padding-bottom:3px;gap:14px}.top-in .page-tools .topswitch{margin-left:0}.top-in{row-gap:6px}}
+@media print{.page-tools{display:none}}
+
+
+.concept-panel{margin:18px 0;border:1px solid var(--line);border-top:3px solid var(--accent);border-radius:12px;padding:20px;background:var(--paper)}
+.concept-panel>.reading-label,.concept-application>.reading-label,.answer-route>.reading-label{font:650 .7rem var(--sans);text-transform:uppercase;letter-spacing:.08em;color:var(--accent-ink);margin:0 0 10px}
+.concept-panel .concept-title{font-family:var(--serif);font-size:1.08rem;line-height:1.55;margin:0 0 16px}
+.concept-panel .tbl{margin:0 0 18px}.concept-application{border-left:3px solid var(--example-line);padding:2px 0 2px 16px}.concept-application p:last-child{margin-bottom:0}
+.answer-route{padding:15px 18px;background:var(--tint);border:1px solid var(--line);border-radius:10px;margin:16px 0}.answer-route p:last-child{margin:0}
+.solution{margin:18px 0;border:1px solid var(--line);border-radius:12px;background:var(--paper);overflow:hidden}
+.solution>summary{display:block;cursor:pointer;padding:15px 20px;color:var(--accent-ink);font-weight:600;list-style:none;line-height:1.55}
+.solution>summary::-webkit-details-marker{display:none}.solution>summary::before{content:'+';display:inline-block;width:22px;font:600 1rem var(--mono)}
+.solution[open]>summary{border-bottom:1px solid var(--line)}.solution[open]>summary::before{content:'−'}
+.solution>summary:focus-visible,.solution-tools button:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+.solution-body{padding:18px 20px}.solution-body>.worked-answer{border:0;background:transparent;padding:0;margin:0}.solution-body>.study-widget{margin-bottom:0}
+.solution-tools{display:flex;flex-wrap:wrap;gap:10px;margin:16px 0 24px}.solution-tools button{border:1px solid var(--accent);color:var(--accent-ink);background:var(--paper);border-radius:8px;padding:9px 13px;cursor:pointer;font:500 .82rem var(--sans)}
+.solution-tools button:hover{background:var(--tint)}.solution-tools .zh-full{font-size:.72rem}
+@media(max-width:600px){.concept-panel{padding:16px}.solution-body{padding:16px}.solution>summary{padding:14px 16px}.solution-tools{gap:8px}}
+@media print{.solution-tools{display:none!important}.solution:not([open])>.solution-body{display:block!important}}
+
+/* v4 study layout */
+.card{border:1px solid var(--line);border-radius:12px;background:var(--paper);padding:14px 18px;margin:14px 0}
+.card-h{font-size:.8rem;font-weight:700;letter-spacing:.04em;color:var(--accent-ink);margin:0 0 6px}
+.card.task{background:var(--panel)}
+.card.task ul{list-style:none;padding-left:0;margin:0}
+.card.task li{margin:.3em 0;padding-left:1.6em;position:relative}
+.card.task li::before{content:"☐";position:absolute;left:0;color:var(--accent-ink)}
+.fwbox{border-left:4px solid var(--accent);background:var(--tint);border-radius:0 10px 10px 0;padding:10px 14px;margin:10px 0}
+.fwbox.fwsub{border-left-color:var(--muted);background:var(--panel)}
+.fwbox .nm{font-weight:700;font-size:1.02rem}
+.src{display:inline-block;font-size:.72rem;font-weight:700;padding:0 8px;margin-left:6px;border-radius:999px;background:var(--accent);color:var(--paper);vertical-align:2px}
+.fwbox .role{font-size:.72rem;font-weight:700;color:var(--muted);margin-left:6px;text-transform:uppercase}
+.fwbox p{margin:.3em 0}
+.fwbox details{margin-top:8px;border-top:1px dashed var(--line);padding-top:6px}
+.fwbox details>summary{cursor:pointer;font-weight:600;color:var(--accent-ink);font-size:.9rem}
+.fwbox details ul{margin:.3em 0 .3em 1.1em;padding:0}
+.fwbox details li{margin:.2em 0}
+.fwbox details .tbl{margin:8px 0}
+.stp{counter-reset:st;list-style:none;padding-left:0;margin:0}
+.stp>li{counter-increment:st;position:relative;padding-left:2.2em;margin:.9em 0;display:block}
+.stp>li::before{content:counter(st);position:absolute;left:0;top:.1em;width:1.6em;height:1.6em;border-radius:50%;background:var(--accent);color:var(--paper);font-weight:700;font-size:.85rem;display:flex;align-items:center;justify-content:center}
+.stp>li>.sth{display:block;font-weight:700;margin-bottom:.2em}
+.decision{border:2px solid var(--accent);border-radius:10px;padding:10px 14px;margin:6px 0 12px;background:var(--tint)}
+.reason{margin:12px 0}
+.reason .rh{font-weight:700;margin:0}
+.fw{display:inline-block;font-size:.72rem;font-weight:600;line-height:1.5;padding:0 8px;margin-left:6px;border-radius:999px;background:var(--tint);color:var(--accent-ink);border:1px solid var(--line);vertical-align:1px;white-space:nowrap}
+.reason p{margin:.2em 0}
+.exam p.para{background:var(--paper);border:1px solid var(--line);border-radius:8px;padding:12px 16px;font-family:var(--serif);line-height:1.85}
+.card.warn{border-color:var(--dwl)}
+.card.warn .card-h{color:var(--dwl)}
+.card.warn ul{margin:0;padding-left:1.2em}
+.ansoff td,.ansoff th{text-align:center;vertical-align:middle}
+.ansoff td.hit{background:var(--tint);font-weight:700;color:var(--accent-ink)}
+.mini{font-size:.86rem;color:var(--muted)}
+.links{margin:.4em 0 0}
+.zone{border-top:3px solid var(--accent);padding-top:6px}
+.orig p{margin:.55em 0}
+.orig ol{padding-left:1.3em}
+.orig li{margin:.5em 0}
+.fwref{table-layout:fixed;min-width:640px}.fwref th:nth-child(1),.fwref td:nth-child(1){width:24%;font-weight:600}.fwref th:nth-child(2),.fwref td:nth-child(2){width:28%}.fwref td{font-size:.9rem}
+@media (max-width:600px){.fw{white-space:normal}.stp>li{padding-left:2em}}
+</style><style>
+/* Full Chinese support is additive; existing short Chinese aides remain. */
+body:not(.show-zh) .zh-full,body:not(.show-zh) .zh-svg{display:none!important}
+.zh-full{display:none;border:0!important;background:transparent!important;padding:0!important;border-radius:0!important;box-shadow:none!important;letter-spacing:normal;text-transform:none;min-width:0;min-height:0;width:auto;height:auto;color:var(--accent-ink);font-family:var(--sans);font-size:.88em;font-weight:400;line-height:1.7;margin-top:5px;overflow-wrap:anywhere;white-space:normal}
+body.show-zh .zh-full{display:block}
+.zh-svg{display:none;font-size:9px;font-family:var(--sans);font-weight:400}
+body.show-zh .zh-svg{display:inline}
+.doc h1>.zh-full,.doc h2>.zh-full,.doc h3>.zh-full{font-size:.65em;line-height:1.5;font-weight:500}
+.doc h4>.zh-full{font-size:.78em}
+.top .zh-full{color:var(--accent-ink)}
+.top .zh-full,.rail .zh-full{font-size:.78em;line-height:1.4;margin-top:2px}
+button .zh-full,label .zh-full,.pb .zh-full{font-size:.78em;line-height:1.5;margin-top:2px}
+body.show-zh .pb{grid-template-columns:minmax(84px,112px) minmax(0,1fr) 76px}
+body.show-zh .g-stats dt{display:block}
+body.show-zh .g-stats dd{overflow-wrap:anywhere;white-space:normal}
+body.show-zh .g-stats dd .zh-full{font-size:.68em}
+body.show-zh .sl label{align-items:flex-start}
+body.show-zh .sl output{white-space:normal;text-align:right}
+body.show-zh .flow>span,body.show-zh .chapterline>span{white-space:normal;height:auto}
+body.show-zh .g-kicker .zh-full,body.show-zh .tag .zh-full{font-size:.9em}
+body.show-zh .chip{height:auto}
+body.show-zh .chip em .zh-full{color:inherit}
+body.show-zh .cmp-sel select{max-width:100%}
+.seg button[aria-checked="true"] .zh-full,.tabs button[aria-selected="true"] .zh-full{color:inherit}
+.topswitch{display:inline-flex;align-items:center;gap:5px;margin-left:auto;white-space:nowrap;color:var(--muted);font:500 .72rem var(--sans)}
+.topswitch input{appearance:none;width:28px;height:16px;border:1px solid var(--tone-d5c6ca);border-radius:999px;background:var(--tone-eee6e8);position:relative;cursor:pointer;flex:none}
+.topswitch input:after{content:"";position:absolute;width:10px;height:10px;left:2px;top:2px;background:var(--tone-ffffff);border-radius:50%;box-shadow:0 1px 2px var(--tone-77777755)}
+.topswitch input:checked{background:var(--accent)}
+.topswitch input:checked:after{left:14px}
+.topswitch input:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+@media(max-width:560px){.top-in .crumbs{flex-basis:100%}.top-in .toc-btn{order:1}.top-in .topswitch{order:2;margin-left:0}.top-in .sessions{order:3;margin-left:auto}.top-in .sessions .pill{padding:3px 9px}body.show-zh .pb{grid-template-columns:85px minmax(0,1fr) 65px;gap:5px}.topswitch{font-size:.68rem}.top-in{gap:8px}}
+@media print{.topswitch{display:none}.zh-full{break-inside:avoid}}
+
+/* Session 5: the same full-Chinese switch, with local widget layout support. */
+.buttonrow button[aria-pressed=true] .zh-full{color:inherit}
+body.show-zh .kpi>div>.zh-full{font-size:.86em}
+body.show-zh .mapbox .zh-svg{font-size:10px;fill:var(--accent-ink)}
+body.show-zh .legend>span{display:grid;grid-template-columns:9px minmax(0,1fr);gap:3px 6px}
+body.show-zh .legend>span>.sw{align-self:center}
+body.show-zh .legend>span>.zh-full{grid-column:2;margin:0}
+body.show-zh .flash button{height:auto;min-height:125px}
+body.show-zh .qa summary{flex-wrap:wrap}
+body.show-zh .qa summary>.zh-full{flex-basis:100%;margin-left:21px}
+@media(max-width:560px){body.show-zh .kpi{grid-template-columns:minmax(0,1fr)}}
+</style>
+<style id="system-theme">
+/* System appearance only changes colors. Print retains the light palette. */
+:root {
+  --header-rgb: 253, 249, 249;
+  --tone-00000033: #00000033;
+  --tone-2f282b: #2f282b;
+  --tone-2f6b4f: #2f6b4f;
+  --tone-3a2830: #3a2830;
+  --tone-3f5675: #3f5675;
+  --tone-3f7f7a: #3f7f7a;
+  --tone-53866c: #53866c;
+  --tone-6e3f55: #6e3f55;
+  --tone-6e3f6a: #6e3f6a;
+  --tone-6f99ba: #6f99ba;
+  --tone-6fae8b: #6fae8b;
+  --tone-70ae85: #70ae85;
+  --tone-7657a8: #7657a8;
+  --tone-77636e: #77636e;
+  --tone-77777755: #77777755;
+  --tone-7e6f74: #7e6f74;
+  --tone-86ad95: #86ad95;
+  --tone-887766: #887766;
+  --tone-88bb9c: #88bb9c;
+  --tone-8a6216: #8a6216;
+  --tone-8a7a5c: #8a7a5c;
+  --tone-8e4357: #8e4357;
+  --tone-987a92: #987a92;
+  --tone-9c4862: #9c4862;
+  --tone-a7cdb6: #a7cdb6;
+  --tone-a8432f: #a8432f;
+  --tone-a9d3ba: #a9d3ba;
+  --tone-b2c4e3: #b2c4e3;
+  --tone-b5a4a9: #b5a4a9;
+  --tone-b86b7b: #b86b7b;
+  --tone-b98a2e: #b98a2e;
+  --tone-b98ab5: #b98ab5;
+  --tone-ba8299: #ba8299;
+  --tone-bfdcc9: #bfdcc9;
+  --tone-c06c84: #c06c84;
+  --tone-c7bcc0: #c7bcc0;
+  --tone-ceb17d: #ceb17d;
+  --tone-cf8877: #cf8877;
+  --tone-d5c6ca: #d5c6ca;
+  --tone-d6ba68: #d6ba68;
+  --tone-d9674f: #d9674f;
+  --tone-d9ebe1: #d9ebe1;
+  --tone-ddb3cb: #ddb3cb;
+  --tone-dfb6ac: #dfb6ac;
+  --tone-e3f2e9: #e3f2e9;
+  --tone-e5c171: #e5c171;
+  --tone-eaf2ee: #eaf2ee;
+  --tone-eaf5ee: #eaf5ee;
+  --tone-ebd7ea: #ebd7ea;
+  --tone-edc2b8: #edc2b8;
+  --tone-eee6e8: #eee6e8;
+  --tone-eee9eb: #eee9eb;
+  --tone-efdde2: #efdde2;
+  --tone-eff9f1: #eff9f1;
+  --tone-f1dca8: #f1dca8;
+  --tone-f6e9f4: #f6e9f4;
+  --tone-f8eef0: #f8eef0;
+  --tone-fae9ed: #fae9ed;
+  --tone-fbf0d9: #fbf0d9;
+  --tone-fce3dd: #fce3dd;
+  --tone-fcedea: #fcedea;
+  --tone-fceef2: #fceef2;
+  --tone-fdf9f9: #fdf9f9;
+  --tone-fff1ed: #fff1ed;
+  --tone-fff3ee: #fff3ee;
+  --tone-ffffff: #ffffff;
+}
+@media screen and (prefers-color-scheme: dark) {
+  :root {
+    color-scheme: dark;
+    --header-rgb: 29, 24, 26;
+    --tone-00000033: #00000055;
+    --tone-2f282b: #EEE4E6;
+    --tone-2f6b4f: #A0D2B2;
+    --tone-3a2830: #EEE4E6;
+    --tone-3f5675: #93AECB;
+    --tone-3f7f7a: #8CC4BE;
+    --tone-53866c: #91C1A4;
+    --tone-6e3f55: #C9A3D6;
+    --tone-6e3f6a: #DAB3D6;
+    --tone-6f99ba: #91B7D6;
+    --tone-6fae8b: #8CC3A0;
+    --tone-70ae85: #8CC3A0;
+    --tone-7657a8: #C3A5E8;
+    --tone-77636e: #BEACB2;
+    --tone-77777755: #00000066;
+    --tone-7e6f74: #BEACB2;
+    --tone-86ad95: #A0CAB0;
+    --tone-887766: #181215;
+    --tone-88bb9c: #78AA8C;
+    --tone-8a6216: #E3C480;
+    --tone-8a7a5c: #C9B68C;
+    --tone-8e4357: #E6B3BE;
+    --tone-987a92: #B39AAF;
+    --tone-9c4862: #E6B3BE;
+    --tone-a7cdb6: #6E8C6B;
+    --tone-a8432f: #F0A48D;
+    --tone-a9d3ba: #669C7D;
+    --tone-b2c4e3: #667C96;
+    --tone-b5a4a9: #A08C95;
+    --tone-b86b7b: #D79AA7;
+    --tone-b98a2e: #D8B66B;
+    --tone-b98ab5: #BD99C1;
+    --tone-ba8299: #C89AAF;
+    --tone-bfdcc9: #5F7A5C;
+    --tone-c06c84: #D79AA7;
+    --tone-c7bcc0: #9D8D94;
+    --tone-ceb17d: #D6BC8D;
+    --tone-cf8877: #D39483;
+    --tone-d5c6ca: #8B737F;
+    --tone-d6ba68: #D6BA68;
+    --tone-d9674f: #E08A6F;
+    --tone-d9ebe1: #2C4135;
+    --tone-ddb3cb: #8C6680;
+    --tone-dfb6ac: #B77F70;
+    --tone-e3f2e9: #23372D;
+    --tone-e5c171: #C9A250;
+    --tone-eaf2ee: #29362F;
+    --tone-eaf5ee: #25372D;
+    --tone-ebd7ea: #413047;
+    --tone-edc2b8: #B77F70;
+    --tone-eee6e8: #4B3E45;
+    --tone-eee9eb: #30282D;
+    --tone-efdde2: #55424A;
+    --tone-eff9f1: #25372D;
+    --tone-f1dca8: #8F7A4A;
+    --tone-f6e9f4: #342938;
+    --tone-f8eef0: #2B2226;
+    --tone-fae9ed: #35272D;
+    --tone-fbf0d9: #3C3223;
+    --tone-fce3dd: #412B28;
+    --tone-fcedea: #382724;
+    --tone-fceef2: #35272D;
+    --tone-fdf9f9: #1D181A;
+    --tone-fff1ed: #382724;
+    --tone-fff3ee: #382724;
+    --tone-ffffff: #241E21;
+  }
+  .topswitch input:after { background: var(--fg); }
+  .topswitch input:checked:after { background: var(--paper); }
+  .m-action.primary .zh-full, .m-pillrow button[aria-pressed="true"] .zh-full,
+  a.cta .zh-full, .risk b .zh-full, .hint b .zh-full, .tcard .tnum .zh-full { color: inherit; }
+}
+</style>
+<style id="learning-revision">
+/* Reading additions use the established system palette and full body column. */
+.doc p,.doc li,.hero .lead{max-width:none}
+.doc h2,.doc h3{scroll-margin-top:calc(var(--header-height,80px) + 20px)}
+.doc .tbl{max-width:100%;overflow-x:auto;overscroll-behavior-x:contain}
+.doc .tbl table{width:100%}
+.doc .tbl th{vertical-align:top}
+.doc .tbl td{vertical-align:top;overflow-wrap:break-word}
+.doc .method,.doc .flow{max-width:100%;flex-wrap:wrap}
+.answer-example{margin:1rem 0;padding:16px 18px;background:var(--paper);border:1px solid var(--line);border-left:3px solid var(--accent);border-radius:10px}
+.answer-example>b{color:var(--accent-ink);font-size:.9rem}
+.answer-example p{margin:.5rem 0 0}
+.sessions a.pill:hover{background:var(--tint);color:var(--accent-ink);border-color:var(--accent)}
+@media(max-width:600px){.top-in{gap:8px 10px}.page-tools{flex-basis:100%;justify-content:flex-end;flex-wrap:wrap;margin:0}.page-tools .practice-toggle{max-width:100%}.answer-example{padding:14px}.doc .tbl td,.doc .tbl th{min-width:130px}}
+</style><style id="midterm-components">
+.study-widget{margin:1.25rem 0;padding:20px;border:1px solid var(--line);border-radius:14px;background:var(--paper)}
+.study-widget .mw-label{margin:0 0 .5rem;color:var(--accent-ink);font-size:.75rem;letter-spacing:.09em;text-transform:uppercase}
+.study-widget button{font:500 .86rem var(--sans);border:1px solid var(--line);border-radius:8px;background:var(--paper);color:var(--fg);padding:8px 12px;cursor:pointer}
+.study-widget button:hover{background:var(--tint);border-color:var(--accent)}
+.study-widget button[aria-pressed=true]{background:var(--tint);color:var(--accent-ink);border-color:var(--accent)}
+.map-tools{display:flex;flex-wrap:wrap;gap:8px;margin:1rem 0}
+.plot{max-width:100%;margin:8px 0;background:var(--paper)}
+.plot svg{display:block;width:100%;height:auto;overflow:visible;touch-action:pan-y}
+.plot text{font-family:var(--sans);fill:var(--fg)}
+.plot .axis-title{font-size:17px;font-weight:600}
+.plot .axis-number,.plot .axis-end{font-size:16px;fill:var(--muted)}
+.plot .point-label{font-size:18px;font-weight:600}
+.plot .zh-svg{font-size:13px;fill:var(--muted)}
+.map-point{cursor:grab;touch-action:none;outline:none}
+.map-point.selected circle,.map-point:focus-visible circle{stroke:var(--fg);stroke-width:3}
+.map-controls{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+.map-controls label,.contribution-inputs label{display:block;min-width:0;font-size:.85rem;color:var(--fg)}
+.map-controls input{display:block;width:100%;accent-color:var(--accent);margin:.65rem 0 .25rem}
+.map-controls output{font-family:var(--mono);font-variant-numeric:tabular-nums;color:var(--accent-ink)}
+.contribution-inputs{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+.contribution-inputs input{display:block;width:100%;min-width:0;margin-top:6px;padding:9px;border:1px solid var(--line);border-radius:7px;background:var(--paper);color:var(--fg);font-family:var(--mono)}
+.contribution-result{margin-top:1rem}.contribution-result p{margin:.5rem 0 0}.net-contribution{font-family:var(--mono);font-size:1.25rem}
+.doc p,.doc li,.hero .lead{max-width:none}
+.doc h2,.doc h3{scroll-margin-top:calc(var(--header-height,80px) + 20px)}
+.doc .tbl{max-width:100%;overflow-x:auto;overscroll-behavior-x:contain}
+.doc .tbl td,.doc .tbl th{vertical-align:top}
+.doc .method,.doc .flow{max-width:100%;flex-wrap:wrap}
+.doc .hint>span{min-width:0}.doc a{overflow-wrap:break-word}
+.answer-example summary{font-weight:600;color:var(--accent-ink);cursor:pointer}
+@media(max-width:600px){.study-widget{padding:14px}.map-controls,.contribution-inputs{grid-template-columns:minmax(0,1fr)}.top-in{gap:8px 10px}.page-tools{flex-basis:100%;justify-content:flex-end;flex-wrap:wrap;margin:0}}
+
+.question-brief{padding:14px 18px;background:var(--tint);border-radius:10px;border:1px solid var(--line);font-size:.92rem}
+.worked-answer{margin:1.2rem 0;padding:20px 24px;border:1px solid var(--line);border-left:4px solid var(--accent);border-radius:12px;background:var(--paper)}
+.worked-answer .answer-label{font:600 .72rem var(--sans);text-transform:uppercase;letter-spacing:.08em;color:var(--accent-ink);margin:0 0 14px}
+.worked-answer>p:last-child{margin-bottom:0}
+.optional{margin:1.2rem 0;padding:14px 18px;border:1px solid var(--line);border-radius:10px}
+.optional>summary{cursor:pointer;font-weight:600;color:var(--accent-ink)}
+.optional[open]>summary{margin-bottom:1rem}
+.optional .study-widget{margin-bottom:0}
+@media(max-width:600px){.worked-answer{padding:16px}.question-brief,.optional{padding:12px 14px}}
+</style><style id="reading-design">
+:root{--example-bg:#EDF3F7;--example-line:#C4D5E0;--example-ink:#385E75;--extra-bg:#F5F3F4}
+@media(prefers-color-scheme:dark){:root{--example-bg:#202B33;--example-line:#405D70;--example-ink:#B5D5E8;--extra-bg:#252124}}
+.doc p,.doc li,.hero .lead{max-width:none}
+.reading-block{margin:18px 0;padding:18px 22px;border:1px solid var(--line);border-radius:12px;background:var(--paper)}
+.reading-block>p{margin:0 0 12px}.reading-block>p:last-child{margin-bottom:0}
+.reading-block>.reading-label,.case-story>.reading-label{font:650 .7rem var(--sans);text-transform:uppercase;letter-spacing:.09em;margin:0 0 10px;color:var(--muted)}
+.reading-key{background:var(--tint);border-left:4px solid var(--accent)}
+.reading-key>.reading-label{color:var(--accent-ink)}
+.reading-key>p:not(.reading-label){font-weight:550}
+.reading-why{border-left:3px solid var(--line)}
+.reading-example,.case-story{background:var(--example-bg);border-color:var(--example-line);border-left:4px solid var(--example-line)}
+.reading-example>.reading-label,.case-story>.reading-label{color:var(--example-ink)}
+.reading-extra{background:var(--extra-bg);border-style:dashed;font-size:.92rem}
+.case-story{padding:20px 24px;border:1px solid var(--example-line);border-left:4px solid var(--example-line);border-radius:12px;margin:1.2rem 0}
+.case-story>p:last-child{margin-bottom:0}
+.example-table{border-top:3px solid var(--example-line);border-radius:10px}
+.example-table th{background:var(--example-bg);color:var(--example-ink)}
+.worked-answer,.answer-example{border:1px solid var(--line);border-left:4px solid var(--accent);background:var(--paper);border-radius:12px;padding:20px 24px;margin:1.2rem 0}
+.question-brief{background:var(--example-bg);border:1px solid var(--example-line);border-radius:10px;padding:16px 20px}
+.doc .abbr-full{font-size:.88em;font-weight:450;text-transform:none;letter-spacing:normal}
+.doc h2 .abbr-full,.doc h3 .abbr-full{color:var(--muted);font-family:var(--sans);font-size:.68em;line-height:1.55}
+.rail .abbr-full{display:none}
+.table-scroll-hint{font-size:.73rem;color:var(--muted);margin:0 0 6px;text-align:right}
+.reading-block>.reading-label{display:block}
+.case-source{font-size:.8rem;color:var(--muted)}
+.doc :is(h2,h3){scroll-margin-top:calc(var(--header-height,80px) + 20px)}
+.doc :is(.mw,.mk,.study-widget){border-top:3px solid var(--accent)}
+@media(max-width:600px){.reading-block,.case-story,.worked-answer,.answer-example{padding:16px}.question-brief{padding:14px}}
+</style></head><body>
+<header class="top"><div class="top-in">
+ <nav class="crumbs" aria-label="Breadcrumb"><a href="index.html">Study Notes<span class="zh-full" lang="zh-Hant">學習筆記</span></a><span>/</span><a href="marketing.html">Marketing<span class="zh-full" lang="zh-Hant">行銷學</span></a><span>/</span><b>Mock paper 1: MK Restaurants<span class="zh-full" lang="zh-Hant">模擬試題 1：MK Restaurants</span></b></nav>
+ <button class="toc-btn" type="button" id="tocBtn" aria-expanded="false" aria-controls="rail">Contents<span class="zh-full" lang="zh-Hant">目錄</span></button>
+ <nav class="sessions" aria-label="Sessions 5–8"><a class="pill" href="marketing-s5.html">S5</a><a class="pill" href="marketing-s6.html">S6</a><span class="pill off">S7</span><span class="pill off">S8</span></nav><div aria-label="Reading tools" class="page-tools" role="group"><label class="topswitch" for="zhToggle" title="完整中文對照；英文與原有短註解保留"><input id="zhToggle" type="checkbox" role="switch" aria-label="顯示完整繁體中文對照">中文 <span id="zhModeLabel">OFF</span></label><button type="button" class="practice-toggle" id="practiceToggle" aria-pressed="false" title="Show or hide short questions within chapters">Practice mode <span class="mode-state" id="practiceState">Off</span><span class="zh-full" lang="zh-Hant">練習模式：關閉</span></button></div></div></header>
+<div class="wrap"><aside class="rail" id="rail" aria-label="Chapter navigation"><p class="lbl">Contents<span class="zh-full" lang="zh-Hant">目錄</span></p><ol id="toc"></ol></aside>
+<main><article class="doc"><div class="hero"><p class="kick">Strategic Marketing Management · Mock paper 1<span class="zh-full" lang="zh-Hant">策略行銷管理｜模擬試題 1</span></p><h1>Mock Paper 1: MK Restaurants<span class="zh-full" lang="zh-Hant">模擬試題 1：MK 餐廳</span></h1><p class="lead">This year’s format: a short news case and five questions, 8 points each. Write your own answer first, then check the framework and answer.<span class="zh-full" lang="zh-Hant">今年格式：新聞短案例＋五題，每題 8 分。先自己寫，再看框架與答案。</span></p></div><h2 id="overview">What this paper tests<span class="zh-full" lang="zh-Hant">本卷考什麼</span></h2><p>This year’s format (S5b): a short news case and five essay questions, <b>8 points each, 40 in total</b>. ★ marks topics listed on the last S5b review slides. The layer column refers to 5Cs → STP → 4Ps (S1), explained in the <a href="marketing-frameworks.html#system">framework handbook</a>.<span class="zh-full" lang="zh-Hant">今年格式（S5b）：新聞短案例＋五題申論，<b>每題 8 分、共 40 分</b>。★ 是 S5b 最後列出的複習主題。「層次」對應 S1 的 5C → STP → 4P，說明在<a href="marketing-frameworks.html#system">框架手冊</a>。</span></p><div class="tbl"><table><thead><tr><th scope="col">Q<span class="zh-full" lang="zh-Hant">題號</span></th><th scope="col">Topic<span class="zh-full" lang="zh-Hant">主題</span></th><th scope="col">Layer<span class="zh-full" lang="zh-Hant">層次</span></th><th scope="col">Main framework (slides)<span class="zh-full" lang="zh-Hant">主框架（講義）</span></th></tr></thead><tbody><tr><td>Q1</td><td>Choose an ASEAN country<span class="zh-full" lang="zh-Hant">選一個東協國家</span></td><td>5Cs → STP<span class="zh-full" lang="zh-Hant">5C → STP</span></td><td>5Cs (S1 · S5a)</td></tr><tr><td>Q2</td><td>Segment young diners and design a 4P plan<span class="zh-full" lang="zh-Hant">區隔年輕顧客並設計 4P</span></td><td>STP → 4Ps<span class="zh-full" lang="zh-Hant">STP → 4P</span></td><td>Demographic vs psychographic (S4b) · 4Ps (S1)</td></tr><tr><td>Q3</td><td>★ One direct + one indirect on a map<span class="zh-full" lang="zh-Hant">★ 一直接＋一間接畫圖</span></td><td>STP – Positioning<span class="zh-full" lang="zh-Hant">STP – 定位</span></td><td>Direct vs indirect (S5b) · Perceptual map (S5a)</td></tr><tr><td>Q4</td><td>Research method for a, b, c<span class="zh-full" lang="zh-Hant">a、b、c 研究方法</span></td><td>5Cs – Customers<span class="zh-full" lang="zh-Hant">5C – 顧客</span></td><td>Qual vs quant · Observation (S3)</td></tr><tr><td>Q5</td><td>★ CRM: attract new members or keep existing ones<span class="zh-full" lang="zh-Hant">★ CRM：拉新還是留舊</span></td><td>4Ps / CRM<span class="zh-full" lang="zh-Hant">4P／CRM</span></td><td>CRM · Lifetime value (S2) · Marketing funnel (S1)</td></tr></tbody></table></div><h2 id="how">How to use this page<span class="zh-full" lang="zh-Hant">怎麼讀這頁</span></h2><div class="card"><p class="card-h">Every question follows the same six steps<span class="zh-full" lang="zh-Hant">每一題都用同一個順序</span></p><ol class="stp"><li><span class="sth">① What to deliver<span class="zh-full" lang="zh-Hant">① 這題要交什麼</span></span>The question broken into a checklist. Missing one item costs marks however good the rest is.<span class="zh-full" lang="zh-Hant">先把題目拆成勾選清單。漏交一項，寫得再好也拿不到滿分。</span></li><li><span class="sth">② Which framework<span class="zh-full" lang="zh-Hant">② 用哪個框架</span></span>At most three cards: ★ the framework to write in the exam, plus up to two supports, each labelled with its lecture (S1–S5). Related frameworks are listed under “Also links to” and open in the framework handbook.<span class="zh-full" lang="zh-Hant">最多三張卡：★ 考試要寫的主框架，加最多兩個輔助，都標明出自哪一堂。其他相關框架列在「也可以連到」，點開進框架手冊。</span></li><li><span class="sth">③ How to apply it<span class="zh-full" lang="zh-Hant">③ 怎麼套用</span></span>The framework actually filled in with the case: which Ansoff cell, what goes in each SWOT box, which rows to compare. Then read the conclusion off the filled framework.<span class="zh-full" lang="zh-Hant">把框架真的用題幹填滿：Ansoff 哪一格、SWOT 每格寫什麼、比哪幾列，再從填好的框架讀出結論。</span></li><li><span class="sth">④ Suggested answer<span class="zh-full" lang="zh-Hant">④ 參考答案</span></span>Decision → reasons (each tagged with its framework) → risk and measure.<span class="zh-full" lang="zh-Hant">決定 → 理由（每個標框架）→ 風險與衡量。</span></li><li><span class="sth">⑤ Exam-ready paragraph<span class="zh-full" lang="zh-Hant">⑤ 考場段落</span></span>The answer written as one exam paragraph.<span class="zh-full" lang="zh-Hant">把答案寫成考試用的一段。</span></li><li><span class="sth">⑥ Where marks are lost<span class="zh-full" lang="zh-Hant">⑥ 常見失分</span></span>The most common mistakes for this question type.<span class="zh-full" lang="zh-Hant">這類題最常被扣分的地方。</span></li></ol><p class="mini">Turn on 中文 (top right) to see Chinese under every English line.<span class="zh-full" lang="zh-Hant">右上「中文」開關可在每行英文下顯示中文。</span></p></div><h2 id="case">The case<span class="zh-full" lang="zh-Hant">題幹</span></h2><div class="card orig"><p class="card-h">Case (news-style short case, as in the exam)<span class="zh-full" lang="zh-Hant">Case（新聞短案例，和考試一樣）</span></p><p><b>MK chases younger diners as its loyal customers grow older</b></p><p>MK Restaurant Group is Thailand’s largest suki (hot pot) chain, with more than 400 MK restaurants and a few branches abroad, including Vietnam and Japan. MK is known for consistent food, friendly staff and family meals, and its core customers are families and older diners.</p><p>Younger diners increasingly choose cheaper all-you-can-eat buffets such as Suki Teenoi, or grill restaurants such as Bar B Q Plaza. MK runs its own delivery service but also sells through delivery apps that charge commission. Its large membership program shows that many young members join for a first-visit discount and never return, while older members visit less often each year.</p><p>Management is considering more branches overseas and new ways to win younger customers.</p><p class="mini">Practice case written from public information; figures are approximate and treated as case facts.<span class="zh-full" lang="zh-Hant">練習用個案，依公開資訊改寫；數字為約略值，練習時視為題幹事實。</span></p></div><div class="card"><p class="card-h">Key facts to use as evidence<span class="zh-full" lang="zh-Hant">可當證據的題幹重點</span></p><ul><li>Largest hot pot chain, 400+ branches; a few abroad (Vietnam, Japan).<span class="zh-full" lang="zh-Hant">泰國最大火鍋連鎖，400 多家；海外少量（越南、日本）。</span></li><li>Strengths: consistent food, friendly service, family dining; core = families and older diners.<span class="zh-full" lang="zh-Hant">強項：品質一致、服務親切、家庭聚餐；核心＝家庭與年長者。</span></li><li>Young diners go to Suki Teenoi (cheap buffet) and Bar B Q Plaza (grill).<span class="zh-full" lang="zh-Hant">年輕人改去 Suki Teenoi（平價吃到飽）與 Bar B Q Plaza（燒烤）。</span></li><li>Own delivery plus commission-charging delivery apps.<span class="zh-full" lang="zh-Hant">自營外送＋收抽成的外送平台。</span></li><li>Young members take a first-visit discount and never return; older members visit less each year.<span class="zh-full" lang="zh-Hant">年輕會員拿首次折扣就不再來；年長會員來店逐年減少。</span></li></ul></div><h2 id="q1">Q1 · Choose one ASEAN country and contrast it with Thailand<span class="zh-full" lang="zh-Hant">Q1｜選一個東協國家，和泰國對比</span></h2><p class="question-brief"><b>Question · 8 points</b><br>MK’s management is debating whether to open more branches in another ASEAN country or focus on Thailand. Which country would you recommend MK prioritize? Contrast it against Thailand and give at least three reasons.<span class="zh-full" lang="zh-Hant"><b>題目｜8 分</b><br>MK 管理層在「到其他東協國家展店」與「專注泰國」之間討論。建議優先哪一國？與泰國對比，至少三個理由。</span></p><div class="card task"><p class="card-h">① What the question asks you to deliver<span class="zh-full" lang="zh-Hant">① 這題要交什麼</span></p><ul><li>One country other than Thailand<span class="zh-full" lang="zh-Hant">選一個國家（泰國以外）</span></li><li>Contrast it with Thailand row by row<span class="zh-full" lang="zh-Hant">和泰國逐項對比</span></li><li>At least three reasons<span class="zh-full" lang="zh-Hant">至少三個理由</span></li><li>A clear decision<span class="zh-full" lang="zh-Hant">明確下決定</span></li></ul></div><div class="card"><p class="card-h">② Which framework (from the lecture slides)<span class="zh-full" lang="zh-Hant">② 用哪個框架（老師講義）</span></p><div class="fwbox"><p><span class="nm">5Cs: Company, Customers, Competitors, Collaborators, Context</span><span class="src">S1 · S5a</span><span class="role">★ Write this in the exam<span class="zh-full" lang="zh-Hant">★ 考試寫這個</span></span></p><p><b>What it is:<span class="zh-full" lang="zh-Hant">是什麼：</span></b> The professor’s way to understand a situation before choosing: what the company has, who the customers are and what they want, who else competes, who helps deliver, and what is happening around them.<span class="zh-full" lang="zh-Hant">老師分析現況的方法，在做選擇之前先看：公司有什麼、顧客是誰要什麼、還有誰在競爭、誰幫忙交付、周邊環境發生什麼。</span></p><p><b>Why this question uses it:<span class="zh-full" lang="zh-Hant">這題為什麼用它：</span></b> Compare Thailand and the chosen country across the 5Cs. Context includes religion and food culture, which the professor raised in S6 (is pork eaten?).<span class="zh-full" lang="zh-Hant">用 5C 比較泰國與選定國家。情境包含宗教與飲食文化，S6 老師特別提到（吃不吃豬肉）。</span></p><details><summary>Framework explained (from the slides)<span class="zh-full" lang="zh-Hant">框架詳解（老師講義）</span></summary><ul><li><b>Company</b>: strengths, resources, existing stores or products, capabilities.<span class="zh-full" lang="zh-Hant"><b>公司</b>：優勢、資源、現有據點或產品、能力。</span></li><li><b>Customers</b>: who they are and what they want – S1’s market size, age and income sit here; needs, wants and demand (wants backed by buying power).<span class="zh-full" lang="zh-Hant"><b>顧客</b>：是誰、想要什麼——S1 的市場規模、年齡、所得放這裡；需要、想要、需求（有購買力的想要）。</span></li><li><b>Competitors</b>: direct (same category) and indirect (other ways to meet the same need).<span class="zh-full" lang="zh-Hant"><b>競爭者</b>：直接（同品類）與間接（滿足同一需要的其他方式）。</span></li><li><b>Collaborators</b>: suppliers, distributors, retailers, partners, parent group businesses.<span class="zh-full" lang="zh-Hant"><b>合作者</b>：供應商、通路、零售商、夥伴、母集團事業。</span></li><li><b>Context</b>: economy and growth, regulation and politics, culture and religion, technology (the macro-environment of S4a).<span class="zh-full" lang="zh-Hant"><b>情境</b>：經濟與成長、法規與政治、文化與宗教、科技（即 S4a 的總體環境）。</span></li></ul><p><b>5Cs vs SWOT</b>: the same facts in two layouts. Company → Strengths and Weaknesses; Customers, Competitors, Collaborators and Context → Opportunities and Threats. Use SWOT when the question asks for it; otherwise a 5C contrast table is clearer for comparing two markets.<span class="zh-full" lang="zh-Hant"><b>5C 與 SWOT</b>：同一批事實的兩種排法。公司 → 優勢與劣勢；顧客、競爭者、合作者、情境 → 機會與威脅。題目要 SWOT 就用 SWOT；比較兩個市場時，5C 對比表比較清楚。</span></p><p><b>Where it leads</b>: 5Cs (understand) → STP (choose whom to serve and why they choose us) → 4Ps (deliver). Slides: S1 “The 5Cs, STP and the 4Ps constitute the marketing management framework”; S5a “Marketing Overview”.<span class="zh-full" lang="zh-Hant"><b>接下來</b>：5C（了解）→ STP（選擇服務誰、為何選我們）→ 4P（執行）。講義：S1「5C、STP、4P 構成行銷管理架構」；S5a「Marketing Overview」。</span></p><p>How to use it in an answer: make one row per C with both markets side by side, mark which market wins each row, then turn the rows that matter into your reasons.<span class="zh-full" lang="zh-Hant">答題用法：每個 C 一列、兩個市場並排，標出每列誰佔優，再把關鍵的列變成理由。</span></p><p class="mini"><a href="marketing-frameworks.html#fw-5c">Open in the framework handbook →<span class="zh-full" lang="zh-Hant">在框架手冊打開 →</span></a></p></details></div><div class="fwbox fwsub"><p><span class="nm">Product–market growth grid (often called Ansoff)</span><span class="src">S4a</span><span class="role">Support<span class="zh-full" lang="zh-Hant">輔助</span></span></p><p><b>What it is:<span class="zh-full" lang="zh-Hant">是什麼：</span></b> Four growth routes from existing or new products in existing or new markets; risk rises as you move away from what you already know.<span class="zh-full" lang="zh-Hant">用「現有／新產品 × 現有／新市場」分出四種成長路線；離熟悉的越遠，風險越高。</span></p><p><b>Why this question uses it:<span class="zh-full" lang="zh-Hant">這題為什麼用它：</span></b> One line: more Thai branches = market penetration; another country = market development, which is riskier.<span class="zh-full" lang="zh-Hant">一句話：泰國再開店＝市場滲透；去另一國＝市場開發，風險較高。</span></p><details><summary>Framework explained (from the slides)<span class="zh-full" lang="zh-Hant">框架詳解（老師講義）</span></summary><ul><li><b>Market penetration</b> (existing product, existing market): increase market share; increase product usage – frequency of use, quantity used, new applications.<span class="zh-full" lang="zh-Hant"><b>市場滲透</b>（現有產品、現有市場）：提高市占；增加使用——使用頻率、使用量、新用途。</span></li><li><b>Product development</b> (new product, existing market): product improvement, product-line extensions, new products for the existing market.<span class="zh-full" lang="zh-Hant"><b>產品開發</b>（新產品、現有市場）：產品改良、產品線延伸、為現有市場推新產品。</span></li><li><b>Market development</b> (existing product, new market): geographic expansion, targeting a new segment.<span class="zh-full" lang="zh-Hant"><b>市場開發</b>（現有產品、新市場）：地理擴張、鎖定新客群。</span></li><li><b>Diversification</b> (new product, new market): forward/backward/horizontal integration; related (concentric) or unrelated (conglomerate).<span class="zh-full" lang="zh-Hant"><b>多角化</b>（新產品、新市場）：前向／後向／水平整合；相關（同心）或不相關（集團式）。</span></li></ul><p>How to use it: name each option with a cell first (“opening more Thai stores is market penetration; Vietnam is market development”), then argue why the extra risk is or is not worth it.<span class="zh-full" lang="zh-Hant">答題用法：先用格子替選項命名（「泰國再開店是市場滲透；越南是市場開發」），再論證多出來的風險值不值得。</span></p><p>Note: the S4a slide shows this grid but does not name it; “Ansoff” is the common textbook name.<span class="zh-full" lang="zh-Hant">注意：S4a 投影片有這張表但沒有命名；「Ansoff」是教科書常用名稱。</span></p><p class="mini"><a href="marketing-frameworks.html#fw-ansoff">Open in the framework handbook →<span class="zh-full" lang="zh-Hant">在框架手冊打開 →</span></a></p></details></div><p class="mini links">Also links to:<span class="zh-full" lang="zh-Hant">也可以連到：</span> <a href="marketing-frameworks.html#fw-nwd">Needs, Wants &amp; Demands</a> <span class="src">S1</span> · <a href="marketing-frameworks.html#fw-s6">Session 6 review ideas</a> <span class="src">S6</span></p></div><div class="card"><p class="card-h">③ How to apply it, step by step<span class="zh-full" lang="zh-Hant">③ 怎麼套用：一步一步</span></p><ol class="stp"><li><span class="sth">Screen with Context first<span class="zh-full" lang="zh-Hant">先用「情境」篩選</span></span><p>MK’s menu is pork-based → Muslim-majority Malaysia, Indonesia and Brunei would need a new halal menu and supply chain, so drop them. Of the rest, Vietnam already loves hot pot (lẩu) and MK already operates there.<span class="zh-full" lang="zh-Hant">MK 菜單以豬肉為主 → 穆斯林為主的馬來西亞、印尼、汶萊需要全新清真菜單與供應鏈，先排除。剩下的國家中，越南本來就愛吃火鍋（lẩu）且 MK 已有據點。</span></p></li><li><span class="sth">Fill the 5Cs for Thailand and Vietnam<span class="zh-full" lang="zh-Hant">填泰國與越南的 5C</span></span><div class="tbl"><table><thead><tr><th scope="col">5C<span class="zh-full" lang="zh-Hant">5C</span></th><th scope="col">Thailand<span class="zh-full" lang="zh-Hant">泰國</span></th><th scope="col">Vietnam<span class="zh-full" lang="zh-Hant">越南</span></th><th scope="col">Advantage<span class="zh-full" lang="zh-Hant">誰佔優</span></th></tr></thead><tbody><tr><td><b>Company</b></td><td>400+ branches, central kitchens<span class="zh-full" lang="zh-Hant">400 多家分店、中央廚房</span></td><td>a few branches<span class="zh-full" lang="zh-Hant">少量分店</span></td><td>Thailand (base)<span class="zh-full" lang="zh-Hant">泰國（基地）</span></td></tr><tr><td><b>Customers</b></td><td>core diners aging (median age about 40)<span class="zh-full" lang="zh-Hant">核心客群老化（中位數約 40）</span></td><td>median age about 32; hot pot is already a favourite shared meal<span class="zh-full" lang="zh-Hant">中位數約 32；火鍋本來就是聚餐首選</span></td><td>Vietnam<span class="zh-full" lang="zh-Hant">越南</span></td></tr><tr><td><b>Competitors</b></td><td>price war with buffets such as Suki Teenoi<span class="zh-full" lang="zh-Hant">和 Suki Teenoi 等吃到飽打價格戰</span></td><td>cheap local hot pot, few chains with MK’s service<span class="zh-full" lang="zh-Hant">在地火鍋便宜，但少有 MK 等級服務</span></td><td>Vietnam (MK’s strength counts more)<span class="zh-full" lang="zh-Hant">越南（MK 優勢更有分量）</span></td></tr><tr><td><b>Collaborators</b></td><td>established suppliers and mall partners<span class="zh-full" lang="zh-Hant">既有供應商與商場夥伴</span></td><td>needs local suppliers and mall partners; existing branches help<span class="zh-full" lang="zh-Hant">需要在地供應商與商場；既有分店有幫助</span></td><td>Thailand<span class="zh-full" lang="zh-Hant">泰國</span></td></tr><tr><td><b>Context</b></td><td>GDP 2–3%, mature<span class="zh-full" lang="zh-Hant">GDP 2–3%，成熟</span></td><td>GDP 6–7%; pork widely eaten<span class="zh-full" lang="zh-Hant">GDP 6–7%；普遍吃豬肉</span></td><td>Vietnam<span class="zh-full" lang="zh-Hant">越南</span></td></tr></tbody></table></div></li><li><span class="sth">Read the table and decide<span class="zh-full" lang="zh-Hant">讀表下決定</span></span><p>Vietnam wins Customers, Competitors and Context; Thailand wins Company and Collaborators, which are the reasons to expand step by step rather than fast.<span class="zh-full" lang="zh-Hant">越南贏在顧客、競爭者、情境；泰國贏在公司與合作者，所以要逐步擴張而不是衝太快。</span></p></li><li><span class="sth">Turn three rows into reasons<span class="zh-full" lang="zh-Hant">三列變三個理由</span></span><p>Customers, Context and Competitors each become one reason; the risk comes from Collaborators and price sensitivity.<span class="zh-full" lang="zh-Hant">顧客、情境、競爭者各一個理由；風險來自合作者與價格敏感。</span></p></li></ol></div><details class="solution" id="q1-answer"><summary>④ Suggested answer<span class="zh-full" lang="zh-Hant">④ 參考答案</span></summary><div class="solution-body"><div class="decision"><b>Decision:</b> MK should prioritize Vietnam: a country that already loves hot pot, entered step by step.<span class="zh-full" lang="zh-Hant"><b>決定：</b>MK 應優先越南：本來就愛吃火鍋的國家，逐步進入。</span></div><div class="reason"><p class="rh">1. Customers: younger diners who already want hot pot. <span class="fw">Customers · 5C</span><span class="zh-full" lang="zh-Hant">一、顧客：年輕且本來就想吃火鍋。</span></p><p>Vietnam’s median age is about 32 versus about 40 in Thailand, where MK’s core diners are aging, and hot pot is already a popular shared meal, so MK does not need to teach a new category.</p></div><div class="reason"><p class="rh">2. Context: growing demand for eating out. <span class="fw">Context · 5C</span><span class="zh-full" lang="zh-Hant">二、情境：外食需求成長。</span></p><p>Vietnam grows about 6–7% a year versus 2–3% in Thailand; rising incomes turn the existing want for hot pot into paying demand, and pork is widely eaten.</p></div><div class="reason"><p class="rh">3. Competitors: MK’s strength counts more. <span class="fw">Competitors · 5C</span><span class="zh-full" lang="zh-Hant">三、競爭者：MK 的優勢更有分量。</span></p><p>In Thailand buffets pull MK into a price war. In Vietnam local hot pot is cheap but few chains match MK’s service, so MK can compete on its strength rather than price.</p></div><p><b>Risk:</b> MK needs new local suppliers and mall partners, and Vietnamese diners are price-sensitive. Open first in malls used by middle-class families.</p><p><b>Measure:</b> Sales per branch, repeat visit rate and payback of new Vietnamese branches.</p></div></details><details class="solution exam" id="q1-para"><summary>⑤ Exam-ready paragraph<span class="zh-full" lang="zh-Hant">⑤ 考場段落範例</span></summary><div class="solution-body"><p class="mini">Use your own words and cite only the case facts you need as evidence (S5b: “do not repeat parts of the case back to me”).<span class="zh-full" lang="zh-Hant">用自己的話，只引用必要的題幹事實當證據（S5b：不要把案例抄回來）。</span></p><p class="para">I recommend MK prioritize Vietnam. I first screened markets on context: MK’s pork-based menu rules out Muslim-majority countries such as Malaysia, which would need a new halal supply chain. Comparing Thailand and Vietnam with the 5Cs, Vietnam is stronger on three of them. First, its customers are younger, while MK’s Thai diners are aging, and hot pot is already a favourite shared meal, so MK does not need to teach a new category. Second, the context is more favourable: faster economic growth means more families can afford to eat out. Third, competitors are weaker on MK’s strength: in Thailand MK is pulled into a price war with buffets, but in Vietnam few chains match its service. Thailand remains stronger on company resources and collaborators, so I would expand step by step, starting in middle-class shopping malls, and track repeat visits and payback per branch.</p></div></details><div class="card warn"><p class="card-h">⑥ Where marks are usually lost<span class="zh-full" lang="zh-Hant">⑥ 常見失分</span></p><ul><li>“Vietnam has more people” as a reason.<span class="zh-full" lang="zh-Hant">只說「越南人口多」。</span></li><li>Comparing Vietnam with Malaysia instead of with Thailand.<span class="zh-full" lang="zh-Hant">理由拿越南和馬來西亞比，而不是和泰國比。</span></li><li>Ignoring the pork-based menu (Context).<span class="zh-full" lang="zh-Hant">沒考慮豬肉菜單（情境）。</span></li></ul></div><h2 id="q2">Q2 · Segment young diners and design a 4P plan<span class="zh-full" lang="zh-Hant">Q2｜區隔年輕顧客，並設計 4P</span></h2><p class="question-brief"><b>Question · 8 points</b><br>MK wants to win younger diners. Should it segment them by age (demographics) or by lifestyle and values (psychographics)? Choose one target segment and design a marketing mix (4Ps) for it. Give at least two reasons.<span class="zh-full" lang="zh-Hant"><b>題目｜8 分</b><br>MK 想吸引年輕顧客。應該用年齡（人口統計）還是生活型態與價值觀（心理統計）來區隔？選一個目標客群，並為它設計行銷組合（4P）。至少兩個理由。</span></p><div class="card task"><p class="card-h">① What the question asks you to deliver<span class="zh-full" lang="zh-Hant">① 這題要交什麼</span></p><ul><li>A choice: demographic or psychographic segmentation, with reasons<span class="zh-full" lang="zh-Hant">選擇：人口統計或心理統計區隔，並說明理由</span></li><li>One named target segment<span class="zh-full" lang="zh-Hant">一個具體的目標客群</span></li><li>A 4P plan that fits that target<span class="zh-full" lang="zh-Hant">一套符合該客群的 4P</span></li><li>At least two reasons<span class="zh-full" lang="zh-Hant">至少兩個理由</span></li></ul></div><div class="card"><p class="card-h">② Which framework (from the lecture slides)<span class="zh-full" lang="zh-Hant">② 用哪個框架（老師講義）</span></p><div class="fwbox"><p><span class="nm">Demographic vs Psychographic segmentation</span><span class="src">S4b · S5a</span><span class="role">★ Write this in the exam<span class="zh-full" lang="zh-Hant">★ 考試寫這個</span></span></p><p><b>What it is:<span class="zh-full" lang="zh-Hant">是什麼：</span></b> Demographics divide people by measurable traits (age, gender, income); psychographics divide them by interests, activities, opinions, values and lifestyle.<span class="zh-full" lang="zh-Hant">人口統計用可測量的特徵（年齡、性別、所得）區分人；心理統計用興趣、活動、意見、價值觀與生活型態區分。</span></p><p><b>Why this question uses it:<span class="zh-full" lang="zh-Hant">這題為什麼用它：</span></b> The first half of the question is exactly this choice. The professor teaches psychographic segmentation and warns that age is often a poor predictor.<span class="zh-full" lang="zh-Hant">前半題就是這個選擇。老師主張心理統計區隔，並提醒年齡常常預測力差。</span></p><details><summary>Framework explained (from the slides)<span class="zh-full" lang="zh-Hant">框架詳解（老師講義）</span></summary><ul><li><b>Demographics</b>: gender, age, marital and parental status, health, financial status. The most popular and easy to measure, but “age is often a poor predictor” (S5a).<span class="zh-full" lang="zh-Hant"><b>人口統計</b>：性別、年齡、婚姻、子女、健康、財務。最常用也最好量，但「年齡常常預測力差」（S5a）。</span></li><li><b>Psychographics</b>: interests, activities, opinions; values and attitudes; lifestyle; concerns; hobbies; spending habits; social class and personality. VALS groups people by values and lifestyles (achievers, experiencers, makers…).<span class="zh-full" lang="zh-Hant"><b>心理統計</b>：興趣、活動、意見；價值觀與態度；生活型態；關心的事；嗜好；消費習慣；社會階層與個性。VALS 依價值觀與生活型態分群。</span></li><li>The professor: “I generally teach that we should focus on psychographic segmentation – reach as many people as possible using the best common denominators.” Digital targeting makes precise targeting easier.<span class="zh-full" lang="zh-Hant">老師：「我通常教大家著重心理統計區隔——用最好的共同點觸及最多人。」數位廣告讓精準鎖定更容易。</span></li><li>S6 review: same age ≠ same motivation; same person ≠ same purchase every time. Demographics help for some goods (cat food, baby products) but leave much unexplained elsewhere.<span class="zh-full" lang="zh-Hant">S6 複習：同年齡 ≠ 同動機；同一個人也不會每次買一樣的。某些商品（貓食、嬰兒用品）人口統計有用，其他常常解釋不了。</span></li><li>Check any segment with S5a’s four tests: measurable, accessible, substantial, actionable.<span class="zh-full" lang="zh-Hant">任何區隔都用 S5a 四個條件檢查：可衡量、可接觸、夠大、可執行。</span></li></ul><p class="mini"><a href="marketing-frameworks.html#fw-demopsycho">Open in the framework handbook →<span class="zh-full" lang="zh-Hant">在框架手冊打開 →</span></a></p></details></div><div class="fwbox"><p><span class="nm">4Ps (marketing mix)</span><span class="src">S1 · S4a · S5a</span><span class="role">★ Write this in the exam<span class="zh-full" lang="zh-Hant">★ 考試寫這個</span></span></p><p><b>What it is:<span class="zh-full" lang="zh-Hant">是什麼：</span></b> The controllable tools – Product, Price, Place, Promotion – that deliver and communicate the chosen position to the target.<span class="zh-full" lang="zh-Hant">可控制的工具——產品、價格、通路、推廣——把選定的定位傳遞並溝通給目標客群。</span></p><p><b>Why this question uses it:<span class="zh-full" lang="zh-Hant">這題為什麼用它：</span></b> The second half: once the target is chosen, each P must support the same position.<span class="zh-full" lang="zh-Hant">後半題：選好目標後，每個 P 都要支持同一個定位。</span></p><details><summary>Framework explained (from the slides)<span class="zh-full" lang="zh-Hant">框架詳解（老師講義）</span></summary><ul><li><b>Product</b>: features, functions and benefits; how customers use it; how it differs from competitors; branding and positioning.<span class="zh-full" lang="zh-Hant"><b>產品</b>：功能與利益、顧客怎麼用、和對手有何不同、品牌與定位。</span></li><li><b>Price</b>: perceived value; compared with the market average and competitors; a pricing structure that fits the business model.<span class="zh-full" lang="zh-Hant"><b>價格</b>：感知價值；和市場平均及對手比較；符合商業模式的定價結構。</span></li><li><b>Place</b>: how target customers prefer to shop; where they find rivals; channels that are seamless and convenient; new channels.<span class="zh-full" lang="zh-Hant"><b>通路</b>：目標顧客偏好怎麼買、在哪裡找到對手、無縫便利的通路、新通路。</span></li><li><b>Promotion</b>: which segments need engagement; where customers look for information; timing; cost-effective channels.<span class="zh-full" lang="zh-Hant"><b>推廣</b>：哪些客群要經營、顧客在哪找資訊、時機、有效率的管道。</span></li><li>S4a: the 4Ps are “the controllable variables the firm blends to produce the response it wants in the target market” (People? added). S5a: “the marketing mix must support the strategy” – action, not just talk.<span class="zh-full" lang="zh-Hant">S4a：4P 是「公司組合起來、在目標市場產生想要反應的可控變數」（另加 People?）。S5a：「行銷組合必須支持策略」——要做到，不只是說。</span></li></ul><p>How to use it in an answer: first state the target and position (STP), then give one line per P that supports that position. Check consistency: a premium position with a discount price is confused.<span class="zh-full" lang="zh-Hant">答題用法：先講目標與定位（STP），再每個 P 寫一行支持它。檢查一致性：高級定位配折扣價就是定位混亂。</span></p><p class="mini"><a href="marketing-frameworks.html#fw-fourps">Open in the framework handbook →<span class="zh-full" lang="zh-Hant">在框架手冊打開 →</span></a></p></details></div><div class="fwbox fwsub"><p><span class="nm">STP · Targeting strategies · Positioning</span><span class="src">S5a</span><span class="role">Support<span class="zh-full" lang="zh-Hant">輔助</span></span></p><p><b>What it is:<span class="zh-full" lang="zh-Hant">是什麼：</span></b> Segment the market, choose the segments to target, then plan the position the product should hold in customers’ minds compared with competitors.<span class="zh-full" lang="zh-Hant">區隔市場、選擇目標客群，再規劃產品相對競爭者在顧客心中的位置。</span></p><p><b>Why this question uses it:<span class="zh-full" lang="zh-Hant">這題為什麼用它：</span></b> Links the two halves: segment → choose the target (check measurable, accessible, substantial, actionable) → position → then the 4Ps.<span class="zh-full" lang="zh-Hant">把前後半連起來：區隔 → 選目標（檢查可衡量、可接觸、夠大、可執行）→ 定位 → 再做 4P。</span></p><details><summary>Framework explained (from the slides)<span class="zh-full" lang="zh-Hant">框架詳解（老師講義）</span></summary><p><b>Segmentation<span class="zh-full" lang="zh-Hant">區隔</span></b></p><ul><li>Bases: geographic, demographic, psychographic, family life cycle.<span class="zh-full" lang="zh-Hant">依據：地理、人口統計、心理統計、家庭生命週期。</span></li><li>Effective segments are <b>measurable</b> (size, purchasing power), <b>accessible</b> (can be reached), <b>substantial</b> (large and profitable enough), <b>actionable</b> (can be served).<span class="zh-full" lang="zh-Hant">有效區隔要<b>可衡量</b>、<b>可接觸</b>、<b>夠大</b>、<b>可執行</b>。</span></li></ul><p><b>Targeting<span class="zh-full" lang="zh-Hant">選目標</span></b></p><ul><li>Consider current and potential competitors, threat of substitutes, buyer and supplier power, and the company’s objectives and resources.<span class="zh-full" lang="zh-Hant">考慮現有與潛在競爭者、替代品威脅、買方與供應商議價力、公司目標與資源。</span></li><li><b>Undifferentiated</b>: one product for everyone (gum). <b>Differentiated</b>: separate offers for different segments – more sales but higher costs (Breeze, Omo, Sunsilk, Dove). <b>Concentrated</b>: a large share of one niche – risk of all eggs in one basket.<span class="zh-full" lang="zh-Hant"><b>無差異</b>：一個產品給所有人。<b>差異化</b>：不同區隔不同產品，銷售多但成本高（Breeze、Omo）。<b>集中</b>：在一個利基拿高市占，風險集中。</span></li></ul><p><b>Positioning<span class="zh-full" lang="zh-Hant">定位</span></b></p><ul><li>A product’s position is where it sits in the consumer’s mind compared with competing products. Don’t leave it to chance.<span class="zh-full" lang="zh-Hant">定位是產品相對對手在顧客心中的位置，不要放任自然形成。</span></li><li>Three steps: (1) identify possible competitive advantages; (2) select the right one(s) – one difference = USP; (3) communicate and deliver it – the marketing mix must support it.<span class="zh-full" lang="zh-Hant">三步：(1) 找出可能的競爭優勢；(2) 選對的（一個差異＝USP）；(3) 傳達並做到——行銷組合要支持。</span></li><li>Differentiation types: product, services, personnel (better-trained people), image (symbols, colours, celebrities). Most advantages are temporary.<span class="zh-full" lang="zh-Hant">差異化類型：產品、服務、人員（訓練更好的員工）、形象（符號、顏色、名人）。多數優勢是暫時的。</span></li><li>Errors: <b>underpositioning</b> (no clear idea), <b>overpositioning</b> (too narrow), <b>confused positioning</b> (mixed image).<span class="zh-full" lang="zh-Hant">錯誤：<b>定位不足</b>、<b>定位過窄</b>、<b>定位混亂</b>。</span></li><li>Avoid abrupt changes: they confuse consumers, who may resist; a position should evolve gradually.<span class="zh-full" lang="zh-Hant">避免突然改變：顧客會困惑、抗拒；定位應逐步演進。</span></li></ul><p>The professor’s caution: don’t believe in STP too much – anyone can buy anything, and most people are not 100% loyal.<span class="zh-full" lang="zh-Hant">老師提醒：別太迷信 STP，任何人都可能買任何東西，多數人也不是 100% 忠誠。</span></p><p class="mini"><a href="marketing-frameworks.html#fw-stp">Open in the framework handbook →<span class="zh-full" lang="zh-Hant">在框架手冊打開 →</span></a></p></details></div><p class="mini links">Also links to:<span class="zh-full" lang="zh-Hant">也可以連到：</span> <a href="marketing-frameworks.html#fw-s6">Session 6 review ideas</a> <span class="src">S6</span> · <a href="marketing-frameworks.html#fw-funnel">Marketing funnel</a> <span class="src">S1</span></p></div><div class="card"><p class="card-h">③ How to apply it, step by step<span class="zh-full" lang="zh-Hant">③ 怎麼套用：一步一步</span></p><ol class="stp"><li><span class="sth">Show why age alone fails<span class="zh-full" lang="zh-Hant">說明為什麼只看年齡不夠</span></span><p>“Diners aged 18–30” includes students on a tight budget, office workers who want healthy food, and friends who want a fun night out. Same age, different motives – they choose different restaurants.<span class="zh-full" lang="zh-Hant">「18–30 歲」裡有預算緊的學生、想吃健康的上班族、想和朋友熱鬧的人。同年齡、不同動機——他們選的餐廳也不同。</span></p></li><li><span class="sth">Build psychographic segments and test them<span class="zh-full" lang="zh-Hant">建立心理統計區隔並檢驗</span></span><div class="tbl"><table><thead><tr><th scope="col">Segment<span class="zh-full" lang="zh-Hant">區隔</span></th><th scope="col">What they want<span class="zh-full" lang="zh-Hant">想要什麼</span></th><th scope="col">Fit with MK<span class="zh-full" lang="zh-Hant">和 MK 的契合</span></th><th scope="col">Verdict<span class="zh-full" lang="zh-Hant">結論</span></th></tr></thead><tbody><tr><td>Budget fun-seekers<span class="zh-full" lang="zh-Hant">省錢玩樂型</span></td><td>cheap, all-you-can-eat, group fun<span class="zh-full" lang="zh-Hant">便宜、吃到飽、一群人熱鬧</span></td><td>Low: Suki Teenoi’s home ground; a price war<span class="zh-full" lang="zh-Hant">低：Suki Teenoi 的主場；會打價格戰</span></td><td>No<span class="zh-full" lang="zh-Hant">不選</span></td></tr><tr><td>Health-conscious young professionals<span class="zh-full" lang="zh-Hant">重視健康的年輕上班族</span></td><td>light, healthy, quick meals; trust in quality<span class="zh-full" lang="zh-Hant">清淡、健康、快速；信任品質</span></td><td>High: boiled food, vegetables, consistent quality<span class="zh-full" lang="zh-Hant">高：水煮、蔬菜、品質一致</span></td><td><b>Target</b><span class="zh-full" lang="zh-Hant"><b>目標</b></span></td></tr><tr><td>Trend-driven social diners<span class="zh-full" lang="zh-Hant">追潮流社交型</span></td><td>new flavours, photos, Korean trends<span class="zh-full" lang="zh-Hant">新口味、拍照、韓流</span></td><td>Medium: needs constant novelty<span class="zh-full" lang="zh-Hant">中：需要不斷推新</span></td><td>Later<span class="zh-full" lang="zh-Hant">之後再說</span></td></tr></tbody></table></div><p class="mini">Check the target with S5a: measurable (member data, surveys), accessible (offices, gyms, apps), substantial (large in Bangkok), actionable (MK’s menu can serve it).<span class="zh-full" lang="zh-Hant">用 S5a 檢查：可衡量（會員資料、問卷）、可接觸（辦公區、健身房、App）、夠大（曼谷人數多）、可執行（MK 菜單做得到）。</span></p></li><li><span class="sth">Design the 4Ps for that target<span class="zh-full" lang="zh-Hant">為這個客群設計 4P</span></span><div class="tbl"><table><thead><tr><th scope="col">P<span class="zh-full" lang="zh-Hant">P</span></th><th scope="col">Plan<span class="zh-full" lang="zh-Hant">做法</span></th><th scope="col">Why it fits<span class="zh-full" lang="zh-Hant">為什麼符合</span></th></tr></thead><tbody><tr><td>Product</td><td>Single-portion healthy sets: lean protein, extra vegetables, light soup bases, calories shown<span class="zh-full" lang="zh-Hant">一人份健康套餐：瘦肉、多蔬菜、清淡湯底、標示熱量</span></td><td>Matches the health motive<span class="zh-full" lang="zh-Hant">對應健康動機</span></td></tr><tr><td>Price</td><td>A mid-priced lunch set, below a family meal but not a buffet price<span class="zh-full" lang="zh-Hant">中價位午餐套餐，低於家庭餐、但不打吃到飽價格</span></td><td>Avoids a price war; keeps MK’s quality image<span class="zh-full" lang="zh-Hant">避開價格戰；維持品質形象</span></td></tr><tr><td>Place</td><td>Branches near offices; lunch delivery through MK’s own app<span class="zh-full" lang="zh-Hant">辦公區附近分店；自有 App 午餐外送</span></td><td>Reaches them where they work<span class="zh-full" lang="zh-Hant">在他們工作的地方接觸</span></td></tr><tr><td>Promotion</td><td>Fitness and health creators, gym partnerships, member points for repeat lunches<span class="zh-full" lang="zh-Hant">健身與健康網紅、健身房合作、午餐回購點數</span></td><td>Where this segment looks for information<span class="zh-full" lang="zh-Hant">這群人找資訊的地方</span></td></tr></tbody></table></div></li><li><span class="sth">Check consistency<span class="zh-full" lang="zh-Hant">檢查一致性</span></span><p>All four Ps say “healthy hot pot for busy young professionals”, which also fits MK’s existing brand. A cheap buffet price would contradict it (confused positioning).<span class="zh-full" lang="zh-Hant">四個 P 都在說「給忙碌年輕上班族的健康火鍋」，也符合 MK 的品牌。若用吃到飽的低價就自相矛盾（定位混亂）。</span></p></li></ol></div><details class="solution" id="q2-answer"><summary>④ Suggested answer<span class="zh-full" lang="zh-Hant">④ 參考答案</span></summary><div class="solution-body"><div class="decision"><b>Decision:</b> Segment by psychographics and target health-conscious young professionals, with a 4P plan built around healthy, quick lunches.<span class="zh-full" lang="zh-Hant"><b>決定：</b>用心理統計區隔，鎖定重視健康的年輕上班族，以健康快速午餐設計 4P。</span></div><div class="reason"><p class="rh">Reason 1: same age, different motives. <span class="fw">Demographic vs psychographic · S4b</span><span class="zh-full" lang="zh-Hant">理由一：同年齡、不同動機。</span></p><p>Young diners range from budget fun-seekers to health-conscious professionals; age alone cannot tell MK whom to serve or what to offer.</p></div><div class="reason"><p class="rh">Reason 2: the segment fits MK’s strengths and avoids a price war. <span class="fw">STP · Targeting · S5a</span><span class="zh-full" lang="zh-Hant">理由二：符合 MK 優勢、避開價格戰。</span></p><p>Health and consistent quality are what MK already does well, while the budget segment belongs to Suki Teenoi. The segment is substantial and accessible in Bangkok offices.</p></div><div class="reason"><p class="rh">Reason 3: a consistent 4P plan makes the position believable. <span class="fw">4Ps · S1 / S5a</span><span class="zh-full" lang="zh-Hant">理由三：一致的 4P 讓定位可信。</span></p><p>Healthy single-portion sets, a mid price, office-area branches and delivery, and health-focused promotion all support the same message.</p></div><p><b>Measure:</b> Share of lunch diners aged 22–35, repeat rate of the healthy sets, and members gained from gym partnerships.</p></div></details><details class="solution exam" id="q2-para"><summary>⑤ Exam-ready paragraph<span class="zh-full" lang="zh-Hant">⑤ 考場段落範例</span></summary><div class="solution-body"><p class="mini">Use your own words and cite only the case facts you need as evidence (S5b: “do not repeat parts of the case back to me”).<span class="zh-full" lang="zh-Hant">用自己的話，只引用必要的題幹事實當證據（S5b：不要把案例抄回來）。</span></p><p class="para">I recommend MK segment young diners by psychographics rather than age. Diners aged 18 to 30 include budget students who want cheap buffets, health-conscious office workers and groups looking for a fun night out; the same age hides very different motives. Of these segments, MK should target health-conscious young professionals. They are large and easy to reach in Bangkok’s office areas, and they value what MK already does well, healthy boiled food and consistent quality, whereas the budget segment would drag MK into a price war with Suki Teenoi. The marketing mix should support one message, healthy hot pot for busy professionals: single-portion sets with lean protein and vegetables, a mid-level lunch price rather than a buffet price, branches and delivery near offices, and promotion through fitness creators and gym partnerships. I would track the repeat rate of the healthy sets.</p></div></details><div class="card warn"><p class="card-h">⑥ Where marks are usually lost<span class="zh-full" lang="zh-Hant">⑥ 常見失分</span></p><ul><li>Choosing “young people” as the segment (that is still only age).<span class="zh-full" lang="zh-Hant">把「年輕人」當成區隔（那仍然只是年齡）。</span></li><li>A 4P list that does not fit the chosen target, e.g. a buffet price for a quality position.<span class="zh-full" lang="zh-Hant">4P 和目標不符，例如品質定位配吃到飽價格。</span></li><li>Forgetting to say why psychographics beats demographics.<span class="zh-full" lang="zh-Hant">沒說明為什麼心理統計勝過人口統計。</span></li></ul></div><h2 id="q3">Q3 · One direct and one indirect competitor on a perceptual map<span class="zh-full" lang="zh-Hant">Q3｜一個直接＋一個間接對手，畫知覺定位圖</span></h2><p class="question-brief"><b>Question · 8 points</b><br>Identify one direct competitor and one indirect competitor to MK in Thailand. Plot them on a perceptual map along with MK. How should MK position itself to compete more effectively? Give at least two reasons.<span class="zh-full" lang="zh-Hant"><b>題目｜8 分</b><br>指出 MK 在泰國的一個直接、一個間接對手，與 MK 一起畫在知覺定位圖上。MK 應如何定位？至少兩個理由。</span></p><div class="card task"><p class="card-h">① What the question asks you to deliver<span class="zh-full" lang="zh-Hant">① 這題要交什麼</span></p><ul><li>One direct + one indirect, with the reason for each classification<span class="zh-full" lang="zh-Hant">一直接＋一間接，並說明分類理由</span></li><li>A map with two labelled axes and all three brands<span class="zh-full" lang="zh-Hant">兩軸有標示、三品牌都標出的圖</span></li><li>A positioning recommendation<span class="zh-full" lang="zh-Hant">定位建議</span></li><li>At least two reasons<span class="zh-full" lang="zh-Hant">至少兩個理由</span></li></ul></div><div class="card"><p class="card-h">② Which framework (from the lecture slides)<span class="zh-full" lang="zh-Hant">② 用哪個框架（老師講義）</span></p><div class="fwbox"><p><span class="nm">Direct vs Indirect competition</span><span class="src">S5b</span><span class="role">★ Write this in the exam<span class="zh-full" lang="zh-Hant">★ 考試寫這個</span></span></p><p><b>What it is:<span class="zh-full" lang="zh-Hant">是什麼：</span></b> Direct competitors offer the same category to the same target; indirect competitors offer a different product that can satisfy the same need.<span class="zh-full" lang="zh-Hant">直接競爭者在同品類、同客群；間接競爭者提供不同產品，但能滿足同一個需要。</span></p><p><b>Why this question uses it:<span class="zh-full" lang="zh-Hant">這題為什麼用它：</span></b> Define the category (suki hot pot) and the occasion (family meal out) first, and the classification follows.<span class="zh-full" lang="zh-Hant">先定品類（壽喜火鍋）與情境（家庭外出用餐），分類就清楚。</span></p><details><summary>Framework explained (from the slides)<span class="zh-full" lang="zh-Hant">框架詳解（老師講義）</span></summary><ul><li><b>Direct</b>: same category and market, usually the same target (Coca-Cola vs Pepsi).<span class="zh-full" lang="zh-Hant"><b>直接</b>：同品類、同市場，通常同客群（可口可樂 vs 百事）。</span></li><li><b>Indirect</b>: different products that can be substituted to fulfil the same need (Coca-Cola vs Lipton tea). Even time is contested: TV, internet, games compete for entertainment.<span class="zh-full" lang="zh-Hant"><b>間接</b>：不同產品但可替代、滿足同一需要（可口可樂 vs 立頓茶）。連時間也在競爭：電視、網路、遊戲都搶娛樂時間。</span></li><li>Practical test (S6): if a customer could choose it instead of yours for that occasion, it is a competitor. Name the category and occasion first.<span class="zh-full" lang="zh-Hant">實用判準（S6）：顧客在那個情境可以改買它，它就是競爭者。先講清楚品類與情境。</span></li><li>Market types: pure monopoly, oligopoly, monopolistic competition, pure competition. Entry barriers (hard to start) and exit barriers (hard to leave).<span class="zh-full" lang="zh-Hant">市場類型：獨占、寡占、壟斷性競爭、完全競爭。進入障礙與退出障礙。</span></li><li>Customer value analysis: value = benefits − costs; consumers may not be that rational.<span class="zh-full" lang="zh-Hant">顧客價值分析：價值＝利益 − 成本；顧客不一定那麼理性。</span></li></ul><ul><li><b>Competitive strategies</b> (S5b): offense vs defense; market leader vs follower (technology); competitive intelligence – analyse competitors and trends, but don’t spend so much that you become myopic.<span class="zh-full" lang="zh-Hant"><b>競爭策略</b>（S5b）：攻擊 vs 防守；領導者 vs 跟隨者；競爭情報——分析對手與趨勢，但別花太多變成近視。</span></li><li><b>Brand stretching</b>: when a brand extends into a new category, ask whether the new products are direct or indirect competitors of existing ones.<span class="zh-full" lang="zh-Hant"><b>品牌延伸</b>：品牌跨入新品類時，要問新產品和現有產品是直接還是間接競爭。</span></li></ul><p class="mini"><a href="marketing-frameworks.html#fw-competition">Open in the framework handbook →<span class="zh-full" lang="zh-Hant">在框架手冊打開 →</span></a></p></details></div><div class="fwbox"><p><span class="nm">Perceptual map</span><span class="src">S5a</span><span class="role">★ Write this in the exam<span class="zh-full" lang="zh-Hant">★ 考試寫這個</span></span></p><p><b>What it is:<span class="zh-full" lang="zh-Hant">是什麼：</span></b> A two-axis diagram of how consumers perceive brands; each axis is a trait customers care about.<span class="zh-full" lang="zh-Hant">用兩個軸呈現顧客對品牌的認知；每個軸是顧客在意的一個特性。</span></p><p><b>Why this question uses it:<span class="zh-full" lang="zh-Hant">這題為什麼用它：</span></b> This is the S5 homework format: focal brand + one direct + one indirect on one map.<span class="zh-full" lang="zh-Hant">這就是 S5 作業格式：主品牌＋一直接＋一間接。</span></p><details><summary>Framework explained (from the slides)<span class="zh-full" lang="zh-Hant">框架詳解（老師講義）</span></summary><ul><li>Set a value or trait as each axis, then plot each brand; positions can come from data or focus groups.<span class="zh-full" lang="zh-Hant">每個軸設一個價值或特性，再把品牌點上去；位置可來自資料或焦點團體。</span></li><li>Example axes on the slides: old-fashioned ↔ modern, older ↔ younger; student notes add pricey ↔ affordable.<span class="zh-full" lang="zh-Hant">講義的例子軸：傳統 ↔ 現代、年長 ↔ 年輕；學生筆記另有昂貴 ↔ 平價。</span></li><li>Checklist for the exam: label both axes with low and high ends; plot every brand the question asks for; mark where the focal brand should move; say the positions are assumptions unless measured.<span class="zh-full" lang="zh-Hant">考試檢查：兩軸都標名稱與高低；題目要的品牌全部標出；標示主品牌應移去哪裡；沒有量測就說明是假設。</span></li><li>Test your axes: if all points fall on one diagonal, the axes say the same thing – change one.<span class="zh-full" lang="zh-Hant">檢查軸：如果所有點都在同一條斜線上，兩軸在講同一件事，換掉一個。</span></li></ul><p>S5 homework (confirmed for the midterm): a focal brand + one direct + one indirect competitor on one map.<span class="zh-full" lang="zh-Hant">S5 作業（已確認期中會考）：一個主品牌＋一個直接＋一個間接對手畫在同一張圖。</span></p><p class="mini"><a href="marketing-frameworks.html#fw-pmap">Open in the framework handbook →<span class="zh-full" lang="zh-Hant">在框架手冊打開 →</span></a></p></details></div><div class="fwbox fwsub"><p><span class="nm">Marketing myopia · USP · Me-too and branding</span><span class="src">S1</span><span class="role">Support<span class="zh-full" lang="zh-Hant">輔助</span></span></p><p><b>What it is:<span class="zh-full" lang="zh-Hant">是什麼：</span></b> Focusing on the product instead of the benefit customers want is marketing myopia; most features can be copied, so a difference must be a benefit people value, and branding matters.<span class="zh-full" lang="zh-Hant">只看產品而忘了顧客要的利益就是行銷近視；多數功能都會被抄，所以差異要是顧客重視的利益，品牌因此重要。</span></p><p><b>Why this question uses it:<span class="zh-full" lang="zh-Hant">這題為什麼用它：</span></b> Health and service are benefits diners value. Adding a gimmick to look different from Suki Teenoi would be “different just to be different”.<span class="zh-full" lang="zh-Hant">健康與服務是顧客重視的利益；為了和 Suki Teenoi 不同而加噱頭，就是「為不同而不同」。</span></p><details><summary>Framework explained (from the slides)<span class="zh-full" lang="zh-Hant">框架詳解（老師講義）</span></summary><ul><li><b>Marketing myopia</b>: focusing on the product rather than the benefit being satisfied; failing to see challenges from other products or changes in the environment.<span class="zh-full" lang="zh-Hant"><b>行銷近視</b>：只看產品而非被滿足的利益；看不到其他產品或環境變化帶來的挑戰。</span></li><li><b>USP</b>: “USP, but is it a benefit people want or need? Different just to be different…”<span class="zh-full" lang="zh-Hant"><b>USP</b>：「是獨特賣點，但那是顧客想要或需要的利益嗎？還是為不同而不同？」</span></li><li><b>Me-too</b>: who made the first 3- or 5-megapixel camera phone? Nobody remembers – everyone copied. “Everything can usually be copied”, which moves us to the importance of branding; “it very often is not about superiority”.<span class="zh-full" lang="zh-Hant"><b>Me-too</b>：誰做了第一支 300 萬畫素手機？沒人記得，大家都抄。「幾乎什麼都能被抄」，所以品牌很重要；「常常不是比誰更好」。</span></li><li>S6 example: beer made with “iceberg water” – a distinctive ingredient with no clear benefit customers would pay for.<span class="zh-full" lang="zh-Hant">S6 例子：「冰山水」啤酒——成分很特別，但顧客看不到值得多付錢的利益。</span></li></ul><p class="mini"><a href="marketing-frameworks.html#fw-myopia">Open in the framework handbook →<span class="zh-full" lang="zh-Hant">在框架手冊打開 →</span></a></p></details></div><p class="mini links">Also links to:<span class="zh-full" lang="zh-Hant">也可以連到：</span> <a href="marketing-frameworks.html#fw-stp">STP · Targeting strategies · Positioning</a> <span class="src">S5a</span> · <a href="marketing-frameworks.html#fw-uh">Utilitarian vs Hedonic motivation</a> <span class="src">S4b</span></p></div><div class="card"><p class="card-h">③ How to apply it, step by step<span class="zh-full" lang="zh-Hant">③ 怎麼套用：一步一步</span></p><ol class="stp"><li><span class="sth">Define category and occasion<span class="zh-full" lang="zh-Hant">定品類與情境</span></span><p>Category: suki hot pot. Occasion: a family meal out at the weekend.<span class="zh-full" lang="zh-Hant">品類：壽喜火鍋。情境：家庭週末外出用餐。</span></p></li><li><span class="sth">Classify the rivals<span class="zh-full" lang="zh-Hant">分類</span></span><div class="tbl"><table><thead><tr><th scope="col">Rival<span class="zh-full" lang="zh-Hant">對手</span></th><th scope="col">Type<span class="zh-full" lang="zh-Hant">分類</span></th><th scope="col">Why<span class="zh-full" lang="zh-Hant">理由</span></th></tr></thead><tbody><tr><td>Suki Teenoi</td><td>Direct<span class="zh-full" lang="zh-Hant">直接</span></td><td>Same category (hot pot), competes for young diners<span class="zh-full" lang="zh-Hant">同品類（火鍋），搶年輕人</span></td></tr><tr><td>Bar B Q Plaza</td><td>Indirect<span class="zh-full" lang="zh-Hant">間接</span></td><td>Different category (grill) but the same family meal – like Coca-Cola vs Lipton tea<span class="zh-full" lang="zh-Hant">不同品類（燒烤）但搶同一頓家庭餐——像可口可樂 vs 立頓茶</span></td></tr></tbody></table></div><p class="mini">Note: both are cook-at-the-table restaurants, so a strict reader might call Bar B Q Plaza direct. One sentence stating your category (hot pot) settles it; or choose a delivery app for a family meal at home.<span class="zh-full" lang="zh-Hant">提醒：兩者都是桌邊自煮，嚴格的閱卷者可能認為是直接。寫一句「品類是火鍋」就說清楚；或改選外送平台（在家吃的家庭餐）。</span></p></li><li><span class="sth">Choose and test the axes<span class="zh-full" lang="zh-Hant">選軸並檢查</span></span><p>X = value for money; Y = healthy food. Check: the three points are not on one diagonal ✔ (price and service would rise together and form a line).<span class="zh-full" lang="zh-Hant">X＝物有所值；Y＝健康餐點。檢查：三點不在同一條斜線 ✔（價格與服務會一起上升，點會排成一線）。</span></p></li><li><span class="sth">Position and justify<span class="zh-full" lang="zh-Hant">定位並給理由</span></span><p>MK takes the top of the map (health and service) and does not move right to fight Suki Teenoi on price.<span class="zh-full" lang="zh-Hant">MK 佔上方（健康＋服務），不往右和 Suki Teenoi 拚價格。</span></p></li></ol><div class="study-widget" data-mk="perceptual-map" data-context="mk"><p class="mw-label">Interactive · Perceptual map<span class="zh-full" lang="zh-Hant">互動｜知覺定位圖</span></p><p>Starting positions are assumptions for practice; drag to explore.<span class="zh-full" lang="zh-Hant">起始座標為示範假設，可拖拉練習。</span></p><div class="map-tools" role="group" aria-label="Map brands"></div><div class="plot"><svg viewbox="0 0 640 420" role="img" aria-label="Two-axis perceptual map"></svg></div><div class="map-controls"></div><p class="map-status note-small" aria-live="polite"></p><button type="button" class="reset-map">Reset example<span class="zh-full" lang="zh-Hant">重設範例</span></button></div></div><details class="solution" id="q3-answer"><summary>④ Suggested answer<span class="zh-full" lang="zh-Hant">④ 參考答案</span></summary><div class="solution-body"><div class="decision"><b>Decision:</b> Position MK as “the healthy family hot pot with the best service”, not as a cheaper buffet.<span class="zh-full" lang="zh-Hant"><b>決定：</b>定位為「服務最好的健康家庭火鍋」，不走低價吃到飽。</span></div><div class="reason"><p class="rh">Direct: Suki Teenoi. Indirect: Bar B Q Plaza. <span class="fw">Direct vs indirect · S5b</span><span class="zh-full" lang="zh-Hant">直接：Suki Teenoi；間接：Bar B Q Plaza。</span></p><p>Suki Teenoi is the same category (hot pot). Bar B Q Plaza is a different category (grill) that competes for the same family meal out.</p></div><div class="reason"><p class="rh">Map. <span class="fw">Perceptual map · S5a</span><span class="zh-full" lang="zh-Hant">定位圖。</span></p><p>X: value for money (low → high); Y: healthy food (low → high). Suki Teenoi: high value, lower health. Bar B Q Plaza: medium value, low health. MK: lower value, high health.</p></div><div class="reason"><p class="rh">Reason 1: health justifies a higher price. <span class="fw">Utilitarian · S4b</span><span class="zh-full" lang="zh-Hant">理由一：健康支撐較高價格。</span></p><p>Boiled vegetables and lean meat give health-conscious and older diners a believable reason to pay more; grills and buffets cannot claim this easily. It is a benefit customers value, not a difference for its own sake (marketing myopia, S1).</p></div><div class="reason"><p class="rh">Reason 2: service is hard to copy. <span class="fw">Personnel differentiation · S5a</span><span class="zh-full" lang="zh-Hant">理由二：服務難以複製。</span></p><p>MK’s trained staff and consistent family service differentiate it; a price war would cut margin and blur the brand.</p></div><p><b>Measure:</b> Ask diners to rate all three brands on the same two axes.</p></div></details><details class="solution exam" id="q3-para"><summary>⑤ Exam-ready paragraph<span class="zh-full" lang="zh-Hant">⑤ 考場段落範例</span></summary><div class="solution-body"><p class="mini">Use your own words and cite only the case facts you need as evidence (S5b: “do not repeat parts of the case back to me”).<span class="zh-full" lang="zh-Hant">用自己的話，只引用必要的題幹事實當證據（S5b：不要把案例抄回來）。</span></p><p class="para">MK’s direct competitor is Suki Teenoi, another hot pot chain, while Bar B Q Plaza is indirect: a different category, grilling, that competes for the same family meal out. On a map of value for money against healthy food, Suki Teenoi scores high on value but lower on health, Bar B Q Plaza is in the middle on value and low on health, and MK is lower on value but highest on health. MK should position itself as the healthy family hot pot with the best service rather than moving toward cheap buffets. First, boiled vegetables and lean meat give health-conscious and older diners a believable reason to pay more. Second, its trained staff provide personnel differentiation that rivals cannot copy quickly, whereas a price war would cut margins and blur the brand. I would confirm the positions by asking diners to rate all three brands.</p></div></details><div class="card warn"><p class="card-h">⑥ Where marks are usually lost<span class="zh-full" lang="zh-Hant">⑥ 常見失分</span></p><ul><li>Choosing two hot pot chains (no indirect).<span class="zh-full" lang="zh-Hant">兩個都選火鍋店（沒有間接）。</span></li><li>No reason given for the classification.<span class="zh-full" lang="zh-Hant">沒說明分類理由。</span></li><li>Axes that measure the same thing.<span class="zh-full" lang="zh-Hant">兩軸量同一件事。</span></li></ul></div><h2 id="q4">Q4 · A research method for each of a, b and c<span class="zh-full" lang="zh-Hant">Q4｜a、b、c 研究方法</span></h2><p class="question-brief"><b>Question · 8 points</b><br>MK wants to understand younger customers. It would like to a) understand why younger diners choose Suki Teenoi over MK, b) measure how often each age group visits and how much they spend, and c) see how diners actually behave during a visit. Which research methodology would you recommend for each, and why?<span class="zh-full" lang="zh-Hant"><b>題目｜8 分</b><br>MK 想了解年輕顧客：a) 為何年輕人選 Suki Teenoi 而非 MK；b) 各年齡層多常來、花多少；c) 顧客用餐時實際怎麼做。各建議什麼方法？為什麼？</span></p><div class="card task"><p class="card-h">① What the question asks you to deliver<span class="zh-full" lang="zh-Hant">① 這題要交什麼</span></p><ul><li>A method for each of a, b and c<span class="zh-full" lang="zh-Hant">a、b、c 各一個方法</span></li><li>Why each fits<span class="zh-full" lang="zh-Hant">每個都說為什麼</span></li></ul></div><div class="card"><p class="card-h">② Which framework (from the lecture slides)<span class="zh-full" lang="zh-Hant">② 用哪個框架（老師講義）</span></p><div class="fwbox"><p><span class="nm">Qualitative vs Quantitative research</span><span class="src">S3</span><span class="role">★ Write this in the exam<span class="zh-full" lang="zh-Hant">★ 考試寫這個</span></span></p><p><b>What it is:<span class="zh-full" lang="zh-Hant">是什麼：</span></b> Qualitative research is for understanding (why, how); quantitative research is for measuring (who, how often, how much).<span class="zh-full" lang="zh-Hant">質性研究用來理解（為什麼、如何）；量化研究用來衡量（誰、多常、多少）。</span></p><p><b>Why this question uses it:<span class="zh-full" lang="zh-Hant">這題為什麼用它：</span></b> Use the key word in each item to decide the information needed.<span class="zh-full" lang="zh-Hant">用每項的關鍵字判斷需要什麼資訊。</span></p><details><summary>Framework explained (from the slides)<span class="zh-full" lang="zh-Hant">框架詳解（老師講義）</span></summary><p><b>The professor’s two questions<span class="zh-full" lang="zh-Hant">老師的兩個問題</span></b></p><ul><li>1. What kind of information are you looking for?<span class="zh-full" lang="zh-Hant">1. 你要找哪一種資訊？</span></li><li>2. What sort of understanding? <b>Who? How often? How much?</b> → quantitative. <b>How? Why?</b> → qualitative.<span class="zh-full" lang="zh-Hant">2. 哪一種理解？<b>誰？多常？多少？</b>→ 量化；<b>如何？為什麼？</b>→ 質性。</span></li></ul><p><b>Qualitative<span class="zh-full" lang="zh-Hant">質性</span></b></p><ul><li>About understanding; grounded in psychology<span class="zh-full" lang="zh-Hant">目的是理解；以心理學為基礎</span></li><li>Usually focus groups with a moderator (1.5–2+ hours), or in-depth interviews; flexible discussion guide<span class="zh-full" lang="zh-Hant">通常是焦點團體加主持人（1.5–2 小時以上）或深度訪談；討論大綱有彈性</span></li><li>For exploring and developing ideas, concepts, ads, packages; motivations; “why people do/don’t use”<span class="zh-full" lang="zh-Hant">用來探索與發展點子、概念、廣告、包裝；了解動機、為什麼用或不用</span></li><li><b>Not</b> for counting, replication or subgroup differences<span class="zh-full" lang="zh-Hant"><b>不</b>適合計數、重複驗證或比較次群體</span></li></ul><p><b>Quantitative<span class="zh-full" lang="zh-Hant">量化</span></b></p><ul><li>About measuring; represents the population<span class="zh-full" lang="zh-Hant">目的是衡量；能代表母體</span></li><li>Awareness and usage, brands used, how often, satisfaction, taste tests<span class="zh-full" lang="zh-Hant">知名度與使用、用哪些品牌、多常買、滿意度、口味測試</span></li><li>Survey types: telephone, door-to-door, mall intercept, CLT, self-administered online or mobile<span class="zh-full" lang="zh-Hant">問卷方式：電話、到府、商場攔訪、定點測試、線上或手機自填</span></li></ul><p><b>Dangers<span class="zh-full" lang="zh-Hant">要注意的偏誤</span></b></p><ul><li>Questions too direct give rational answers; people support their own behavior; courtesy bias (polite, positive)<span class="zh-full" lang="zh-Hant">問題太直接只得到理性答案；人會替自己的行為辯護；客套偏誤</span></li><li>Correlation is not causation; statistics don’t explain why<span class="zh-full" lang="zh-Hant">相關不等於因果；統計不會告訴你原因</span></li></ul><p>Research types: descriptive (who uses, how much), diagnostic (what’s going on), predictive (what would happen if…). Objectives come first; the method follows.<span class="zh-full" lang="zh-Hant">研究類型：描述性（誰用、用多少）、診斷性（發生什麼事）、預測性（如果…會怎樣）。先定目標，方法跟著來。</span></p><p class="mini"><a href="marketing-frameworks.html#fw-qualquant">Open in the framework handbook →<span class="zh-full" lang="zh-Hant">在框架手冊打開 →</span></a></p></details></div><div class="fwbox fwsub"><p><span class="nm">Observation · Experiments</span><span class="src">S3</span><span class="role">Support<span class="zh-full" lang="zh-Hant">輔助</span></span></p><p><b>What it is:<span class="zh-full" lang="zh-Hant">是什麼：</span></b> Observation records what people actually do; experiments change one variable to see its effect.<span class="zh-full" lang="zh-Hant">觀察記錄人們實際做了什麼；實驗改變一個變數看效果。</span></p><p><b>Why this question uses it:<span class="zh-full" lang="zh-Hant">這題為什麼用它：</span></b> Item (c) asks what diners actually do, which is exactly what observation records.<span class="zh-full" lang="zh-Hant">(c) 問「實際怎麼做」，正是觀察要記錄的。</span></p><details><summary>Framework explained (from the slides)<span class="zh-full" lang="zh-Hant">框架詳解（老師講義）</span></summary><ul><li><b>Observation</b> avoids many survey biases: it records what people did, not what they say. But it only shows the surface, not motives, attitudes or feelings; it can be slow and costly.<span class="zh-full" lang="zh-Hant"><b>觀察</b>避開問卷偏誤：記錄做了什麼而非說了什麼；但只看到表面，看不到動機與感受，且耗時。</span></li><li><b>Mystery shopper</b>: researchers pose as customers to evaluate prices, displays, service; can be used on competitors too.<span class="zh-full" lang="zh-Hant"><b>神秘客</b>：假扮顧客評估價格、陳列、服務；也可用在競爭者。</span></li><li><b>Experiment</b>: O = observation (measure), X = treatment (change). Compare X O with O X O. Example: week-3 sales (O) → install a display (X) → week-4 sales (O). Watch for spurious causes.<span class="zh-full" lang="zh-Hant"><b>實驗</b>：O = 觀察（量測）、X = 處理（改變）。比較 X O 與 O X O。例：第 3 週銷售 → 放陳列架 → 第 4 週銷售。小心其他干擾因素。</span></li><li><b>Lab vs field</b>: a lab gives control but is artificial; field experiments are realistic but less controlled.<span class="zh-full" lang="zh-Hant"><b>實驗室 vs 實地</b>：實驗室好控制但不真實；實地真實但難控制。</span></li><li>Other tools from S3: conjoint analysis (trade-offs between attributes), cluster analysis (profiling groups).<span class="zh-full" lang="zh-Hant">S3 其他工具：聯合分析（屬性取捨）、集群分析（描繪族群）。</span></li></ul><p class="mini"><a href="marketing-frameworks.html#fw-observation">Open in the framework handbook →<span class="zh-full" lang="zh-Hant">在框架手冊打開 →</span></a></p></details></div><p class="mini links">Also links to:<span class="zh-full" lang="zh-Hant">也可以連到：</span> <a href="marketing-frameworks.html#fw-research">Research process · Cluster analysis · Conjoint</a> <span class="src">S3</span></p></div><div class="card"><p class="card-h">③ How to apply it, step by step<span class="zh-full" lang="zh-Hant">③ 怎麼套用：一步一步</span></p><ol class="stp"><li><span class="sth">Key word → information → method<span class="zh-full" lang="zh-Hant">關鍵字 → 資訊 → 方法</span></span><div class="tbl"><table><thead><tr><th scope="col">Item<span class="zh-full" lang="zh-Hant">項目</span></th><th scope="col">Key word<span class="zh-full" lang="zh-Hant">關鍵字</span></th><th scope="col">Method<span class="zh-full" lang="zh-Hant">方法</span></th><th scope="col">Why<span class="zh-full" lang="zh-Hant">為什麼</span></th></tr></thead><tbody><tr><td>a</td><td><b>why</b></td><td>Qualitative: focus groups or in-depth interviews with diners aged 18–30<span class="zh-full" lang="zh-Hant">質性：18–30 歲焦點團體或深度訪談</span></td><td>Uncovers motives in their own words (price, variety, fun with friends)<span class="zh-full" lang="zh-Hant">用顧客自己的話找動機（價格、選擇多、和朋友熱鬧）</span></td></tr><tr><td>b</td><td><b>how often / how much</b></td><td>Quantitative: member and POS data + a survey of non-members<span class="zh-full" lang="zh-Hant">量化：會員與 POS 資料＋非會員問卷</span></td><td>Needs real numbers comparable across age groups<span class="zh-full" lang="zh-Hant">要能比較各年齡層的實際數字</span></td></tr><tr><td>c</td><td>actually <b>behave</b></td><td>Observation in selected branches (ordering, waiting, table time)<span class="zh-full" lang="zh-Hant">觀察：在部分分店觀察點餐、等待、用餐時間</span></td><td>People cannot report their behaviour accurately<span class="zh-full" lang="zh-Hant">顧客說的和做的不一樣</span></td></tr></tbody></table></div></li><li><span class="sth">Add one limitation<span class="zh-full" lang="zh-Hant">補一句限制</span></span><p>Observation cannot show why; follow up unusual behaviour with short interviews.<span class="zh-full" lang="zh-Hant">觀察看不到原因；異常行為再用簡短訪談追問。</span></p></li></ol></div><details class="solution" id="q4-answer"><summary>④ Suggested answer<span class="zh-full" lang="zh-Hant">④ 參考答案</span></summary><div class="solution-body"><div class="decision"><b>Decision:</b> Qualitative for (a), quantitative for (b), observation for (c).<span class="zh-full" lang="zh-Hant"><b>決定：</b>a 質性、b 量化、c 觀察。</span></div><div class="reason"><p class="rh">(a) Focus groups or in-depth interviews with diners aged 18–30. <span class="fw">Qualitative · S3</span><span class="zh-full" lang="zh-Hant">(a) 18–30 歲焦點團體或深度訪談。</span></p><p>“Why” needs open discussion to uncover motives such as price, variety and fun with friends.</p></div><div class="reason"><p class="rh">(b) Member and POS data, plus a survey of non-members. <span class="fw">Quantitative · S3</span><span class="zh-full" lang="zh-Hant">(b) 會員與 POS 資料＋非會員問卷。</span></p><p>“How often” and “how much” need numbers that can be compared across age groups.</p></div><div class="reason"><p class="rh">(c) Observation in selected branches. <span class="fw">Observation · S3</span><span class="zh-full" lang="zh-Hant">(c) 部分分店觀察。</span></p><p>Observation records what diners actually do, which people often cannot report accurately.</p></div><p><b>Risk:</b> Observation shows behaviour but not reasons; follow up unusual behaviour with short interviews.</p></div></details><details class="solution exam" id="q4-para"><summary>⑤ Exam-ready paragraph<span class="zh-full" lang="zh-Hant">⑤ 考場段落範例</span></summary><div class="solution-body"><p class="mini">Use your own words and cite only the case facts you need as evidence (S5b: “do not repeat parts of the case back to me”).<span class="zh-full" lang="zh-Hant">用自己的話，只引用必要的題幹事實當證據（S5b：不要把案例抄回來）。</span></p><p class="para">(a) To understand why younger diners choose Suki Teenoi, I recommend qualitative focus groups or in-depth interviews with diners aged 18 to 30, because the question is “why”, and open discussion can uncover motives such as price, variety or having fun with friends. (b) To measure visit frequency and spending by age group, I recommend quantitative research using member and point-of-sale data, plus a short survey for non-members, because the company needs numbers it can compare across groups. (c) To see how diners actually behave, I recommend observation in selected branches, because it records real behaviour such as ordering and waiting time, which customers often cannot describe accurately. Since observation cannot explain motives, I would follow up interesting behaviour with brief interviews.</p></div></details><div class="card warn"><p class="card-h">⑥ Where marks are usually lost<span class="zh-full" lang="zh-Hant">⑥ 常見失分</span></p><ul><li>Answering only one item.<span class="zh-full" lang="zh-Hant">只答一項。</span></li><li>Using a survey for (c): surveys measure what people say, not what they do.<span class="zh-full" lang="zh-Hant">(c) 用問卷：問卷量的是說的，不是做的。</span></li></ul></div><h2 id="q5">Q5 · Members: attract new ones or keep existing ones?<span class="zh-full" lang="zh-Hant">Q5｜會員：花錢拉新還是留住舊客？</span></h2><p class="question-brief"><b>Question · 8 points</b><br>MK’s data show that many young members join for a first-visit discount and never return, while older members visit less often each year. Should MK spend more on discounts to attract new members, or on keeping existing members? Give at least two reasons and suggest two CRM actions.<span class="zh-full" lang="zh-Hant"><b>題目｜8 分</b><br>MK 的資料顯示：很多年輕會員拿了首次折扣就不再來，年長會員來店次數逐年下降。MK 應把錢花在折扣拉新，還是留住既有會員？至少兩個理由，並提出兩個 CRM 行動。</span></p><div class="card task"><p class="card-h">① What the question asks you to deliver<span class="zh-full" lang="zh-Hant">① 這題要交什麼</span></p><ul><li>A decision: attract new or keep existing<span class="zh-full" lang="zh-Hant">決定：拉新或留舊</span></li><li>At least two reasons<span class="zh-full" lang="zh-Hant">至少兩個理由</span></li><li>Two concrete CRM actions<span class="zh-full" lang="zh-Hant">兩個具體 CRM 行動</span></li></ul></div><div class="card"><p class="card-h">② Which framework (from the lecture slides)<span class="zh-full" lang="zh-Hant">② 用哪個框架（老師講義）</span></p><div class="fwbox"><p><span class="nm">Relationship marketing · CRM · Lifetime value</span><span class="src">S2</span><span class="role">★ Write this in the exam<span class="zh-full" lang="zh-Hant">★ 考試寫這個</span></span></p><p><b>What it is:<span class="zh-full" lang="zh-Hant">是什麼：</span></b> Focus on long-lasting customer relationships rather than single transactions, because repeat customers bring long-term revenue.<span class="zh-full" lang="zh-Hant">重視長期顧客關係而非單次交易，因為回頭客帶來長期收入。</span></p><p><b>Why this question uses it:<span class="zh-full" lang="zh-Hant">這題為什麼用它：</span></b> The question is “single transaction vs long-term relationship”, which is exactly relationship marketing and lifetime value.<span class="zh-full" lang="zh-Hant">這題就是「單次交易 vs 長期關係」，正是關係行銷與終身價值。</span></p><details><summary>Framework explained (from the slides)<span class="zh-full" lang="zh-Hant">框架詳解（老師講義）</span></summary><ul><li><b>Relationship marketing</b>: buy one time vs a lifetime (Panthip model vs Dell). Many firms keep chasing new customers while losing old ones.<span class="zh-full" lang="zh-Hant"><b>關係行銷</b>：買一次 vs 買一輩子（Panthip vs Dell）。很多公司一直找新客，卻一直流失舊客。</span></li><li><b>Lifetime value</b>: economies of scale, easier relationships for staff and customers, benefits from repeat purchase, long-term revenue. Compare with the cost of acquiring customers and churn.<span class="zh-full" lang="zh-Hant"><b>終身價值</b>：規模經濟、員工與顧客關係更順、回購收益、長期收入；要和獲客成本與流失一起看。</span></li><li><b>Be realistic</b>: “beware of believing in 100% loyalty – not a realistic goal”.<span class="zh-full" lang="zh-Hant"><b>要實際</b>：「別相信 100% 忠誠，那不是實際的目標」。</span></li><li><b>Keeping score</b>: satisfaction vs importance; hygiene (must-have) vs motivation (nice-to-have) factors; KPIs are not automatically useful.<span class="zh-full" lang="zh-Hant"><b>衡量</b>：滿意度 vs 重要性；保健因子（必須有）vs 激勵因子（有更好）；KPI 不一定有用。</span></li><li><b>Loyalty program objectives</b>: keep you in the consideration set, encourage you to spend more, offer tiers to achieve (silver, gold).<span class="zh-full" lang="zh-Hant"><b>會員計畫目的</b>：讓你留在考慮名單、讓你多花錢、用等級（銀、金）鼓勵升級。</span></li><li><b>Marketing metrics</b>: sales and share are popular, but also awareness, trial, repurchase; views and likes can be faked.<span class="zh-full" lang="zh-Hant"><b>行銷指標</b>：銷售與市占最常見，也要看知名度、試用、回購；觀看數與按讚可能是假的。</span></li><li><b>CEM / CX</b>: companies often forget the customer experience; feedback that arrives too late is useless for service recovery.<span class="zh-full" lang="zh-Hant"><b>顧客體驗管理</b>：公司常忘了顧客體驗；回饋太晚就來不及補救。</span></li></ul><p class="mini">Slide example: Greyhound: a once-VIP customer was refused a birthday reward because his card had expired, and nobody followed up when his visits dropped (S6).<span class="zh-full" lang="zh-Hant">講義例子：Greyhound：曾是 VIP 的顧客因卡過期被拒絕生日禮，來店變少也沒人關心（S6）。</span></p><p class="mini"><a href="marketing-frameworks.html#fw-crm">Open in the framework handbook →<span class="zh-full" lang="zh-Hant">在框架手冊打開 →</span></a></p></details></div><div class="fwbox"><p><span class="nm">Marketing funnel</span><span class="src">S1</span><span class="role">★ Write this in the exam<span class="zh-full" lang="zh-Hant">★ 考試寫這個</span></span></p><p><b>What it is:<span class="zh-full" lang="zh-Hant">是什麼：</span></b> Customers move from awareness to interest, trial and repeat purchase; each step can fail, so each needs its own objective and measure.<span class="zh-full" lang="zh-Hant">顧客從知道、有興趣、試用到回購；每一步都可能斷掉，所以每一步要有自己的目標與指標。</span></p><p><b>Why this question uses it:<span class="zh-full" lang="zh-Hant">這題為什麼用它：</span></b> Use the funnel to diagnose where each group of members drops out.<span class="zh-full" lang="zh-Hant">用漏斗診斷兩群會員卡在哪一關。</span></p><details><summary>Framework explained (from the slides)<span class="zh-full" lang="zh-Hant">框架詳解（老師講義）</span></summary><ul><li>Without awareness, interest is difficult; awareness does not ensure interest; interest does not ensure trial; trial does not ensure repeat (S6 review).<span class="zh-full" lang="zh-Hant">沒有知名度很難有興趣；有知名度不保證有興趣；有興趣不保證試用；試用不保證回購（S6 複習）。</span></li><li>Use it to <b>diagnose</b> where customers drop out, then pick the matching action and metric: awareness/consideration, conversion, repeat rate.<span class="zh-full" lang="zh-Hant">用它<b>診斷</b>顧客在哪一關流失，再選對應的行動與指標：知名度／考慮、轉換、回購率。</span></li><li>S2 marketing metrics ask the same: what is our objective – awareness? interest? trial? reminder? repurchase? Views and likes can be faked.<span class="zh-full" lang="zh-Hant">S2 行銷指標問的一樣：目標是知名度、興趣、試用、提醒還是回購？觀看與按讚可能是假的。</span></li></ul><p class="mini"><a href="marketing-frameworks.html#fw-funnel">Open in the framework handbook →<span class="zh-full" lang="zh-Hant">在框架手冊打開 →</span></a></p></details></div><div class="fwbox fwsub"><p><span class="nm">Data mining · MIS · Retail location analysis</span><span class="src">S2</span><span class="role">Support<span class="zh-full" lang="zh-Hant">輔助</span></span></p><p><b>What it is:<span class="zh-full" lang="zh-Hant">是什麼：</span></b> Data mining finds patterns in large amounts of data; it shows what happened, not why, and may not generalize to other places.<span class="zh-full" lang="zh-Hant">Data mining 從大量資料找出模式；它告訴你發生了什麼，不告訴你為什麼，也不一定適用其他地方。</span></p><p><b>Why this question uses it:<span class="zh-full" lang="zh-Hant">這題為什麼用它：</span></b> Member data shows <b>who</b> is drifting away, but not <b>why</b>; pair it with short interviews.<span class="zh-full" lang="zh-Hant">會員資料看得出<b>誰</b>在流失，看不出<b>為什麼</b>；要搭配簡短訪談。</span></p><details><summary>Framework explained (from the slides)<span class="zh-full" lang="zh-Hant">框架詳解（老師講義）</span></summary><ul><li><b>Data mining</b>: the computer filters large amounts of data and identifies patterns, often with AI; humans then analyse further. Example: 7-Eleven sales near a school differ from sales near a factory.<span class="zh-full" lang="zh-Hant"><b>Data mining</b>：電腦從大量資料找模式（常配合 AI），再由人分析。例：學校旁和工廠旁的 7-Eleven 銷售不同。</span></li><li>Limits on the slide: it analyses what has happened, does not predict what will happen, may not generalize to other places, and <b>does not tell us why</b>.<span class="zh-full" lang="zh-Hant">講義寫的限制：分析已發生的事、不能預測未來、不一定適用其他地方、<b>不會告訴你為什麼</b>。</span></li><li>The more data links to an individual, the more valuable it is – behavioral data is very valuable – but it raises <b>privacy</b> and ethics issues (Tesco, Central One Card SMS when you enter a mall).<span class="zh-full" lang="zh-Hant">資料越能連到個人越有價值，行為資料非常值錢——但有<b>隱私</b>與倫理問題（Tesco、Central One Card 進商場就傳簡訊）。</span></li><li><b>MIS</b>: TPS → MIS → DSS → expert systems; “bad data, bad decisions”; information overload.<span class="zh-full" lang="zh-Hant"><b>MIS</b>：TPS → MIS → DSS → 專家系統；「爛資料、爛決策」；資訊過載。</span></li><li><b>Retail location analysis</b>: identify target demographics, match them with census data in each store’s catchment area, then focus marketing on the best-matching stores.<span class="zh-full" lang="zh-Hant"><b>零售選址分析</b>：找出目標人口特徵，對照每家店商圈的普查資料，把行銷集中在最吻合的店。</span></li><li>Zara: actual sales drive production, but is that predictive elsewhere?<span class="zh-full" lang="zh-Hant">Zara：用實際銷售決定生產，但在別處也能預測嗎？</span></li></ul><p>How to use it: pair data mining (who stopped coming) with qualitative research (why they stopped).<span class="zh-full" lang="zh-Hant">答題用法：用 data mining 找出誰不來了，再用質性研究問為什麼。</span></p><p class="mini"><a href="marketing-frameworks.html#fw-datamining">Open in the framework handbook →<span class="zh-full" lang="zh-Hant">在框架手冊打開 →</span></a></p></details></div><p class="mini links">Also links to:<span class="zh-full" lang="zh-Hant">也可以連到：</span> <a href="marketing-frameworks.html#fw-s6">Session 6 review ideas</a> <span class="src">S6</span></p></div><div class="card"><p class="card-h">③ How to apply it, step by step<span class="zh-full" lang="zh-Hant">③ 怎麼套用：一步一步</span></p><ol class="stp"><li><span class="sth">Diagnose with the funnel<span class="zh-full" lang="zh-Hant">用漏斗診斷</span></span><div class="tbl"><table><thead><tr><th scope="col">Members<span class="zh-full" lang="zh-Hant">會員</span></th><th scope="col">Where they drop out<span class="zh-full" lang="zh-Hant">卡在哪一關</span></th><th scope="col">Meaning<span class="zh-full" lang="zh-Hant">意思</span></th></tr></thead><tbody><tr><td>Young members<span class="zh-full" lang="zh-Hant">年輕會員</span></td><td>Trial → repeat breaks<span class="zh-full" lang="zh-Hant">Trial → Repeat 斷掉</span></td><td>The discount bought one trial, not a relationship<span class="zh-full" lang="zh-Hant">折扣只買到一次試吃，沒有建立關係</span></td></tr><tr><td>Older members<span class="zh-full" lang="zh-Hant">年長會員</span></td><td>Repeat falling (churn)<span class="zh-full" lang="zh-Hant">Repeat 逐年下降（流失）</span></td><td>Good customers are drifting away<span class="zh-full" lang="zh-Hant">原本的好客人正在流失</span></td></tr></tbody></table></div></li><li><span class="sth">Compare with lifetime value<span class="zh-full" lang="zh-Hant">用終身價值比較</span></span><p>A member who returns ten times a year is worth far more than a one-off discount visitor, and keeping customers usually costs less than finding new ones → spend first on bringing people back.<span class="zh-full" lang="zh-Hant">每年來 10 次的會員價值遠高於只來一次的折扣客；留舊客通常比找新客便宜 → 錢優先花在讓人回來。</span></p></li><li><span class="sth">Decide, but be realistic<span class="zh-full" lang="zh-Hant">下決定，但要實際</span></span><p>Prioritise keeping members and moving new ones from trial to repeat, without expecting 100% loyalty (S1 and S2 both warn customers switch for variety).<span class="zh-full" lang="zh-Hant">優先留舊，並把新會員從試用推到回購；不追求 100% 忠誠（S1、S2 都提醒顧客本來就會換口味）。</span></p></li><li><span class="sth">Design two CRM actions<span class="zh-full" lang="zh-Hant">設計兩個 CRM 行動</span></span><div class="tbl"><table><thead><tr><th scope="col">Action<span class="zh-full" lang="zh-Hant">行動</span></th><th scope="col">Fixes<span class="zh-full" lang="zh-Hant">解決哪一關</span></th></tr></thead><tbody><tr><td>Replace part of the first-visit discount with a second-visit reward and tiers<span class="zh-full" lang="zh-Hant">把首次折扣改為第二次來店禮與等級</span></td><td>Young members: trial → repeat<span class="zh-full" lang="zh-Hant">年輕會員：試用 → 回購</span></td></tr><tr><td>Churn alert: when visits drop, send a personal offer (birthday, favourite dishes) – the Greyhound lesson from S6<span class="zh-full" lang="zh-Hant">流失預警：來店變少時寄個人化優惠（生日、愛吃的菜）——S6 的 Greyhound 教訓</span></td><td>Older members: churn<span class="zh-full" lang="zh-Hant">年長會員：流失</span></td></tr></tbody></table></div></li></ol></div><details class="solution" id="q5-answer"><summary>④ Suggested answer<span class="zh-full" lang="zh-Hant">④ 參考答案</span></summary><div class="solution-body"><div class="decision"><b>Decision:</b> Shift spending from first-visit discounts to keeping members: turn trial into repeat, and stop older members from drifting away.<span class="zh-full" lang="zh-Hant"><b>決定：</b>把錢從首次折扣轉到留住會員。</span></div><div class="reason"><p class="rh">Reason 1: lifetime value beats one-off visits. <span class="fw">Lifetime value · S2</span><span class="zh-full" lang="zh-Hant">理由一：終身價值勝過單次來店。</span></p><p>A member who returns many times a year is worth far more than a discount hunter who comes once, and keeping customers usually costs less than finding new ones.</p></div><div class="reason"><p class="rh">Reason 2: the funnel breaks at repeat, not at trial. <span class="fw">Marketing funnel · S1</span><span class="zh-full" lang="zh-Hant">理由二：漏斗斷在回購。</span></p><p>MK already gets young people to try it; more discounts would buy more one-time visits. The problem to fix is repeat purchase.</p></div><div class="reason"><p class="rh">CRM action 1: reward the second visit. <span class="fw">Loyalty program · S2</span><span class="zh-full" lang="zh-Hant">CRM 行動一：獎勵第二次來店。</span></p><p>Replace part of the first-visit discount with a reward on the second and third visit, with tiers for frequent members.</p></div><div class="reason"><p class="rh">CRM action 2: churn alerts. <span class="fw">CRM · S2</span><span class="zh-full" lang="zh-Hant">CRM 行動二：流失預警。</span></p><p>When a member’s visits drop, send a personal offer based on favourite dishes or birthdays.</p></div><p><b>Risk:</b> No program creates 100% loyalty; set realistic targets. Data mining shows who is leaving, not why, so interview a few lapsed members before designing offers.</p><p><b>Measure:</b> Repeat rate within 60 days of joining, churn rate of older members, and revenue per member.</p></div></details><details class="solution exam" id="q5-para"><summary>⑤ Exam-ready paragraph<span class="zh-full" lang="zh-Hant">⑤ 考場段落範例</span></summary><div class="solution-body"><p class="mini">Use your own words and cite only the case facts you need as evidence (S5b: “do not repeat parts of the case back to me”).<span class="zh-full" lang="zh-Hant">用自己的話，只引用必要的題幹事實當證據（S5b：不要把案例抄回來）。</span></p><p class="para">I recommend MK spend less on first-visit discounts and more on keeping members. Using the marketing funnel, young members are not failing at trial but at repeat purchase, so more discounts would only buy more one-time visits. From a relationship marketing view, a member who returns several times a year has a much higher lifetime value than a one-off discount hunter, and keeping customers usually costs less than finding new ones. I would take two CRM actions. First, move part of the first-visit discount to rewards on the second and third visits, with tiers for frequent diners. Second, use member data to spot older members whose visits are falling and send them personal offers based on their favourite dishes or birthdays. Because the data shows who is leaving but not why, I would also interview a few lapsed members. Since no customer is fully loyal, I would set realistic targets and track repeat rate, churn and revenue per member.</p></div></details><div class="card warn"><p class="card-h">⑥ Where marks are usually lost<span class="zh-full" lang="zh-Hant">⑥ 常見失分</span></p><ul><li>“Keeping customers is cheaper” with no link to the two member groups in the case.<span class="zh-full" lang="zh-Hant">只說「留舊客較便宜」，沒連到題幹兩群會員。</span></li><li>Two CRM actions that are both discounts.<span class="zh-full" lang="zh-Hant">兩個 CRM 行動都是折扣。</span></li><li>Promising 100% loyalty.<span class="zh-full" lang="zh-Hant">承諾 100% 忠誠。</span></li></ul></div><h2 id="check">Self-marking checklist<span class="zh-full" lang="zh-Hant">自我批改清單</span></h2><div class="tbl"><table><thead><tr><th scope="col">Q<span class="zh-full" lang="zh-Hant">題號</span></th><th scope="col">Full marks need<span class="zh-full" lang="zh-Hant">拿滿分需要</span></th></tr></thead><tbody><tr><td>Q1</td><td>5C table with both countries; religion/pork screen under Context; three reasons, each a C contrasted with Thailand<span class="zh-full" lang="zh-Hant">兩國 5C 對比表；情境下做宗教／豬肉篩選；三個理由各是一個 C、都和泰國比</span></td></tr><tr><td>Q2</td><td>Why psychographics beats age; one named segment checked with the four tests; a 4P plan that fits it<span class="zh-full" lang="zh-Hant">說明心理統計為何勝過年齡；一個具體客群並用四條件檢查；配合它的 4P</span></td></tr><tr><td>Q3</td><td>One direct + one indirect with reasons; labelled map; two reasons<span class="zh-full" lang="zh-Hant">一直接＋一間接並說明；標示完整的圖；兩個理由</span></td></tr><tr><td>Q4</td><td>A method and reason for each of a, b, c<span class="zh-full" lang="zh-Hant">a、b、c 各有方法與原因</span></td></tr><tr><td>Q5</td><td>Funnel diagnosis; lifetime value decision; two different CRM actions<span class="zh-full" lang="zh-Hant">漏斗診斷；終身價值下決定；兩個不同 CRM 行動</span></td></tr></tbody></table></div></article></main></div>
+<script>'use strict';
+(() => {
+  const isBilingual=document.documentElement.dataset.bilingual==='true';
+  const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+  const bi=(en,zh)=>esc(en)+(isBilingual?'<span class="zh-full" lang="zh-Hant">'+esc(zh)+'</span>':'');
+  const header=document.querySelector('.top');
+  const measure=()=>document.documentElement.style.setProperty('--header-height',Math.ceil(header.getBoundingClientRect().height)+'px');
+  measure();window.addEventListener('resize',measure);if('ResizeObserver' in window)new ResizeObserver(measure).observe(header);
+  const toc=document.getElementById('toc'),rail=document.getElementById('rail'),tocButton=document.getElementById('tocBtn');
+  toc.replaceChildren();
+  const headings=[...document.querySelectorAll('.doc h2,.doc h3')];
+  headings.forEach(h=>{const li=document.createElement('li'),a=document.createElement('a');li.className=h.tagName.toLowerCase();li.dataset.id=h.id;a.href='#'+h.id;a.innerHTML=h.innerHTML;li.append(a);toc.append(li)});
+  tocButton.setAttribute('aria-controls','rail');
+  tocButton.addEventListener('click',()=>{const on=rail.classList.toggle('open');tocButton.setAttribute('aria-expanded',String(on))});
+  toc.addEventListener('click',e=>{if(e.target.closest('a')){rail.classList.remove('open');tocButton.setAttribute('aria-expanded','false')}});
+  if('IntersectionObserver' in window){const ob=new IntersectionObserver(entries=>entries.forEach(e=>{if(!e.isIntersecting)return;toc.querySelectorAll('.on').forEach(x=>x.classList.remove('on'));toc.querySelector('li[data-id="'+e.target.id+'"] a')?.classList.add('on')}),{rootMargin:'-100px 0px -65% 0px'});headings.forEach(h=>ob.observe(h))}
+  document.querySelectorAll('[data-reveal-all]').forEach(button=>button.addEventListener('click',()=>{
+    const items=[...button.parentElement.nextElementSibling.querySelectorAll('details')],open=!items.every(d=>d.open);
+    items.forEach(d=>d.open=open);button.setAttribute('aria-expanded',String(open));button.innerHTML=open?bi('Hide all answers','隱藏全部答案'):bi('Show all answers','顯示全部答案');
+  }));
+
+  document.querySelectorAll('[data-solutions]').forEach(button=>button.addEventListener('click',()=>{const open=button.dataset.solutions==='open';document.querySelectorAll('details.solution').forEach(el=>el.open=open)}));
+
+  const mapExamples={"mk": {"x": ["Value for money", "物有所值"], "y": ["Healthy food", "健康餐點"], "brands": [["MK", "MK（主品牌）", 2.2, 4.5], ["Suki Teenoi", "Suki Teenoi（直接）", 4.5, 2.4], ["Bar B Q Plaza", "Bar B Q Plaza（間接）", 3.0, 1.8]]}};
+  const NS='http://www.w3.org/2000/svg';
+  const make=(tag,attrs,text)=>{const e=document.createElementNS(NS,tag);Object.entries(attrs||{}).forEach(([k,v])=>e.setAttribute(k,v));if(text!==undefined)e.textContent=text;return e};
+  const clamp=v=>Math.max(1,Math.min(5,Math.round(v*10)/10));
+  const Widgets={};
+  Widgets['perceptual-map']=host=>{
+    const config=mapExamples[host.dataset.context];let points=config.brands.map(p=>[...p]),selected=0,drag=null;
+    const svg=host.querySelector('svg'),tools=host.querySelector('.map-tools'),controls=host.querySelector('.map-controls'),status=host.querySelector('.map-status');
+    const px=v=>80+(v-1)*120,py=v=>320-(v-1)*65;
+    svg.append(make('rect',{x:80,y:60,width:480,height:260,fill:'var(--paper)',stroke:'var(--line)'}));
+    for(let i=1;i<=5;i++){
+      svg.append(make('line',{x1:px(i),y1:60,x2:px(i),y2:320,stroke:'var(--line)'}));
+      svg.append(make('line',{x1:80,y1:py(i),x2:560,y2:py(i),stroke:'var(--line)'}));
+      svg.append(make('text',{x:px(i),y:344,'text-anchor':'middle',class:'axis-number'},i));
+      svg.append(make('text',{x:65,y:py(i)+4,'text-anchor':'end',class:'axis-number'},i));
+    }
+    const axis=(en,zh,attrs)=>{const t=make('text',attrs,en);if(isBilingual){const z=make('tspan',{class:'zh-svg',lang:'zh-Hant',x:attrs.x,dy:15},zh);t.append(z)}svg.append(t)};
+    axis(config.x[0],config.x[1],{x:320,y:389,'text-anchor':'middle',class:'axis-title'});
+    axis(config.y[0],config.y[1],{x:17,y:190,transform:'rotate(-90 17 190)','text-anchor':'middle',class:'axis-title'});
+    axis('Low','低',{x:80,y:367,'text-anchor':'middle',class:'axis-end'});
+    axis('High','高',{x:560,y:367,'text-anchor':'middle',class:'axis-end'});
+    axis('High','高',{x:577,y:66,'text-anchor':'start',class:'axis-end'});
+    axis('Low','低',{x:577,y:320,'text-anchor':'start',class:'axis-end'});
+    const group=make('g',{});svg.append(group);const nodes=[];
+    const colors=['var(--accent)','var(--demand)','var(--muted)'];
+    points.forEach((point,i)=>{
+      const g=make('g',{tabindex:0,role:'button','data-point':i,'aria-label':'Move '+point[0]+' point',class:'map-point'});
+      g.append(make('title',{},point[0]+' (example position)'));
+      g.append(make('circle',{r:8,fill:colors[i]}));g.append(make('text',{x:12,y:-13,class:'point-label'},point[0]));group.append(g);nodes.push(g);
+      const button=document.createElement('button');button.type='button';button.dataset.point=String(i);button.innerHTML=bi(point[0],point[1]);tools.append(button);
+      button.addEventListener('click',()=>{selected=i;sync()});
+      g.addEventListener('keydown',e=>{
+        const d={ArrowLeft:[-.1,0],ArrowRight:[.1,0],ArrowUp:[0,.1],ArrowDown:[0,-.1]}[e.key];
+        if(d){e.preventDefault();selected=i;points[i][2]=clamp(points[i][2]+d[0]);points[i][3]=clamp(points[i][3]+d[1]);sync()}
+        if(e.key==='Enter'||e.key===' '){e.preventDefault();selected=i;sync()}
+      });
+      g.addEventListener('pointerdown',e=>{selected=i;drag=i;g.setPointerCapture(e.pointerId);e.preventDefault();sync()});
+      g.addEventListener('pointermove',e=>{if(drag!==i)return;const pt=svg.createSVGPoint();pt.x=e.clientX;pt.y=e.clientY;const q=pt.matrixTransform(svg.getScreenCTM().inverse());points[i][2]=clamp(1+(q.x-80)/120);points[i][3]=clamp(1+(320-q.y)/65);sync()});
+      g.addEventListener('pointerup',()=>drag=null);g.addEventListener('pointercancel',()=>drag=null);
+    });
+    controls.innerHTML=[['x',config.x],['y',config.y]].map(([key,label])=>'<label>'+bi(label[0],label[1])+'<input type="range" data-axis="'+key+'" min="1" max="5" step="0.1"><output></output></label>').join('');
+    const xInput=controls.querySelector('[data-axis=x]'),yInput=controls.querySelector('[data-axis=y]');
+    const sync=()=>{
+      nodes.forEach((g,i)=>{const p=points[i];g.setAttribute('transform','translate('+px(p[2])+','+py(p[3])+')');g.classList.toggle('selected',i===selected);g.setAttribute('aria-pressed',String(i===selected));const label=g.querySelector('.point-label');label.setAttribute('x',p[2]>3.8?-12:12);label.setAttribute('text-anchor',p[2]>3.8?'end':'start');label.setAttribute('y',p[3]>4.6?23:-13)});
+      [...tools.children].forEach((b,i)=>b.setAttribute('aria-pressed',String(i===selected)));
+      const p=points[selected];xInput.value=p[2];yInput.value=p[3];xInput.nextElementSibling.textContent=p[2].toFixed(1);yInput.nextElementSibling.textContent=p[3].toFixed(1);
+      status.innerHTML=bi(p[0]+': x = '+p[2].toFixed(1)+', y = '+p[3].toFixed(1)+'. Example coordinates on 1–5 scales.',p[1]+'：x = '+p[2].toFixed(1)+'、y = '+p[3].toFixed(1)+'。1–5 量尺上的假設座標。');
+    };
+    xInput.addEventListener('input',()=>{points[selected][2]=clamp(+xInput.value);sync()});
+    yInput.addEventListener('input',()=>{points[selected][3]=clamp(+yInput.value);sync()});
+    host.querySelector('.reset-map').addEventListener('click',()=>{points=config.brands.map(p=>[...p]);selected=0;sync()});sync();
+  };
+  Widgets['channel-contribution']=host=>{
+    const fields=[['orders','New-channel orders','新通路訂單',1000,1],['transferred','Orders transferred from stores','由門市轉移的訂單',700,1],['online','Online contribution / order (THB)','線上每單貢獻（THB）',60,1],['store','Lost store contribution / order (THB)','流失門市每單貢獻（THB）',50,1],['extra','Additional operating costs (THB)','額外營運成本（THB）',10000,100]];
+    host.querySelector('.contribution-inputs').innerHTML=fields.map(([key,en,zh,val,step])=>'<label>'+bi(en,zh)+'<input type="number" data-field="'+key+'" min="0" step="'+step+'" value="'+val+'"></label>').join('');
+    const result=host.querySelector('.contribution-result'),num=k=>{const v=Number(host.querySelector('[data-field='+k+']').value);return Number.isFinite(v)?Math.max(0,v):0},fmt=n=>new Intl.NumberFormat('en-US',{maximumFractionDigits:2}).format(n);
+    const update=()=>{const n=num('orders'),t=Math.min(n,num('transferred')),m=num('online'),s=num('store'),c=num('extra'),gain=n*m-t*s-c;
+      const input=host.querySelector('[data-field=transferred]');input.max=String(n);if(num('transferred')>n)input.value=n;
+      result.innerHTML='<b class="net-contribution">'+(gain<0?'−':'+')+'THB '+fmt(Math.abs(gain))+'</b><p>'+bi('Incremental contribution; '+fmt(n-t)+' orders are additional under the transfer assumption.','增量貢獻；在轉移假設下，額外訂單為 '+fmt(n-t)+'。')+'</p><p class="note-small">'+fmt(n)+' × '+fmt(m)+' − '+fmt(t)+' × '+fmt(s)+' − '+fmt(c)+' = '+fmt(gain)+'</p>';
+    };host.querySelectorAll('input').forEach(i=>i.addEventListener('input',update));update();
+  };
+  window.MktWidgets={mount:root=>root.querySelectorAll('[data-mk]').forEach(host=>{if(!host.dataset.mounted&&Widgets[host.dataset.mk]){Widgets[host.dataset.mk](host);host.dataset.mounted='true'}})};
+  window.MktWidgets.mount(document);
+})();
+</script><script>
+(() => {
+ const zh=document.getElementById('zhToggle'),label=document.getElementById('zhModeLabel');
+ const setZh=on=>{zh.checked=on;document.body.classList.toggle('show-zh',on);label.textContent=on?'ON':'OFF'};
+ setZh(false);zh.addEventListener('change',()=>setZh(zh.checked));
+ const button=document.getElementById('practiceToggle'),state=document.getElementById('practiceState');
+ const setPractice=on=>{button.setAttribute('aria-pressed',String(on));state.textContent=on?'On':'Off';button.querySelector(':scope>.zh-full').textContent='練習模式：'+(on?'開啟':'關閉');document.querySelectorAll('.practice-prompt').forEach(e=>e.hidden=!on)};
+ setPractice(false);button.addEventListener('click',()=>setPractice(button.getAttribute('aria-pressed')!=='true'));
+})();
+</script><script>(()=>{const h=document.querySelector('.top');if(!h)return;const f=()=>document.documentElement.style.setProperty('--header-height',Math.ceil(h.getBoundingClientRect().height)+'px');f();if('ResizeObserver'in window)new ResizeObserver(f).observe(h);window.addEventListener('resize',f)})();</script><script>(() => {
+  const bilingual=!!document.getElementById('zhToggle');
+  const tables=[...document.querySelectorAll('article .tbl')];
+  const entries=tables.map(table=>{
+    const hint=document.createElement('p');hint.className='table-scroll-hint';
+    hint.textContent='Swipe or use arrow keys to see the rest of the table.';
+    if(bilingual){const zh=document.createElement('span');zh.className='zh-full';zh.lang='zh-Hant';zh.textContent='可左右滑動，或用方向鍵查看完整表格。';hint.append(zh)}
+    table.before(hint);table.setAttribute('aria-label','Scrollable study table');
+    return {table,hint};
+  });
+  const refresh=()=>entries.forEach(({table,hint})=>{
+    const wide=table.scrollWidth>table.clientWidth+2;hint.hidden=!wide;
+    if(wide)table.tabIndex=0;else table.removeAttribute('tabindex');
+  });
+  refresh();window.addEventListener('resize',refresh);
+  if('ResizeObserver'in window){const observer=new ResizeObserver(refresh);tables.forEach(t=>observer.observe(t))}
+  if(document.fonts)document.fonts.ready.then(refresh);
+})();
+</script></body></html>
