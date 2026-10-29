@@ -1,0 +1,558 @@
+<!DOCTYPE html>
+
+<html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1, viewport-fit=cover" name="viewport"/><title>Marketing on One Line</title>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&amp;family=Noto+Serif+TC:wght@600;700&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet"/>
+<style>
+/* Layout: one reading column with a sticky chapter rail; colors follow system appearance. */
+:root {
+  color-scheme: light;
+  --bg: var(--tone-fdf9f9); --panel: var(--tone-f8eef0); --paper: var(--tone-ffffff); --tint: var(--tone-fae9ed); --line: var(--tone-efdde2);
+  --fg: var(--tone-2f282b); --muted: var(--tone-7e6f74); --accent: var(--tone-c06c84); --accent-ink: var(--tone-9c4862);
+  --demand: var(--tone-3f5675); --supply: var(--tone-c06c84); --ext: var(--tone-6e3f55); --world: var(--tone-8a7a5c); --policy: var(--tone-3f7f7a);
+  --cs: var(--tone-a7cdb6); --ps: var(--tone-b2c4e3); --dwl: var(--tone-d9674f); --rev: var(--tone-e5c171); --rev2: var(--tone-f1dca8); --time: var(--tone-ddb3cb); --ts: var(--tone-bfdcc9);
+  --serif: "Noto Serif TC", "Songti TC", Georgia, serif;
+  --sans: "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", system-ui, sans-serif;
+  --mono: "JetBrains Mono", ui-monospace, Menlo, monospace;
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; scroll-padding-top: 76px; background: var(--bg); }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+body { background: var(--bg); color: var(--fg); font-family: var(--sans); font-size: 16px; line-height: 1.75; }
+a { color: var(--accent-ink); }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+.top { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 20; background: rgba(var(--header-rgb), .94); backdrop-filter: blur(8px); border-bottom: 1px solid var(--line); padding-inline: 16px; }
+.top-in { max-width: 1160px; margin: 0 auto; display: flex; align-items: center; gap: 14px; min-height: 56px; flex-wrap: wrap; padding-block: 8px; }
+.brand { font-family: var(--serif); font-weight: 700; font-size: 1.02rem; white-space: nowrap; }
+.brand small { font-family: var(--sans); font-weight: 500; color: var(--muted); font-size: .76rem; margin-left: 6px; letter-spacing: .06em; }
+.sessions { display: flex; gap: 4px; margin-left: auto; }
+.crumbs { font-size: .86rem; display: flex; gap: 8px; align-items: baseline; flex-wrap: wrap; }
+.crumbs a { color: var(--muted); text-decoration: none; } .crumbs a:hover { color: var(--accent-ink); } .crumbs span { color: var(--line); } .crumbs b { font-family: var(--serif); }
+.sessions a.pill { text-decoration: none; transition: border-color .15s, color .15s; }
+.sessions a.pill:hover, .sessions a.pill:focus-visible { border-color: var(--accent); color: var(--accent-ink); background: var(--tint); }
+.sessions .pill { font: 500 .82rem var(--sans); border: 1px solid var(--line); background: var(--paper); color: var(--muted); padding: 4px 12px; border-radius: 999px; }
+.sessions .pill[aria-current="page"] { background: var(--accent); border-color: var(--accent); color: #FFFFFF; }
+.sessions .pill.off { opacity: .5; cursor: not-allowed; }
+.toc-btn { display: none; font: 500 .85rem var(--sans); border: 1px solid var(--line); background: var(--paper); color: var(--fg); border-radius: 8px; padding: 5px 12px; }
+
+.wrap { max-width: 1160px; margin: 0 auto; padding-inline: 16px; display: grid; grid-template-columns: 220px minmax(0, 1fr); gap: 52px; }
+.rail { position: sticky; top: 76px; align-self: start; max-height: calc(100vh - 92px); overflow: auto; padding-block: 34px 40px; font-size: .86rem; line-height: 1.5; }
+.rail .lbl { font-size: .7rem; letter-spacing: .14em; text-transform: uppercase; color: var(--muted); margin: 0 0 10px; }
+.rail ol { list-style: none; margin: 0; padding: 0; }
+.rail li a { display: block; padding: 4px 10px; color: var(--muted); text-decoration: none; border-radius: 6px; }
+.rail li a:hover { color: var(--fg); background: var(--tint); }
+.rail li.h3 a { padding-left: 22px; font-size: .8rem; }
+.rail li a.on { color: var(--accent-ink); background: var(--tint); font-weight: 500; }
+
+main { min-width: 0; padding-block: 30px 120px; }
+.doc { max-width: 780px; }
+.hero { padding-block: 8px 26px; border-bottom: 1px solid var(--line); }
+.kick { font-size: .74rem; letter-spacing: .16em; text-transform: uppercase; color: var(--accent-ink); margin: 0 0 6px; font-weight: 500; }
+.hero h1 { font-family: var(--serif); font-size: clamp(1.8rem, 4vw, 2.5rem); line-height: 1.25; margin: 0 0 12px; text-wrap: balance; }
+.lead { margin: 0; font-size: 1.04rem; max-width: 62ch; }
+.legend { display: flex; flex-wrap: wrap; gap: 6px 16px; margin-top: 16px; font-size: .78rem; color: var(--muted); }
+.legend span { display: inline-flex; align-items: center; gap: 6px; }
+
+.doc h2 { font-family: var(--serif); font-size: 1.55rem; line-height: 1.35; margin: 3.4rem 0 .3rem; text-wrap: balance; }
+.doc h3 { font-size: 1.1rem; line-height: 1.45; margin: 2.2rem 0 .5rem; color: var(--accent-ink); text-wrap: balance; }
+.sub { margin: 0 0 1.2rem; color: var(--muted); max-width: 66ch; }
+.doc p, .doc li { max-width: none; }
+.doc ul, .doc ol { padding-left: 1.25em; }
+.doc li { margin: .25rem 0; }
+.zh { display: inline-block; font-size: .78em; line-height: 1.3; color: var(--accent-ink); background: var(--tint); padding: 0 6px; border-radius: 4px; margin-left: 2px; vertical-align: 1px; font-weight: 500; }
+.hint { font-size: .9rem; color: var(--muted); display: flex; gap: 10px; align-items: baseline; }
+.hint b { flex: none; font-size: .72rem; color: #FFFFFF; background: var(--accent); padding: 0 7px; border-radius: 4px; font-weight: 500; }
+.key { background: var(--tint); padding: 12px 16px; border-radius: 8px; font-weight: 500; }
+.note-small { font-size: .8rem; color: var(--muted); }
+
+.pair { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; margin: 1rem 0; }
+.pair > div { background: var(--paper); border: 1px solid var(--line); border-radius: 10px; padding: 12px 16px; }
+.pair b { color: var(--accent-ink); }
+.pair p { margin: 4px 0 0; font-size: .92rem; }
+
+.matrix { display: grid; grid-template-columns: minmax(90px, .7fr) repeat(2, minmax(0, 1fr)); gap: 6px; margin: 1rem 0 1.2rem; font-size: .9rem; max-width: 620px; }
+.matrix .mh { font-weight: 700; font-size: .8rem; color: var(--muted); align-self: end; padding: 0 4px 2px; }
+.matrix .mh.side { align-self: center; }
+.matrix .cell { background: var(--paper); border: 1px solid var(--line); border-radius: 8px; padding: 12px; font-weight: 500; }
+.matrix .cell.hi { background: var(--tint); border-color: var(--accent); }
+.matrix small { display: block; font-weight: 400; color: var(--muted); font-size: .8rem; margin-top: 2px; line-height: 1.45; }
+
+.map { display: grid; grid-template-columns: minmax(0, 1fr) auto minmax(0, 1.3fr) auto minmax(0, 1fr); gap: 10px; align-items: center; margin: 1rem 0; }
+.mcol { display: flex; flex-direction: column; gap: 8px; }
+.mbox { background: var(--paper); border: 1px solid var(--line); border-radius: 10px; padding: 10px 12px; font-size: .84rem; line-height: 1.5; display: flex; flex-direction: column; gap: 2px; }
+.mbox b { font-size: .9rem; } .mbox span { color: var(--muted); } .mbox em { font-style: normal; color: var(--accent-ink); font-size: .78rem; font-weight: 500; }
+.mbox.good { border-color: var(--cs); } .mbox.ask { background: var(--tint); border-color: var(--accent); }
+.marrow { color: var(--accent); font-weight: 700; }
+
+.flow { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; margin: 1rem 0; font-size: .86rem; }
+.flow span { background: var(--paper); border: 1px solid var(--line); border-radius: 6px; padding: 4px 10px; line-height: 1.45; }
+.flow i { font-style: normal; color: var(--accent); font-weight: 700; }
+.formula { font-family: var(--mono); font-size: .9rem; background: var(--paper); border: 1px solid var(--line); border-radius: 8px; padding: 12px 16px; line-height: 1.9; overflow-x: auto; }
+.steps { counter-reset: s; list-style: none; padding-left: 0 !important; }
+.steps li { counter-increment: s; display: flex; gap: 10px; }
+.steps li::before { content: counter(s); flex: none; width: 22px; height: 22px; border-radius: 50%; background: var(--tint); color: var(--accent-ink); font: 700 .75rem/22px var(--sans); text-align: center; margin-top: 3px; }
+.assign { margin: 1.6rem 0; border: 1px dashed var(--accent); border-radius: 10px; padding: 14px 16px; background: var(--paper); }
+.assign p { margin: 6px 0 0; font-size: .92rem; }
+
+.tbl { overflow-x: auto; margin: 1rem 0; border: 1px solid var(--line); border-radius: 10px; background: var(--paper); }
+.doc table { border-collapse: collapse; width: 100%; font-size: .88rem; line-height: 1.55; }
+.doc th, .doc td { text-align: left; vertical-align: top; padding: 9px 12px; border-bottom: 1px solid var(--line); }
+.doc th { background: var(--panel); font-weight: 700; }
+.doc tr:last-child td { border-bottom: 0; }
+.drill .ans { filter: blur(5px); cursor: pointer; user-select: none; transition: filter .2s; }
+.drill .ans.shown { filter: none; user-select: auto; }
+
+.traps { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; margin-top: 1rem; }
+.traps > div { background: var(--paper); border: 1px solid var(--line); border-radius: 10px; padding: 12px 14px; font-size: .88rem; line-height: 1.55; }
+.traps s { color: var(--muted); text-decoration-color: var(--dwl); }
+.traps p { margin: 6px 0 0; font-weight: 500; }
+
+.qa-tools { margin: .4rem 0 .8rem; }
+.qa-tools button { font: 500 .82rem var(--sans); border: 1px solid var(--accent); background: var(--paper); color: var(--accent-ink); border-radius: 6px; padding: 5px 12px; cursor: pointer; }
+.qa { display: flex; flex-direction: column; gap: 6px; }
+.qa details { background: var(--paper); border: 1px solid var(--line); border-radius: 8px; }
+.qa summary { cursor: pointer; padding: 10px 14px; font-weight: 500; font-size: .93rem; list-style: none; display: flex; gap: 10px; }
+.qa summary::before { content: "Q"; color: var(--accent); font-weight: 700; }
+.qa details[open] summary { border-bottom: 1px dashed var(--line); }
+.qa details p { margin: 0; padding: 10px 14px 12px 36px; font-size: .9rem; }
+
+/* graphs */
+.graph { max-width: 900px; margin: 1.8rem 0 2.2rem; background: var(--paper); border: 1px solid var(--line); border-radius: 12px; padding: 18px 18px 14px; }
+.g-head h4 { font-family: var(--serif); font-size: 1.12rem; margin: 2px 0 2px; line-height: 1.45; }
+.g-head p { margin: 0 0 10px; color: var(--muted); font-size: .86rem; }
+.g-kicker { font-size: .68rem; letter-spacing: .16em; text-transform: uppercase; color: var(--accent-ink); }
+.g-body { display: grid; grid-template-columns: minmax(0, 1.55fr) minmax(0, 1fr); gap: 18px; align-items: start; }
+.g-plot svg { width: 100%; height: auto; display: block; }
+.g-side { display: flex; flex-direction: column; gap: 14px; min-width: 0; }
+.g-ctrl { display: flex; flex-direction: column; gap: 10px; }
+.sl label { display: flex; justify-content: space-between; font-size: .8rem; color: var(--muted); line-height: 1.3; }
+.sl output { font-family: var(--mono); color: var(--fg); font-size: .8rem; }
+.sl input { width: 100%; accent-color: var(--accent); margin: 4px 0 0; }
+.g-btn { align-self: flex-start; font: 500 .8rem var(--sans); border: 1px solid var(--accent); color: var(--accent-ink); background: transparent; border-radius: 6px; padding: 4px 11px; cursor: pointer; }
+.g-btn:hover { background: var(--tint); }
+.seg { display: inline-flex; border: 1px solid var(--line); border-radius: 7px; overflow: hidden; align-self: flex-start; }
+.seg button { font: 500 .8rem var(--sans); border: 0; background: transparent; color: var(--muted); padding: 5px 12px; cursor: pointer; }
+.seg button[aria-checked="true"] { background: var(--accent); color: var(--paper); }
+.chk { display: flex; gap: 8px; align-items: center; font-size: .8rem; color: var(--muted); }
+.chk input { accent-color: var(--accent); }
+.g-stats { margin: 0; border-top: 1px solid var(--line); padding-top: 10px; display: flex; flex-direction: column; gap: 3px; }
+.st { display: flex; justify-content: space-between; gap: 10px; font-size: .8rem; line-height: 1.45; }
+.st dt { color: var(--muted); display: flex; align-items: center; gap: 7px; }
+.st dd { margin: 0; font-family: var(--mono); font-variant-numeric: tabular-nums; white-space: nowrap; }
+.st.big dd { font-weight: 500; color: var(--accent-ink); font-size: .92rem; }
+.g-note { margin: 12px 0 0; padding: 9px 12px; background: var(--tint); border-radius: 6px; font-size: .85rem; line-height: 1.6; }
+
+.sw { width: 11px; height: 11px; border-radius: 2px; display: inline-block; flex: none; }
+.sw.none { background: transparent; }
+.sw.a-cs { background: var(--cs); } .sw.a-ps { background: var(--ps); } .sw.a-ps2 { background: var(--ps); outline: 1px solid var(--demand); }
+.sw.a-dwl { background: repeating-linear-gradient(45deg, var(--dwl) 0 2px, transparent 2px 4px); outline: 1px solid var(--dwl); }
+.sw.a-rev { background: var(--rev); } .sw.a-rev2 { background: var(--rev2); } .sw.a-time { background: var(--time); } .sw.a-ts { background: var(--ts); }
+.sw.ln { height: 3px; border-radius: 2px; width: 16px; }
+
+svg .ax { stroke: var(--muted); stroke-width: 1.2; }
+svg .axl { fill: var(--muted); font: 500 11px var(--sans); }
+svg .tk { fill: var(--muted); font: 500 10.5px var(--mono); }
+svg .gd { stroke: var(--muted); stroke-width: 1; stroke-dasharray: 3 4; opacity: .7; }
+svg .cv { stroke-width: 2.6; fill: none; stroke-linecap: round; }
+svg .cv.dash { stroke-dasharray: 7 5; stroke-width: 2; }
+svg .cvl { font: 700 11.5px var(--sans); }
+svg .c-d { stroke: var(--demand); fill: var(--demand); } svg .c-s { stroke: var(--supply); fill: var(--supply); }
+svg .c-x { stroke: var(--ext); fill: var(--ext); } svg .c-w { stroke: var(--world); fill: var(--world); } svg .c-t { stroke: var(--policy); fill: var(--policy); }
+svg text.cvl { stroke: none; }
+svg .pt { fill: var(--paper); stroke: var(--fg); stroke-width: 2; }
+svg .ptl { fill: var(--fg); font: 700 11px var(--sans); }
+svg .atag { fill: var(--fg); font: 700 11px var(--sans); opacity: .8; }
+svg .a-cs { fill: var(--cs); fill-opacity: .6; } svg .a-ps { fill: var(--ps); fill-opacity: .6; }
+svg .a-ps2 { fill: var(--ps); fill-opacity: .95; } svg .a-ts { fill: var(--ts); fill-opacity: .6; }
+svg .a-dwl { fill: url(#dwlHatch); stroke: var(--dwl); stroke-width: 1.2; }
+svg .a-rev { fill: var(--rev); fill-opacity: .75; } svg .a-rev2 { fill: var(--rev2); fill-opacity: .8; } svg .a-time { fill: var(--time); fill-opacity: .65; }
+
+svg .grid { stroke: var(--line); stroke-width: 1; }
+svg .a-prof { fill: var(--cs); fill-opacity: .75; } svg .a-loss { fill: var(--dwl); fill-opacity: .35; }
+.sw.a-prof { background: var(--cs); } .sw.a-loss { background: var(--dwl); opacity: .5; }
+.twin { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+.tw-t { margin: 0 0 2px; font-size: .78rem; font-weight: 700; color: var(--muted); }
+.g-ctrl .g-btn + .g-btn { margin-top: -4px; }
+.graph.wide .g-body { grid-template-columns: minmax(0, 1fr); }
+.graph.wide .g-side { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 16px; }
+@media (max-width: 700px) { .twin, .graph.wide .g-side { grid-template-columns: minmax(0, 1fr); } }
+svg polyline.cv { fill: none !important; }
+
+.graph { background: var(--paper); }
+.g-note { background: var(--tint); }
+
+@media (max-width: 900px) {
+  .wrap { grid-template-columns: minmax(0, 1fr); gap: 0; }
+  .rail { display: none; position: fixed; inset: 64px 0 0 0; max-height: none; background: var(--bg); z-index: 15; padding: 20px 16px 60px; }
+  .rail.open { display: block; }
+  .toc-btn { display: inline-block; }
+  .g-body { grid-template-columns: minmax(0, 1fr); }
+  .map { grid-template-columns: minmax(0, 1fr); }
+  .marrow { transform: rotate(90deg); justify-self: center; }
+}
+@media (max-width: 560px) { .pair, .traps { grid-template-columns: minmax(0, 1fr); } }
+/* Management components */
+.three { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; margin: 1rem 0; }
+.tcard { background: var(--paper); border: 1px solid var(--line); border-radius: 12px; padding: 14px 16px; display: flex; flex-direction: column; gap: 4px; }
+.tcard .tnum { width: 24px; height: 24px; border-radius: 50%; background: var(--accent); color: #FFFFFF; font: 700 .78rem/24px var(--sans); text-align: center; }
+.tcard p { margin: 0; color: var(--muted); font-size: .88rem; }
+.tags { display: flex; flex-wrap: wrap; gap: 5px; margin-top: 6px; }
+.tags span { font-size: .74rem; background: var(--tint); color: var(--accent-ink); padding: 1px 8px; border-radius: 999px; font-weight: 500; }
+.method, .loop, .cascade { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; margin: 1rem 0; font-size: .86rem; }
+.method span, .loop span, .cascade span { background: var(--paper); border: 1px solid var(--line); border-radius: 6px; padding: 5px 11px; line-height: 1.4; }
+.method span.hi { background: var(--tint); border-color: var(--accent); color: var(--accent-ink); font-weight: 700; }
+.method i, .loop i, .cascade i { font-style: normal; color: var(--accent); font-weight: 700; }
+.loop i.back { font-size: 1.1rem; }
+.cascade { flex-direction: column; align-items: flex-start; gap: 2px; }
+.cascade span:nth-of-type(2) { margin-left: 18px; } .cascade span:nth-of-type(3) { margin-left: 36px; } .cascade span:nth-of-type(4) { margin-left: 54px; }
+.cascade i:nth-of-type(1) { margin-left: 14px; } .cascade i:nth-of-type(2) { margin-left: 32px; } .cascade i:nth-of-type(3) { margin-left: 50px; }
+.four { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 10px; margin: 1rem 0; }
+.four > div { background: var(--paper); border: 1px solid var(--line); border-radius: 10px; padding: 12px; }
+.four b { font-size: .9rem; color: var(--accent-ink); } .four p { margin: 4px 0 0; font-size: .84rem; color: var(--muted); line-height: 1.5; }
+
+.ladder { display: grid; grid-template-columns: minmax(0, 1fr) 118px 118px; grid-template-rows: repeat(5, auto); gap: 5px 8px; margin: 1rem 0 .3rem; max-width: 640px; }
+.lv { grid-column: 1; background: var(--paper); border: 1px solid var(--line); border-radius: 8px; padding: 7px 12px; font-weight: 700; font-size: .9rem; line-height: 1.35; }
+.lv small { display: block; font-weight: 400; color: var(--muted); font-size: .78rem; }
+.lv.l5 { grid-row: 1; margin-inline: 22%; } .lv.l4 { grid-row: 2; margin-inline: 16%; } .lv.l3 { grid-row: 3; margin-inline: 10%; } .lv.l2 { grid-row: 4; margin-inline: 5%; } .lv.l1 { grid-row: 5; }
+.lv.l5, .lv.l4 { background: var(--tone-f6e9f4); } .lv.l3 { background: var(--tint); } .lv.l2, .lv.l1 { background: var(--tone-eaf2ee); }
+.erg { border-radius: 8px; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: .84rem; text-align: center; padding: 6px; }
+.erg.g { grid-column: 2; grid-row: 1 / span 2; background: var(--tone-ebd7ea); color: var(--tone-6e3f6a); }
+.erg.r { grid-column: 3; grid-row: 2 / span 2; background: var(--tint); color: var(--accent-ink); }
+.erg.e { grid-column: 2; grid-row: 4 / span 2; background: var(--tone-d9ebe1); color: var(--tone-2f6b4f); }
+
+.mw { background: var(--paper); border: 1px solid var(--line); border-radius: 12px; padding: 18px; margin: 1.6rem 0 2rem; }
+.mw-body { margin-top: 10px; }
+.hz-cols { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
+.hz-t { margin: 0 0 6px; font-weight: 700; font-size: .88rem; } .hz-t small { font-weight: 400; color: var(--muted); }
+.chips { display: flex; flex-direction: column; gap: 5px; }
+.chip { display: flex; justify-content: space-between; gap: 10px; font: 500 .84rem var(--sans); text-align: left; background: var(--bg); border: 1px solid var(--line); color: var(--fg); border-radius: 7px; padding: 6px 10px; cursor: pointer; }
+.chip em { font-style: normal; font-size: .74rem; color: var(--muted); }
+.hz-cols > div:first-child .chip[aria-pressed="true"] { border-color: var(--dwl); background: var(--tone-fcedea); }
+.hz-cols > div:first-child .chip[aria-pressed="true"] em { color: var(--tone-a8432f); }
+.hz-cols > div:last-child .chip[aria-pressed="true"] { border-color: var(--tone-6fae8b); background: var(--tone-eaf5ee); }
+.hz-cols > div:last-child .chip[aria-pressed="true"] em { color: var(--tone-2f6b4f); }
+.scale { display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: 6px; margin-top: 18px; }
+.half { height: 14px; background: var(--bg); border: 1px solid var(--line); border-radius: 7px; position: relative; overflow: hidden; }
+.half i { position: absolute; top: 0; bottom: 0; transition: width .25s; }
+.half.left i { right: 0; background: var(--dwl); } .half.right i { left: 0; background: var(--tone-6fae8b); }
+@media (prefers-reduced-motion: reduce) { .half i { transition: none; } }
+.zero { font: 700 .8rem var(--mono); color: var(--muted); }
+.scale-l { display: flex; justify-content: space-between; font-size: .74rem; color: var(--muted); margin-top: 4px; }
+
+.kpi-flow { display: grid; grid-template-columns: minmax(0, 1fr) auto minmax(0, 1.3fr) auto minmax(0, .8fr) auto minmax(0, 1fr); gap: 8px; align-items: stretch; margin-top: 12px; font-size: .84rem; }
+.kpi-flow > div { background: var(--bg); border: 1px solid var(--line); border-radius: 8px; padding: 8px 10px; line-height: 1.45; }
+.kpi-flow > i { font-style: normal; color: var(--accent); font-weight: 700; align-self: center; }
+.kpi-flow b { font-size: .72rem; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
+.kpi-flow p { margin: 3px 0 0; } .kpi-flow ul { margin: 3px 0 0; padding-left: 1.1em; }
+.kpi-flow .bad { border-color: var(--dwl); background: var(--tone-fcedea); } .kpi-flow .good { border-color: var(--tone-6fae8b); background: var(--tone-eaf5ee); }
+
+.cmp-sel { display: flex; flex-wrap: wrap; gap: 8px 12px; align-items: center; font-size: .84rem; color: var(--muted); }
+.cmp-sel select { font: 500 .88rem var(--sans); padding: 5px 8px; border: 1px solid var(--line); border-radius: 7px; background: var(--paper); color: var(--fg); }
+table.cmp td:first-child { font-weight: 700; color: var(--muted); width: 22%; }
+
+.tabs { display: flex; flex-wrap: wrap; gap: 4px; border-bottom: 1px solid var(--line); }
+.tabs button { font: 500 .86rem var(--sans); background: none; border: 0; border-bottom: 2px solid transparent; color: var(--muted); padding: 6px 12px; cursor: pointer; margin-bottom: -1px; }
+.tabs button[aria-selected="true"] { color: var(--accent-ink); border-bottom-color: var(--accent); }
+.ev { display: flex; flex-direction: column; gap: 6px; margin-top: 12px; }
+.ev > div { display: grid; grid-template-columns: 190px auto minmax(0, 1fr); gap: 10px; align-items: baseline; background: var(--bg); border: 1px solid var(--line); border-radius: 8px; padding: 8px 12px; font-size: .86rem; line-height: 1.5; }
+.ev p { margin: 0; }
+.tag { font-size: .72rem; font-weight: 700; padding: 1px 8px; border-radius: 999px; white-space: nowrap; }
+.tag.gap { background: var(--tone-fce3dd); color: var(--tone-a8432f); } .tag.ok { background: var(--tone-e3f2e9); color: var(--tone-2f6b4f); }
+.tag.maybe { background: var(--tone-fbf0d9); color: var(--tone-8a6216); } .tag.na { background: var(--tone-eee9eb); color: var(--muted); }
+.issue { margin-top: 12px; background: var(--tint); border-radius: 8px; padding: 10px 14px; font-size: .9rem; }
+.issue p { margin: 4px 0 0; }
+
+.xgrid { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 8px; margin: 1rem 0; }
+.xgrid > div { background: var(--paper); border: 1px solid var(--line); border-radius: 10px; padding: 10px; display: flex; flex-direction: column; gap: 5px; font-size: .84rem; line-height: 1.4; }
+.xgrid small { color: var(--muted); font-size: .76rem; }
+.xgrid .ok, .xgrid .gap { align-self: flex-start; font-size: .72rem; font-weight: 700; padding: 1px 8px; border-radius: 999px; }
+.xgrid .ok { background: var(--tone-e3f2e9); color: var(--tone-2f6b4f); } .xgrid .gap { background: var(--tone-fce3dd); color: var(--tone-a8432f); }
+
+@media (max-width: 760px) {
+  .three, .four { grid-template-columns: minmax(0, 1fr); }
+  .xgrid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .hz-cols { grid-template-columns: minmax(0, 1fr); }
+  .kpi-flow { grid-template-columns: minmax(0, 1fr); } .kpi-flow > i { transform: rotate(90deg); justify-self: center; }
+  .ev > div { grid-template-columns: minmax(0, 1fr); gap: 3px; } .ev .tag { justify-self: start; }
+  .ladder { grid-template-columns: minmax(0, 1fr) 84px 84px; }
+}
+
+/* Session 4 + case page */
+.tcard small.dont { color: var(--muted); font-size: .78rem; border-top: 1px dashed var(--line); padding-top: 6px; margin-top: 4px; }
+.quotes { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; margin: .6rem 0 1rem; }
+.quotes q { background: var(--paper); border: 1px solid var(--line); border-radius: 10px; padding: 10px 14px; font-style: italic; color: var(--muted); font-size: .9rem; }
+.six { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; margin: 1rem 0; }
+.six > div { display: flex; gap: 10px; align-items: flex-start; background: var(--paper); border: 1px solid var(--line); border-radius: 10px; padding: 10px 12px; font-size: .88rem; line-height: 1.5; }
+.six > div > span { flex: none; width: 24px; height: 24px; border-radius: 50%; background: var(--tint); color: var(--accent-ink); font: 700 .76rem/24px var(--sans); text-align: center; }
+a.cta { display: inline-block; background: var(--accent); color: #FFFFFF; text-decoration: none; font-weight: 500; padding: 8px 16px; border-radius: 8px; }
+a.cta:hover { background: var(--accent-ink); }
+blockquote.say { margin: .6rem 0; padding: 12px 16px; background: var(--paper); border: 1px solid var(--line); border-radius: 10px; font-size: .92rem; line-height: 1.7; }
+.timeline { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; margin: 1rem 0; }
+.timeline > div { background: var(--paper); border: 1px solid var(--line); border-top: 3px solid var(--accent); border-radius: 10px; padding: 10px 14px; font-size: .88rem; line-height: 1.5; }
+.timeline time { font: 500 .76rem var(--mono); color: var(--accent-ink); display: block; }
+.timeline p { margin: 4px 0 0; color: var(--muted); }
+.score { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 8px; margin: 1rem 0; }
+.score > div { border-radius: 10px; padding: 10px 12px; font-size: .84rem; line-height: 1.5; border: 1px solid var(--line); }
+.score .up { background: var(--tone-eaf5ee); border-color: var(--tone-a9d3ba); } .score .down { background: var(--tone-fcedea); border-color: var(--tone-edc2b8); }
+.score b::after { margin-left: 6px; font-size: .78rem; } .score .up b::after { content: "improved"; color: var(--tone-2f6b4f); } .score .down b::after { content: "worse"; color: var(--tone-a8432f); }
+.score ul { margin: 6px 0 0; padding-left: 1.1em; }
+
+.jcm { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr) minmax(0, .9fr); gap: 16px; }
+.jdims { display: flex; flex-direction: column; gap: 8px; }
+.jd.g0 label span { color: var(--tone-6e3f6a); } .jd.g1 label span { color: var(--accent-ink); } .jd.g2 label span { color: var(--tone-2f6b4f); }
+.jstates { display: flex; flex-direction: column; gap: 12px; padding-top: 4px; }
+.jst span { font-size: .8rem; font-weight: 500; }
+.jbar { height: 12px; border-radius: 6px; background: var(--bg); border: 1px solid var(--line); overflow: hidden; margin-top: 3px; }
+.jbar i { display: block; height: 100%; transition: width .25s; }
+.jst.g0 .jbar i { background: var(--tone-b98ab5); } .jst.g1 .jbar i { background: var(--accent); } .jst.g2 .jbar i { background: var(--tone-6fae8b); }
+@media (prefers-reduced-motion: reduce) { .jbar i { transition: none; } }
+.jout ul { margin: 8px 0 0; padding-left: 1.1em; font-size: .82rem; color: var(--muted); }
+.jlvl { display: inline-block; font-weight: 700; padding: 3px 12px; border-radius: 999px; font-size: .86rem; }
+.jlvl.strong { background: var(--tone-e3f2e9); color: var(--tone-2f6b4f); } .jlvl.moderate { background: var(--tone-fbf0d9); color: var(--tone-8a6216); } .jlvl.weak { background: var(--tone-fce3dd); color: var(--tone-a8432f); }
+.jgns { margin-top: 14px; }
+
+.qz-item { font-size: 1rem; font-weight: 500; margin: 4px 0 12px; }
+.qz-opts { display: grid; gap: 8px; }
+.qz-opts.grid2 { grid-template-columns: repeat(2, minmax(0, 1fr)); max-width: 520px; }
+.qz-opts.row5 { grid-template-columns: repeat(5, minmax(0, 1fr)); }
+.qz-o { font: 500 .88rem var(--sans); background: var(--bg); border: 1px solid var(--line); color: var(--fg); border-radius: 8px; padding: 10px; cursor: pointer; display: flex; flex-direction: column; gap: 2px; text-align: center; }
+.qz-o small { color: var(--muted); font-size: .74rem; font-weight: 400; }
+.qz-o:hover { border-color: var(--accent); }
+.qz-o.right { background: var(--tone-e3f2e9); border-color: var(--tone-6fae8b); } .qz-o.wrong { background: var(--tone-fce3dd); border-color: var(--dwl); }
+.qz-nav { display: flex; justify-content: space-between; align-items: center; margin-top: 10px; font-size: .8rem; color: var(--muted); }
+
+.rsteps { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; margin-top: 12px; }
+.rsteps > div { background: var(--bg); border: 1px solid var(--line); border-radius: 8px; padding: 10px 12px; font-size: .85rem; line-height: 1.5; }
+.rsteps > div.g { background: var(--tint); border-color: var(--accent); }
+.rsteps b { font-size: .72rem; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
+.rsteps p { margin: 4px 0 0; }
+.risk { font-size: .88rem; } .risk b { font-size: .72rem; color: #FFFFFF; background: var(--tone-b98a2e); padding: 1px 7px; border-radius: 4px; margin-right: 6px; }
+.sayd summary { cursor: pointer; font-weight: 500; color: var(--accent-ink); font-size: .9rem; }
+
+@media (max-width: 760px) {
+  .quotes, .six, .timeline, .rsteps { grid-template-columns: minmax(0, 1fr); }
+  .score { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .jcm { grid-template-columns: minmax(0, 1fr); }
+  .qz-opts.row5 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+
+
+.eq-controls{display:flex;flex-wrap:wrap;gap:7px;margin:12px 0}.eq-controls button,.eq-controls select{font:500 .86rem var(--sans);color:var(--accent-ink);background:var(--paper);border:1px solid var(--line);border-radius:8px;padding:8px 12px;max-width:100%;cursor:pointer}.eq-controls button[aria-pressed="true"]{background:var(--tint);border-color:var(--accent)}.eq-result{background:var(--tint);border-radius:8px;padding:14px;min-height:100px}.eq-result p{margin:5px 0}.eq-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}.eq-grid>div{border:1px solid var(--line);border-radius:10px;padding:14px;background:var(--paper)}.eq-grid b{color:var(--accent-ink)}.eq-num{font:500 1.8rem var(--mono);display:block;color:var(--accent-ink)}.eq-map{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}.eq-map>div{padding:16px;background:var(--paper);border:1px solid var(--line);border-radius:10px}.eq-map p{margin:6px 0}body{margin:0}.hint span{min-width:0} @media(max-width:600px){.eq-grid,.eq-map{grid-template-columns:minmax(0,1fr)}.hint{flex-wrap:wrap}.mw{padding:14px}.doc{overflow-wrap:break-word}}
+
+#map + .sub + .three > .tcard > .zh, .three > .tcard > .zh { align-self: flex-start; }
+
+.qz-o:focus-visible,.qz-nav .g-btn:focus-visible{outline:2px solid var(--accent-ink);outline-offset:3px}
+.qz-o[aria-disabled="true"]{cursor:default}
+
+.eq-route{margin:18px 0;padding:18px;border:1px solid var(--line);border-radius:12px;background:var(--paper)}
+.eq-route figcaption{font-weight:600;color:var(--accent-ink);margin-bottom:14px}
+.eq-route-steps{display:grid;grid-template-columns:minmax(0,1fr) 16px minmax(0,1fr) 16px minmax(0,1fr) 16px minmax(0,1fr);align-items:stretch;gap:6px}
+.eq-route-steps>div{min-width:0;border-top:3px solid var(--accent);background:var(--bg);padding:12px 10px}
+.eq-step{display:block;font:500 .8rem var(--mono);color:var(--muted);margin-bottom:5px}
+.eq-route-steps b{display:block;font-size:.9rem}.eq-route-steps p{font-size:.86rem;line-height:1.65;margin:8px 0;color:var(--muted)}
+.eq-route-steps a{display:block;font-size:.75rem;line-height:1.6}.eq-route-steps>i{align-self:center;font-style:normal;color:var(--accent)}
+.eq-route-result{display:flex;justify-content:center;align-items:center;flex-wrap:wrap;gap:10px;margin-top:14px;padding:10px;background:var(--tint);border-radius:7px;font-size:.86rem}
+@media(max-width:720px){.eq-route-steps{grid-template-columns:minmax(0,1fr);gap:5px}.eq-route-steps>i{text-align:center;transform:rotate(90deg)}.eq-route-steps>div{padding:10px 12px}}
+
+</style><style>.doc a.case-text-link{color:var(--accent-ink);text-decoration:underline;text-decoration-color:var(--accent);text-decoration-thickness:1px;text-underline-offset:3px;background:transparent;border:0;border-radius:0;padding:0;box-shadow:none;font-weight:500}.doc a.case-text-link:hover{text-decoration-color:var(--accent-ink)}.doc a.case-text-link:focus-visible{outline:2px solid var(--accent);outline-offset:4px}</style><style id="system-appearance">
+/* System appearance only changes colors. Print retains the light palette. */
+:root {
+  --header-rgb: 253, 249, 249;
+  --tone-2f282b: #2f282b;
+  --tone-2f6b4f: #2f6b4f;
+  --tone-3f5675: #3f5675;
+  --tone-3f7f7a: #3f7f7a;
+  --tone-6e3f55: #6e3f55;
+  --tone-6e3f6a: #6e3f6a;
+  --tone-6fae8b: #6fae8b;
+  --tone-7e6f74: #7e6f74;
+  --tone-8a6216: #8a6216;
+  --tone-8a7a5c: #8a7a5c;
+  --tone-9c4862: #9c4862;
+  --tone-a7cdb6: #a7cdb6;
+  --tone-a8432f: #a8432f;
+  --tone-a9d3ba: #a9d3ba;
+  --tone-b2c4e3: #b2c4e3;
+  --tone-b98a2e: #b98a2e;
+  --tone-b98ab5: #b98ab5;
+  --tone-bfdcc9: #bfdcc9;
+  --tone-c06c84: #c06c84;
+  --tone-d9674f: #d9674f;
+  --tone-d9ebe1: #d9ebe1;
+  --tone-ddb3cb: #ddb3cb;
+  --tone-e3f2e9: #e3f2e9;
+  --tone-e5c171: #e5c171;
+  --tone-eaf2ee: #eaf2ee;
+  --tone-eaf5ee: #eaf5ee;
+  --tone-ebd7ea: #ebd7ea;
+  --tone-edc2b8: #edc2b8;
+  --tone-eee9eb: #eee9eb;
+  --tone-efdde2: #efdde2;
+  --tone-f1dca8: #f1dca8;
+  --tone-f6e9f4: #f6e9f4;
+  --tone-f8eef0: #f8eef0;
+  --tone-fae9ed: #fae9ed;
+  --tone-fbf0d9: #fbf0d9;
+  --tone-fce3dd: #fce3dd;
+  --tone-fcedea: #fcedea;
+  --tone-fdf9f9: #fdf9f9;
+  --tone-ffffff: #ffffff;
+}
+@media screen and (prefers-color-scheme: dark) {
+  :root {
+    color-scheme: dark;
+    --header-rgb: 29, 24, 26;
+    --tone-2f282b: #EEE4E6;
+    --tone-2f6b4f: #A0D2B2;
+    --tone-3f5675: #93AECB;
+    --tone-3f7f7a: #8CC4BE;
+    --tone-6e3f55: #C9A3D6;
+    --tone-6e3f6a: #DAB3D6;
+    --tone-6fae8b: #8CC3A0;
+    --tone-7e6f74: #BEACB2;
+    --tone-8a6216: #E3C480;
+    --tone-8a7a5c: #C9B68C;
+    --tone-9c4862: #E6B3BE;
+    --tone-a7cdb6: #6E8C6B;
+    --tone-a8432f: #F0A48D;
+    --tone-a9d3ba: #669C7D;
+    --tone-b2c4e3: #667C96;
+    --tone-b98a2e: #D8B66B;
+    --tone-b98ab5: #BD99C1;
+    --tone-bfdcc9: #5F7A5C;
+    --tone-c06c84: #D79AA7;
+    --tone-d9674f: #E08A6F;
+    --tone-d9ebe1: #2C4135;
+    --tone-ddb3cb: #8C6680;
+    --tone-e3f2e9: #23372D;
+    --tone-e5c171: #C9A250;
+    --tone-eaf2ee: #29362F;
+    --tone-eaf5ee: #25372D;
+    --tone-ebd7ea: #413047;
+    --tone-edc2b8: #B77F70;
+    --tone-eee9eb: #30282D;
+    --tone-efdde2: #55424A;
+    --tone-f1dca8: #8F7A4A;
+    --tone-f6e9f4: #342938;
+    --tone-f8eef0: #2B2226;
+    --tone-fae9ed: #35272D;
+    --tone-fbf0d9: #3C3223;
+    --tone-fce3dd: #412B28;
+    --tone-fcedea: #382724;
+    --tone-fdf9f9: #1D181A;
+    --tone-ffffff: #241E21;
+  }
+}
+</style><style id="reading-layout-fix">.six > div > p{flex:1;min-width:0;margin:0}.steps > li{align-items:flex-start}.steps > li > .step-copy{flex:1;min-width:0;margin:0}</style>
+<style>
+.zhp { color: var(--accent-ink); background: var(--tint); border-radius: 8px; padding: 10px 14px; font-size: .93rem; margin: .5rem 0 1rem; }
+.zi { display: block; color: var(--accent-ink); font-size: .86rem; margin-top: 3px; }
+body.nozh .zhp, body.nozh .zh, body.nozh .zi { display: none !important; }
+.zbtn { font: 500 .82rem var(--sans); border: 1px solid var(--line); background: var(--paper); color: var(--fg); padding: 4px 12px; border-radius: 999px; cursor: pointer; }
+.zbtn.on { background: var(--accent); color: #fff; border-color: var(--accent); }
+.tools { display: flex; gap: 8px; flex-wrap: wrap; margin: 1rem 0; }
+body.practice .pm { filter: blur(5px); cursor: pointer; user-select: none; transition: filter .2s; }
+body.practice .pm.shown { filter: none; }
+.pat { background: var(--paper); border: 1px solid var(--line); border-left: 3px solid var(--accent); border-radius: 8px; padding: 10px 14px; margin: .5rem 0; }
+.pat .lab { font-size: .72rem; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); display: block; margin-bottom: 2px; }
+.pat .en { font-family: var(--serif); font-size: 1.02rem; }
+.blank { color: var(--accent-ink); font-weight: 700; }
+.ex { background: var(--panel); border-radius: 8px; padding: 10px 14px; margin: .5rem 0 1rem; font-size: .95rem; }
+.ex b.lab { font-size: .72rem; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); display: block; font-weight: 500; }
+.cards { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; margin: .8rem 0 1.2rem; }
+.kc { background: var(--paper); border: 1px solid var(--line); border-radius: 12px; padding: 12px 16px; }
+.kc h4 { margin: 0 0 4px; font-size: 1rem; }
+.kc h4 small { color: var(--muted); font-weight: 500; font-size: .75rem; margin-left: 6px; }
+.kc .q { font-size: .9rem; color: var(--muted); margin: 0 0 6px; }
+.kc .say { font-family: var(--serif); margin: 6px 0 0; font-size: .97rem; }
+.kc .chips { display: flex; flex-direction: row; flex-wrap: wrap; gap: 5px; margin: 4px 0; }
+.kc .chips span { font-size: .8rem; border: 1px solid var(--line); background: var(--panel); border-radius: 999px; padding: 1px 9px; }
+.line3 { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; margin: 1rem 0; }
+.line3 div { background: var(--paper); border: 1px solid var(--line); border-radius: 12px; padding: 12px 14px; }
+.line3 div b { display: block; font-family: var(--serif); font-size: 1.15rem; color: var(--accent-ink); }
+.line3 div span.k { font-size: .72rem; letter-spacing: .12em; text-transform: uppercase; color: var(--muted); }
+.drill li { margin: .6rem 0; }
+.drill .ans { display: block; margin-top: 4px; font-family: var(--serif); }
+@media (max-width: 700px) { .cards, .line3 { grid-template-columns: minmax(0, 1fr); } }
+</style>
+</head><body><header class="top"><div class="top-in"><nav aria-label="Breadcrumb" class="crumbs"><a href="index.html">Mock exams</a><span>/</span><b>Marketing · One-line map</b></nav><button aria-expanded="false" class="toc-btn" id="tocBtn" type="button">Contents</button></div></header><div class="wrap"><aside class="rail" id="rail"><p class="lbl">Contents</p><ol id="toc"></ol></aside><main><article class="doc">
+<div class="hero"><p class="kick">Strategic Marketing · Quick sheet</p><h1>Marketing on one line</h1><p class="lead">Understand → Choose → Do. Every framework from S1–S6 sits somewhere on this line, and each card gives one sentence you can adapt in the exam.</p>
+<div class="tools"><button class="zbtn" id="zBtn" type="button">中文 ON</button><button class="zbtn" id="pBtn" type="button">Practice mode OFF</button></div>
+<p class="note-small">Practice mode blurs the example sentences. Try saying one yourself, then click to compare.</p></div>
+<h2 id="line">The one line</h2>
+<p>The terms feel blurry when you learn them as a long list. Put them on one line and most of them have an obvious place. Dr. Shannon’s S1 slide says it directly: “The 5Cs, STP and the 4Ps constitute the marketing management framework.”</p>
+<div class="line3">
+<div><span class="k">Step 1 · Understand</span><b>5Cs</b>What is going on? Who are we, who are the customers, who else is there?</div>
+<div><span class="k">Step 2 · Choose</span><b>STP</b>Who do we serve, and why should they pick us over the others?</div>
+<div><span class="k">Step 3 · Do</span><b>4Ps</b>What do we sell, at what price, where, and how do we tell people?</div>
+</div>
+<p class="zhp" lang="zh-Hant">一條線就好：先了解狀況（5C）→ 再選要服務誰、要讓他們怎麼看我們（STP）→ 最後決定怎麼做（4P）。其他所有框架都是幫其中一步做得更好的工具。順序不能跳：還沒選好目標客群就開始想打折、打廣告，是老師最常扣分的地方。</p>
+<div class="ex"><b class="lab">Example</b><span class="pm">A coffee shop. <b>Understand:</b> office workers nearby, three chains already on the street, rent rising. <b>Choose:</b> target people who work from cafés; position as the quiet place with good Wi-Fi. <b>Do:</b> long tables and sockets (Product), a day pass (Price), stay near co-working offices (Place), posts on work-from-café pages (Promotion).</span><span class="zi" lang="zh-Hant">一間咖啡店走一次：了解（附近上班族、街上已有三家連鎖、租金上漲）→ 選擇（鎖定在咖啡店工作的人，定位成安靜、網路好的地方）→ 執行（長桌插座、一日票、開在共享辦公室旁、在相關社群推廣）。</span></div>
+<h2 id="read">Which step is the question asking about?</h2>
+<p>Before picking any framework, read the question and decide which step it sits in. The words usually give it away.</p>
+<div style="overflow-x:auto"><table><thead><tr><th>If the question says…</th><th>Step</th><th>Reach for</th></tr></thead><tbody><tr><td>analyse the situation · compare two countries · is this market attractive · what is changing · who are the competitors · how do customers decide · what research would you do</td><td><b>1 · Understand</b></td><td>5Cs, SWOT, macro environment, market size/age/income, buyer decision process, competition, research methods</td></tr><tr><td>who should they target · how should they position · sub-brand · move up- or down-market · enter a new country · grow · which products to keep</td><td><b>2 · Choose</b></td><td>Segmentation, targeting strategy, positioning, perceptual map, growth grid (Ansoff), BCG, mission</td></tr><tr><td>how to launch · how to increase sales · which channel · online or stores · how to promote · loyalty program</td><td><b>3 · Do</b></td><td>4Ps, funnel, CRM / lifetime value, e-commerce and omnichannel, disintermediation, new users / new uses / more usage</td></tr><tr><td>is this ethical · is this good for customers · shrinking packs · targeting children</td><td><b>Check across the line</b></td><td>Societal marketing concept, ethics of targeting, downsizing</td></tr></tbody></table></div>
+<p class="zhp" lang="zh-Hant">看題目的關鍵字分到哪一步，就知道從哪一組框架裡挑。一題通常只需要一到兩個框架，有時候第一句先用 5C 交代狀況，再用另一個框架回答真正的問題。</p>
+<h2 id="mindset">Before the line: the mindset</h2>
+<p>These are less a step and more the way of thinking behind the whole line.</p>
+<div class="cards"><div class="kc"><h4>Needs, wants, demands<small>S1</small></h4><p class="q">Answers: Will people actually buy?</p><div class="chips"><span>Need: a felt lack</span><span>Want: shaped by culture</span><span>Demand: want + money</span></div><p class="say pm">A large population is not enough on its own. Wants only become demand when people can pay, so income matters as much as size.</p><span class="zi" lang="zh-Hant">人多不代表需求大，要有購買力。</span></div><div class="kc"><h4>Marketing philosophies<small>S1</small></h4><p class="q">Answers: What does the company put first?</p><div class="chips"><span>Production</span><span>Product</span><span>Selling</span><span>Marketing</span><span>Societal</span><span>Strategic</span></div><p class="say pm">The societal marketing concept asks a firm to meet customer wants while also protecting people’s long-term well-being.</p><span class="zi" lang="zh-Hant">六種經營觀念；問到 CSR、健康、道德，就點名 societal marketing concept。</span></div><div class="kc"><h4>Marketing myopia · USP<small>S1</small></h4><p class="q">Answers: Are we selling a feature or a benefit?</p><div class="chips"><span>Benefit, not feature</span><span>USP must be wanted</span><span>Features get copied → brand</span></div><p class="say pm">Customers buy the benefit, not the feature. Most features can be copied, so the brand has to carry the difference.</p><span class="zi" lang="zh-Hant">顧客買的是好處不是功能；功能會被抄，所以要靠品牌。</span></div></div>
+<h2 id="understand">Step 1 · Understand</h2>
+<p>Everything here describes the situation. Nothing here is a decision yet.</p>
+<div class="cards"><div class="kc"><h4>5Cs<small>S1 · S5a</small></h4><p class="q">Answers: What is the situation?</p><div class="chips"><span>Company</span><span>Customers</span><span>Competitors</span><span>Collaborators</span><span>Context</span></div><p class="say pm">Before choosing a strategy, I use the 5Cs to understand the situation: what the company has, what customers want, who else competes, who helps deliver, and what is changing around them.</p><span class="zi" lang="zh-Hant">公司有什麼、顧客要什麼、還有誰在競爭、誰幫忙交付（供應商、通路）、外在環境在變什麼。</span></div><div class="kc"><h4>SWOT<small>S4a</small></h4><p class="q">Answers: What do we have, and what is out there?</p><div class="chips"><span>S, W = inside the company</span><span>O, T = outside</span></div><p class="say pm">Rising health awareness is an opportunity, not a strength, because it happens outside the company.</p><span class="zi" lang="zh-Hant">S、W 是公司內部、自己控制得了的；O、T 是外部的。最常錯：把市場趨勢寫成優勢。</span></div><div class="kc"><h4>Macro environment<small>S4a</small></h4><p class="q">Answers: What is changing around everyone?</p><div class="chips"><span>Demographic</span><span>Economic</span><span>Natural</span><span>Technological</span><span>Political</span><span>Cultural</span></div><p class="say pm">A proposed sugar tax is a political factor. It becomes a real threat only if it is passed.</p><span class="zi" lang="zh-Hant">六個外在力量。注意「提案」還不是「法規」。</span></div><div class="kc"><h4>Market size · age · income<small>S1</small></h4><p class="q">Answers: How big and how attractive is this market, and for whom?</p><div class="chips"><span>Population size</span><span>Age profile</span><span>Income</span><span>Growth</span></div><p class="say pm">Compared with Vietnam, Thailand has an older population but higher incomes, so it suits premium products more than mass-volume ones.</p><span class="zi" lang="zh-Hant">比兩個市場要用同一組欄位並排比，不要只描述一國。</span></div><div class="kc"><h4>Buyer decision process<small>S4b</small></h4><p class="q">Answers: How does the customer decide?</p><div class="chips"><span>Need recognition</span><span>Information search</span><span>Evaluation</span><span>Purchase</span><span>Post-purchase</span><span>Involvement · risk</span></div><p class="say pm">Buying a car is high involvement, so customers search and compare for a long time. A snack is low involvement and is often bought by habit.</p><span class="zi" lang="zh-Hant">五個階段不是每次都走完；看涉入程度和風險。</span></div><div class="kc"><h4>Utilitarian vs hedonic<small>S4b</small></h4><p class="q">Answers: Why do they buy?</p><div class="chips"><span>Utilitarian: useful, practical</span><span>Hedonic: fun, pleasure</span></div><p class="say pm">People buy an energy drink for a utilitarian reason, to stay awake, but the brand can also add a hedonic reason, the feeling of being tough.</p><span class="zi" lang="zh-Hant">實用動機 vs 享樂動機，常常同時存在。</span></div><div class="kc"><h4>Direct vs indirect competition<small>S5b</small></h4><p class="q">Answers: Who else could the customer choose?</p><div class="chips"><span>Direct: same category</span><span>Indirect: different product, same need</span></div><p class="say pm">Other bubble-tea shops are direct competitors. A convenience-store iced coffee is an indirect competitor, because it meets the same need with a different product.</p><span class="zi" lang="zh-Hant">同類商品 = 直接；不同商品但滿足同一個需要 = 間接。</span></div><div class="kc"><h4>Market research<small>S3 · S2</small></h4><p class="q">Answers: What do we need to find out, and how?</p><div class="chips"><span>Qualitative: why, how</span><span>Quantitative: how many, how often</span><span>Observation · experiment</span><span>Data mining: patterns, not reasons</span></div><p class="say pm">To learn why customers stopped coming, I would use in-depth interviews. To measure how many customers feel this way, I would use a survey.</p><span class="zi" lang="zh-Hant">先講需要什麼資訊，再選方法。問「為什麼」用質化，問「多少」用量化；data mining 只看得到發生什麼，看不到原因。</span></div></div>
+<h2 id="choose">Step 2 · Choose</h2>
+<p>This is where the real decisions are. Most strong answers spend their time here.</p>
+<div class="cards"><div class="kc"><h4>Segmentation<small>S4b · S5a</small></h4><p class="q">Answers: How can we split the market into groups?</p><div class="chips"><span>Demographic: age, income</span><span>Psychographic: lifestyle, values</span><span>Good segment: measurable, accessible, substantial, actionable</span></div><p class="say pm">Segmenting only by age misses the point here. Two 25-year-olds can want very different things, so I would segment by lifestyle as well.</p><span class="zi" lang="zh-Hant">人口統計（年齡、收入）vs 心理統計（生活型態、價值觀）。好的區隔要量得到、接觸得到、夠大、做得出行動。</span></div><div class="kc"><h4>Targeting strategy<small>S5a</small></h4><p class="q">Answers: How many groups do we go after?</p><div class="chips"><span>Undifferentiated: one offer for all</span><span>Differentiated: different offers per group</span><span>Concentrated: one niche</span></div><p class="say pm">With a small budget, a concentrated strategy makes sense: serve one niche well instead of competing with large chains for everyone.</p><span class="zi" lang="zh-Hant">全部一起打、分群打、還是只打一個利基。</span></div><div class="kc"><h4>Positioning · perceptual map<small>S5a</small></h4><p class="q">Answers: Where do we sit in customers’ minds compared with rivals?</p><div class="chips"><span>Two axes customers care about</span><span>Plot every brand</span><span>Look for an empty space</span></div><p class="say pm">I would draw a perceptual map with “price” and “healthiness” as the axes. The upper-left corner, healthy but affordable, is empty, so that is where the brand should position.</p><span class="zi" lang="zh-Hant">兩個軸要是顧客在乎、而且彼此不重複的特質（價格和品質常常是同一件事，別這樣配）。</span></div><div class="kc"><h4>Growth grid (often called Ansoff)<small>S4a</small></h4><p class="q">Answers: Where should we grow?</p><div class="chips"><span>Penetration: same product, same market</span><span>Product development</span><span>Market development</span><span>Diversification</span></div><p class="say pm">Opening stores in Vietnam with the same menu is market development. It is riskier than penetration because the customers are new to us.</p><span class="zi" lang="zh-Hant">S4a 投影片有這張表但沒寫名字，Ansoff 是教科書的叫法。越遠離熟悉的產品和市場，風險越高。</span></div><div class="kc"><h4>BCG matrix<small>S4a</small></h4><p class="q">Answers: Which products or units do we invest in?</p><div class="chips"><span>Star</span><span>Question mark</span><span>Cash cow</span><span>Dog</span></div><p class="say pm">The original drink is a cash cow: high share in a slow-growing market. Its cash can fund the new product line, which is still a question mark.</p><span class="zi" lang="zh-Hant">依市場成長率和相對市占分四格；問號不會自動變明星。</span></div><div class="kc"><h4>Mission · brand consistency<small>S4a</small></h4><p class="q">Answers: Does this choice still fit who we are?</p><div class="chips"><span>What is our business?</span><span>Who are our customers?</span><span>Every touchpoint tells the same story</span></div><p class="say pm">A sudden move to luxury would confuse current customers, because it does not match the brand’s mission of affordable everyday food.</p><span class="zi" lang="zh-Hant">改目標或形象之前，先看跟使命、原本顧客合不合。</span></div><div class="kc"><h4>Ethics of targeting<small>S5a</small></h4><p class="q">Answers: Is it fair to aim this at them?</p><div class="chips"><span>Who is targeted</span><span>Is the product good for them?</span></div><p class="say pm">Targeting sugary drinks at children is likely to draw criticism, because the group is vulnerable and the product harms their health.</p><span class="zi" lang="zh-Hant">鎖定弱勢族群推銷不健康產品，會被批評。</span></div></div>
+<h2 id="do">Step 3 · Do</h2>
+<p>Only now do the tactics come in. Each one should follow from the target and position you chose in step 2.</p>
+<div class="cards"><div class="kc"><h4>4Ps (+ People)<small>S1 · S5a</small></h4><p class="q">Answers: How do we deliver and communicate the position?</p><div class="chips"><span>Product</span><span>Price</span><span>Place</span><span>Promotion</span><span>(People)</span></div><p class="say pm">Because the target is busy office workers who value speed, the 4Ps should all support convenience: a small menu, mid-range price, locations near offices and promotion through delivery apps.</p><span class="zi" lang="zh-Hant">4P 要跟著目標客群和定位走，不能是一份放到哪都適用的清單。</span></div><div class="kc"><h4>Marketing funnel<small>S1</small></h4><p class="q">Answers: Where are customers dropping out?</p><div class="chips"><span>Awareness</span><span>Interest</span><span>Trial</span><span>Repeat</span></div><p class="say pm">The campaign got many views, but views are only awareness. The real problem is that few people moved on to trial.</p><span class="zi" lang="zh-Hant">曝光不等於銷售；每一層都要有自己的目標和衡量方式。</span></div><div class="kc"><h4>CRM · lifetime value<small>S2</small></h4><p class="q">Answers: How do we keep customers longer?</p><div class="chips"><span>Lifetime value</span><span>Churn</span><span>Loyalty program goals</span></div><p class="say pm">A loyalty program should raise lifetime value, not just give discounts. I would measure repeat visits and churn.</p><span class="zi" lang="zh-Hant">重點是長期關係與顧客終身價值；打折不等於關係。</span></div><div class="kc"><h4>E-commerce · omnichannel<small>S2</small></h4><p class="q">Answers: Online, stores, or both?</p><div class="chips"><span>Bricks & mortar</span><span>Clicks & mortar</span><span>Pure play</span><span>One seamless experience</span></div><p class="say pm">For a product customers like to try first, stores still matter. Omnichannel lets them check stock online and pick up in store.</p><span class="zi" lang="zh-Hant">要連到產品與顧客講，不能只說「線上是趨勢」。</span></div><div class="kc"><h4>Disintermediation<small>S5b</small></h4><p class="q">Answers: Should we cut out the middleman?</p><div class="chips"><span>Control vs expertise</span><span>Channel conflict</span></div><p class="say pm">Selling through its own app gives the brand control and customer data, but it loses the reach of delivery platforms and may upset partners.</p><span class="zi" lang="zh-Hant">自己賣能拿到控制權和資料，但要講失去了什麼。</span></div><div class="kc"><h4>New users · new uses · more usage<small>S5b</small></h4><p class="q">Answers: Where can more sales come from?</p><div class="chips"><span>New users</span><span>New uses</span><span>More usage</span></div><p class="say pm">The brand can find new users (older adults), new uses (as a cooking ingredient) or more usage (a larger family pack).</p><span class="zi" lang="zh-Hant">三個來源，給兩個點子時別用同一個來源。</span></div><div class="kc"><h4>Downsizing<small>S5b</small></h4><p class="q">Answers: Is a smaller pack at the same price fair?</p><div class="chips"><span>Same price, less product</span><span>Unit price rises</span><span>Hard to compare</span></div><p class="say pm">Shrinking the pack from 500 g to 450 g at the same price is a hidden price rise of about 11%, which customers may see as deceptive.</p><span class="zi" lang="zh-Hant">縮量不漲價，單位價格其實上升；少了 10% 的量，單價漲了約 11%。</span></div></div>
+<h2 id="mixups">Pairs that get mixed up</h2>
+<div style="overflow-x:auto"><table><thead><tr><th>These two</th><th>The difference in one line</th></tr></thead><tbody><tr><td>5Cs vs SWOT</td><td>5Cs describe the situation. SWOT sorts what you found into inside/outside so you can make a decision. Use one or the other in a table, not both mixed together.</td></tr><tr><td>5Cs vs growth grid</td><td>5Cs is step 1 (what is going on). The growth grid is step 2 (which product–market to go for). The grid uses what the 5Cs found.</td></tr><tr><td>Growth grid vs STP</td><td>The grid chooses <i>which market</i> to grow into. STP chooses <i>who inside a market</i> to serve and how to stand out to them.</td></tr><tr><td>4Ps vs funnel</td><td>4Ps are the tools you control. The funnel is the customer’s steps, which you measure to see whether the tools work.</td></tr><tr><td>Segmentation vs targeting</td><td>Segmentation splits the market. Targeting picks which pieces to serve.</td></tr><tr><td>Direct vs indirect competitor</td><td>Same category = direct. Different product, same need = indirect.</td></tr></tbody></table></div>
+<p class="zhp" lang="zh-Hant">之前混淆過的 Ansoff：它不是 5C，也不是顧客端或賣方端的分析，而是第 2 步「選擇」裡面決定「往哪裡成長」的工具，用的是 5C 查到的資訊。</p>
+<h2 id="try">Try it yourself</h2>
+<p>Pick a brand you know well. Do it in Chinese first, then write one English sentence per step using the lines above.</p>
+<ol class="drill"><li>Understand: write one line each for the 5Cs.</li><li>Choose: name one target group and finish this sentence: “For <i>[target]</i>, <i>[brand]</i> is the <i>[position]</i> because <i>[reason]</i>.”</li><li>Do: one 4P decision for each P, and check that each one fits the target.</li><li>Look back: could you jump from step 1 straight to step 3? If yes, step 2 is missing.</li></ol>
+<p class="zhp" lang="zh-Hant">用你熟的品牌，先用中文走一次三步，再每一步寫一句英文。如果你發現自己從第 1 步直接跳到 4P，就是漏了第 2 步。</p>
+</article></main></div>
+
+<script>
+(function(){
+  const z=document.getElementById('zBtn'), p=document.getElementById('pBtn');
+  z.addEventListener('click',()=>{const off=document.body.classList.toggle('nozh');z.textContent=off?'中文 OFF':'中文 ON';});
+  p.addEventListener('click',()=>{const on=document.body.classList.toggle('practice');p.classList.toggle('on',on);p.textContent=on?'Practice mode ON':'Practice mode OFF';document.querySelectorAll('.pm.shown').forEach(e=>e.classList.remove('shown'));});
+  document.addEventListener('click',e=>{const t=e.target.closest('.pm');if(t&&document.body.classList.contains('practice'))t.classList.toggle('shown');});
+})();
+</script>
+
+<script>
+(function () {
+  const toc = document.getElementById('toc'), rail = document.getElementById('rail');
+  const hs = [...document.querySelectorAll('.doc > h2, .doc > h3')];
+  hs.forEach(h => {
+    const li = document.createElement('li'); li.className = h.tagName.toLowerCase(); li.dataset.id = h.id;
+    const a = document.createElement('a'); a.href = '#' + h.id; a.textContent = h.childNodes[0].textContent.trim();
+    li.appendChild(a); toc.appendChild(li);
+  });
+  const spy = new IntersectionObserver(es => es.forEach(e => {
+    if (!e.isIntersecting) return;
+    toc.querySelectorAll('a.on').forEach(a => a.classList.remove('on'));
+    const a = toc.querySelector('li[data-id="' + e.target.id + '"] a'); if (a) a.classList.add('on');
+  }), { rootMargin: '-80px 0px -70% 0px' });
+  hs.forEach(h => spy.observe(h));
+
+  const tb = document.getElementById('tocBtn');
+  tb.addEventListener('click', () => { const o = rail.classList.toggle('open'); tb.setAttribute('aria-expanded', o); });
+  toc.addEventListener('click', e => { if (e.target.closest('a')) { rail.classList.remove('open'); tb.setAttribute('aria-expanded', false); } });
+
+  const all = document.getElementById('qaAll');
+  if (all) all.addEventListener('click', () => {
+    const ds = document.querySelectorAll('.qa details'), open = ![...ds].every(d => d.open);
+    ds.forEach(d => d.open = open); all.textContent = open ? 'Hide all answers' : 'Show all answers';
+  });
+  document.querySelectorAll('.drill .ans').forEach(s => s.addEventListener('click', () => s.classList.toggle('shown')));
+
+  if (window.EconWidgets) window.EconWidgets.mount(document);
+  if (window.MgmtWidgets) window.MgmtWidgets.mount(document);
+})();
+</script>
+</body></html>
